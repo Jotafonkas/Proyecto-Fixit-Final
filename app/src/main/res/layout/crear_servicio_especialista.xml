@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Encabezado -->
+    <TextView
+        android:id="@+id/txtCrearServicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crear_servicio"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:padding="25dp"/>
+
+    <ImageButton
+        android:id="@+id/imgbtnVolver"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside" />
+
+
+    <TextView
+        android:id="@+id/txtNombreServicio"
+        android:layout_below="@id/txtCrearServicio"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="-0.5dp"
+        android:layout_gravity="top|left"
+        android:gravity="center_horizontal|center_vertical"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/nombre_del_servicio"
+        android:textColor="#FF000000"
+        android:textSize="20sp"
+        tools:ignore="RtlHardcoded" />
+
+       <EditText
+           android:id="@+id/edNombreServicio"
+           android:layout_width="347dp"
+           android:layout_height="45dp"
+           android:layout_marginLeft="21dp"
+           android:layout_marginTop="10dp"
+           android:layout_gravity="top|left"
+           android:background="@drawable/drawable_shape_2"
+           android:inputType="text"
+           android:hint="@string/nombre_del_servicio"
+           android:layout_below="@id/txtNombreServicio"
+           tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/txtDescripcionServicio"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="-0.5dp"
+        android:layout_gravity="top|left"
+        android:gravity="center_horizontal|center_vertical"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/descripcion_del_servicio"
+        android:textColor="#FF000000"
+        android:textSize="20sp"
+        android:layout_below="@id/edNombreServicio"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/edDescripcionServicio"
+        android:layout_width="347dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="top|left"
+        android:background="@drawable/drawable_shape_4"
+        android:inputType="text"
+        android:hint="@string/descripcion_del_servicio"
+        android:layout_below="@id/txtDescripcionServicio"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/txtPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="-0.5dp"
+        android:layout_gravity="top|left"
+        android:gravity="center_horizontal|center_vertical"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/precio_del_servicio"
+        android:textColor="#FF000000"
+        android:textSize="20sp"
+        android:layout_below="@id/edDescripcionServicio"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/edPrecio"
+        android:layout_width="347dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="top|left"
+        android:background="@drawable/drawable_shape_3"
+        android:inputType="text"
+        android:hint="@string/$"
+        android:layout_below="@id/txtPrecio"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/txtCargarImagenes"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="-0.5dp"
+        android:layout_gravity="top|left"
+        android:gravity="center_horizontal|center_vertical"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/imagenes_de_tus_trabajos_opcional"
+        android:textColor="#FF000000"
+        android:textSize="20sp"
+        android:layout_below="@id/edPrecio"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/btnCargarImagenes"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/txtCargarImagenes"
+        android:layout_alignStart="@+id/txtCargarImagenes"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/btn_cargar_imgservicio_especialista" />
+
+    <Button
+        android:layout_below="@id/btnCargarImagenes"
+        android:id="@+id/btnPublicar"
+        android:layout_width="186dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="top|left"
+        android:text="@string/btn_publicar_servicio"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="10dp"
+        tools:ignore="RtlHardcoded" />
+
+
+
+
+    <!-- Navbar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@color/header"
+        app:itemIconTint="@color/item_white_menu"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu" />
+</RelativeLayout>

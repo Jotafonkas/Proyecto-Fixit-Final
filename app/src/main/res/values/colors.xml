@@ -18,4 +18,7 @@
 
     <!-- Colores del perfil especialista -->
     <color name="edit_texts2">#E3E3E3</color>
+
+    <!-- Colores de la vista Categorias especialistas -->
+    <color name="redondeo_categorias">#CFCFCF</color>
 </resources>

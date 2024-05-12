@@ -12,16 +12,18 @@
     <string name="registro_portada"><u>Regístrate</u></string>
 
     <!-- Strings Registro Especialista -->
-    <string name="register_specialist_title">Registro</string>
+    <string name="register_specialist_title">Registro Especialista</string>
+    <string name="btn_cargar">Cargar</string>
+    <string name="btn_eliminar">Eliminar</string>
     <string name="text1_register_specialist">Nombre y Apellido</string>
     <string name="email_register_specialist">Correo Electrónico</string>
     <string name="rut_register_specialist">Rut sin puntos ni guión (Ej:101234560)</string>
     <string name="phone_register_specialist">Teléfono</string>
-    <string name="btnNext">Siguiente</string>
     <string name="profession_register_specilialist">Profesión/Especialidad\n</string>
     <string name="password_register_specialist">Contraseña</string>
+    <string name="password2_register_specialist">Confirme su Contraseña</string>
     <string name="text_certificado_de_antecedentes">Certificado de Antecedentes</string>
-    <string name="upload_certificate">Adjuntar</string>
+    <string name="btn_upload_certificate">Adjuntar</string>
     <string name="btn_register_specialist">Registrarse</string>
 
 
@@ -53,5 +55,19 @@
     <!-- Strings Perfil Especialista -->
     <string name="titulo_perfil">Mi Perfil</string>
     <string name="edit_profile_pic">Foto de Perfil</string>
+    <string name="btn_cargarfoto_perfil">Cargar</string>
+
+
+    <!-- Strings Crear Servicio Especialista -->
+    <string name="crear_servicio">Crear servicio</string>
+    <string name="nombre_del_servicio">Nombre del Servicio</string>
+    <string name="descripcion_del_servicio">Descripción del Servicio</string>
+    <string name="precio_del_servicio">Precio del Servicio</string>
+    <string name="$">$</string>
+    <string name="btn_cargar_imgservicio_especialista">Cargar</string>
+    <string name="btn_publicar_servicio">Publicar Servicio</string>
+    <string name="btn_eliminarfoto_perfil">Eliminar</string>
+    <string name="imagenes_de_tus_trabajos_opcional">Imagenes de tus trabajos (Opcional)</string>
+
 
 </resources>

@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterSpecialist2"
+            android:name=".vista_ayuda"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,5 +67,12 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" /> <!-- Permiso para realizar llamadas telefónicas -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permiso para enviar correos electrónicos -->
+    <uses-permission android:name="android.permission.SENDTO" />
 
 </manifest>
