@@ -1,0 +1,342 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Encabezado -->
+    <TextView
+        android:id="@+id/txtCategoriaServiciosEspecialistas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_categorias"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:padding="25dp"/>
+
+
+    <TextView
+        android:layout_below="@id/txtCategoriaServiciosEspecialistas"
+        android:id="@+id/txtServiciosdispo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:gravity="center_horizontal|top"
+        android:includeFontPadding="false"
+        android:text="@string/texto_categorias"
+        android:textColor="#FF000000"
+        android:textSize="20sp" />
+
+
+
+    <GridLayout
+        android:id="@+id/gdCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:layout_below="@id/txtServiciosdispo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:src="@drawable/img_limpieza"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_limpieza"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerInside"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_transporte"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_electricidad"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_fontaneria"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_tecnologia"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_carpinteria"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_cuidadopersonal"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_comida"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/styles_imagen_redondeada_categorias">
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/styles_imagen_redondeada_categorias"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_construccion"
+                android:gravity="center_horizontal|top"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+
+</GridLayout>
+
+
+    <!-- Navbar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@color/header"
+        app:itemIconTint="@color/item_white_menu"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu" />
+</RelativeLayout>
