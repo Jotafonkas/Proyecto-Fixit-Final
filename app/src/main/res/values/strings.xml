@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nombre de la aplicación -->
+    <string name="nombre_app" />
+
+    <!-- Strings Portada -->
+    <string name="titulo_portada">Fixit</string>
+    <string name="subtitulo_portada">Servicios a tu Alcance</string>
+    <string name="descripcion_portada">Te conectamos con los especialistas que necesitas.</string>
+    <string name="texto_boton_portada">Iniciar Sesión</string>
+    <string name="pregunta_portada">¿No tienes una cuenta?</string>
+    <string name="registro_portada"><u>Regístrate</u></string>
+
+    <!-- Strings Registro Especialista -->
+    <string name="register_specialist_title">Registro</string>
+    <string name="text1_register_specialist">Nombre y Apellido</string>
+    <string name="email_register_specialist">Correo Electrónico</string>
+    <string name="rut_register_specialist">Rut sin puntos ni guión (Ej:101234560)</string>
+    <string name="phone_register_specialist">Teléfono</string>
+    <string name="btnNext">Siguiente</string>
+    <string name="profession_register_specilialist">Profesión/Especialidad\n</string>
+    <string name="password_register_specialist">Contraseña</string>
+    <string name="text_certificado_de_antecedentes">Certificado de Antecedentes</string>
+    <string name="upload_certificate">Adjuntar</string>
+    <string name="btn_register_specialist">Registrarse</string>
+
+
+    <!-- Strings Seleccion Usuario -->
+    <string name="text_selection_user">ESCOJA SU USUARIO:</string>
+    <string name="button1_selection_user">ESPECIALISTA</string>
+    <string name="button2_selection_user">CLIENTE</string>
+
+    <!-- Strings Login Especialista -->
+    <string name="login_specialist_title">Iniciar Sesión</string>
+    <string name="email_login_specialist">Correo Electrónico</string>
+    <string name="password_login_specialist">Contraseña</string>
+    <string name="btnLogin">Ingresar</string>
+
+    <!-- Strings Home -->
+    <string name="titulo_home">Bienvenid@ a Fixit</string>
+    <string name="btn_perfil_home">Perfil</string>
+    <string name="text1_home">Tu trabajo es recompensado</string>
+    <string name="text2_home">Te ayudamos en lo que necesites 24/7</string>
+    <string name="text3_home">Si ofreces un servicio de calidad, nosotros te pondremos primero.</string>
+    <string name="text4_home">Garantizamos que tu necesidad sea cubierta con nuestros especialistas.</string>
+
+    <!-- Strings Menú -->
+    <string name="item1_menu">Inicio</string>
+    <string name="item2_menu">Servicios</string>
+    <string name="item3_menu">Menú</string>
+    <string name="item4_menu">Ayuda</string>
+
+    <!-- Strings Perfil Especialista -->
+    <string name="titulo_perfil">Mi Perfil</string>
+    <string name="edit_profile_pic">Foto de Perfil</string>
+
+</resources>

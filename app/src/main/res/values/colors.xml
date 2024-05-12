@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema default del sistema -->
+    <color name="button_color">#2F2F2F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Colores del login especialista -->
+    <color name="header_login_specialist">#2F2F2F</color>
+    <color name="edit_texts">#CFCFCF</color>
+
+    <!-- Colores de la home -->
+    <color name="header">#2F2F2F</color>
+    <color name="color_navbar_home">#2F2F2F</color>
+
+    <!-- Colores del navbar -->
+    <color name="item_white_menu">#BFBFBF</color>
+
+    <!-- Colores del perfil especialista -->
+    <color name="edit_texts2">#E3E3E3</color>
+</resources>

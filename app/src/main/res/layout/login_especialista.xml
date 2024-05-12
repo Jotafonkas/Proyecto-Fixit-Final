@@ -1,0 +1,112 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/LoginEspecialista"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/header_login_specialist"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/login_specialist_title"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:id="@+id/volver"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside"
+        android:onClick="ReturnRegisterUser"
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imagen"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_below="@id/LoginEspecialista"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/image_perfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerHorizontal="true"
+        app:shapeAppearanceOverlay="@style/radius4"/>
+
+    <LinearLayout
+        android:layout_below="@id/imagen"
+        android:layout_marginTop="20dp"
+        android:id="@+id/editTextContainer"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+
+        <TextView
+            android:id="@+id/name_register_specialist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/email_login_specialist"
+            android:textColor="#FF000000"
+            android:textSize="20sp"
+            android:layout_marginStart="25dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="347dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/styles_login_especialista"
+            />
+
+        <TextView
+            android:id="@+id/TVrut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-0.5dp"
+            android:layout_gravity="top"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/password_login_specialist"
+            android:textColor="#FF000000"
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="347dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/styles_login_especialista"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSiguiente"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/editTextContainer"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="31dp"
+        android:onClick="OpenRegisterUser"
+        android:text="@string/btnLogin"
+        android:textSize="20sp" />
+
+</RelativeLayout>
