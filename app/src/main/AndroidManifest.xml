@@ -21,6 +21,15 @@
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
         <activity
+            android:name=".ViewSpecialistComments"
+            android:exported="false" />
+        <activity
+            android:name=".ViewSpecialistServices"
+            android:exported="false" />
+        <activity
+            android:name=".ViewSpecialistProfile"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -39,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginSpecialist"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,4 +102,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

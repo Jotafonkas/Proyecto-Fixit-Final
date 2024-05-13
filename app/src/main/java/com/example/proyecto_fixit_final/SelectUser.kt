@@ -11,7 +11,7 @@ class SelectUser : AppCompatActivity() {
         setContentView(R.layout.seleccion_usuario)
     }
 
-    fun OpenRegistEspecialist(view: View) {
+    fun OpenRegisterSpecialist(view: View) {
         val intent = Intent(this, RegisterSpecialist::class.java)
         startActivity(intent)
     }

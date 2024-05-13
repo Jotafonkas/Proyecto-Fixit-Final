@@ -11,7 +11,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.portada)
     }
 
-    fun OpenSelectUser(view: View) {
+    fun openLogin(view: View) {
+        val intent = Intent(this, Login::class.java)
+        startActivity(intent)
+    }
+
+    fun openSelectUser(view: View) {
         val intent = Intent(this, SelectUser::class.java)
         startActivity(intent)
     }

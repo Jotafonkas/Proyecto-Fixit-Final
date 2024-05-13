@@ -57,7 +57,6 @@
     <string name="edit_profile_pic">Foto de Perfil</string>
     <string name="btn_cargarfoto_perfil">Cargar</string>
 
-
     <!-- Strings Crear Servicio Especialista -->
     <string name="crear_servicio">Crear servicio</string>
     <string name="nombre_del_servicio">Nombre del Servicio</string>
@@ -67,7 +66,6 @@
     <string name="btn_publicar_servicio">Publicar Servicio</string>
     <string name="btn_eliminarfoto_perfil">Eliminar</string>
     <string name="imagenes_de_tus_trabajos_opcional">Imagenes de tus trabajos (Opcional)</string>
-
 
     <!-- Strings Categorias Especialista -->
     <string name="titulo_categorias">Categorías de servicios</string>
@@ -82,7 +80,6 @@
     <string name="txt_comida">Comida</string>
     <string name="txt_construccion">Construcción</string>
 
-
     <!-- Strings Ayuda -->
     <string name="txt_contactanos">Contáctanos</string>
     <string name="numero_de_contacto">+56 9 347 096 35</string>
@@ -91,5 +88,29 @@
     <string name="fixit_tittle">Fixit</string>
     <string name="txt_slogan_help">Te conectamos con los especialistas que necesitas.</string>
 
+    <!-- Strings Visualizacion Especialista -->
+    <string name="titulo_perfil_especialista">Perfil de Servicio</string>
+    <string name="txt_excelente">Excelente</string>
+    <string name="txt_deficiente">Deficiente</string>
+    <string name="txt_calificacion">Calificación</string>
+    <string name="calificacion_numero">5.0</string>
+    <string name="esp_nombrecompleto"><u>Nombre del Especialista: </u></string>
+    <string name="esp_profesion"><u>Profesión: </u></string>
+    <string name="esp_descripcion"><u>Descripción: </u></string>
+    <string name="btnservicios">Servicios</string>
+    <string name="btncontactar">Contactar</string>
+    <string name="btncomentarios">Comentarios</string>
+
+    <!-- Strings Comentarios Especialista -->
+    <string name="titulo_comentarios_especialista">Comentarios</string>
+    <string name="esp_nombrecliente">Nombre Cliente</string>
+
+    <!-- Strings Servicios Especialista -->
+    <string name="titulo_servicios_especialista">Servicios</string>
+    <string name="btn_ver_servicio">Ver Servicio</string>
+    <string name="txt_nombre_servicio"><u>Nombre Servicio</u></string>
+    <string name="txt_descripcion_servicio"><u>Descripción:</u></string>
+    <string name="txt_precio_servicio"><u>Precio:</u> $</string>
+    <string name="btn_ver_perfil_especialista">Ver Perfil</string>
 
 </resources>

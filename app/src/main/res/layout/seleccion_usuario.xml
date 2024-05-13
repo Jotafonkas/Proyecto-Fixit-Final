@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="@id/texto_seleccion"
         app:layout_constraintTop_toBottomOf="@id/texto_seleccion"
         android:layout_marginTop="60dp"
-        android:onClick="OpenRegistEspecialist"/>
+        android:onClick="OpenRegisterSpecialist"/>
 
     <Button
         android:id="@+id/boton2_seleccion_user"
@@ -94,7 +94,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/boton1_seleccion_user"
         app:layout_constraintTop_toBottomOf="@id/boton1_seleccion_user"
-        android:layout_marginTop="20dp"
-        android:onClick="OpenRegistCliente"/>
+        android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

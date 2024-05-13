@@ -24,5 +24,17 @@
         <item name="cornerSizeBottomLeft">70dp</item>
         <item name="cornerSizeBottomRight">70dp</item>
     </style>
+    <style name="radius5">
+        <item name="cornerSizeTopRight">40dp</item>
+        <item name="cornerSizeTopLeft">40dp</item>
+        <item name="cornerSizeBottomLeft">40dp</item>
+        <item name="cornerSizeBottomRight">40dp</item>
+    </style>
+    <style name="radius6">
+        <item name="cornerSizeTopRight">10dp</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeBottomLeft">10dp</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+    </style>
 
 </resources>

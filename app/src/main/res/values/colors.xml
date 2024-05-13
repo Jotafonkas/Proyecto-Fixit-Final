@@ -22,4 +22,14 @@
     <!-- Colores del perfil especialista -->
     <color name="input_categoria">#CFCFCF</color>
 
+    <!-- Colores de Visualizacion Especialista -->
+    <color name="red">#AF5050</color>
+    <color name="green">#466D20</color>
+    <color name="greenlight">#66AD20</color>
+    <color name="color_fondo_de_datos">#EAEAEA</color>
+
+    <!-- Colores de Servicios Especialista -->
+    <color name="color_servicio">#2F2F2F</color>
+    <color name="color_servicio2">#3A3A3A</color>
+
 </resources>
