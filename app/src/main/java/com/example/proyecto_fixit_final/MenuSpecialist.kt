@@ -8,7 +8,12 @@ import android.view.View
 class MenuSpecialist : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu_especialista)
+        setContentView(R.layout.menu_especialista)
+    }
+
+    fun openProfile(view: View) {
+        val intent = Intent(this, ProfileSpecialist::class.java)
+        startActivity(intent)
     }
 
 }

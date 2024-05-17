@@ -6,24 +6,29 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class Home: AppCompatActivity() {
 
     private lateinit var headerTextView: TextView
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home) // Asegúrate de usar el layout correcto
-
         headerTextView = findViewById(R.id.header)
         auth = FirebaseAuth.getInstance()
+        firestore = Firebase.firestore
 
         // Recibir el correo pasado desde LoginSpecialist
-        val correo = intent.getStringExtra("correo")
-
-        // Actualizar el TextView con el mensaje de bienvenida
-        headerTextView.text = "Bienvenid@, $correo"
+        val user = auth.currentUser
+        if (user != null) {
+            // Recuperar y mostrar el nombre del usuario desde Firestore
+            fetchAndDisplayUserName(user.uid)
+        }
     }
 
     // Método para abrir el perfil
@@ -38,5 +43,19 @@ class Home: AppCompatActivity() {
             // Usuario no logueado, mostrar mensaje de error
             Toast.makeText(this, "Por favor, inicie sesión para acceder a su perfil", Toast.LENGTH_LONG).show()
         }
+    }
+    private fun fetchAndDisplayUserName(uid: String) {
+        firestore.collection("users").document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val nombre = document.getString("nombre")
+                    headerTextView.text = "Bienvenid@, $nombre"
+                } else {
+                    Toast.makeText(this, "No se encontró el usuario.", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al obtener el usuario: ${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
 }

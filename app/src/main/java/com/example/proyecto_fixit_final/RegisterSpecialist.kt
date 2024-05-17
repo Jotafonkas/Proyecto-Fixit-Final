@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,11 +15,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class RegisterSpecialist : AppCompatActivity() {
 
     // Declarar las variables del layout
+    private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var btnRegistro: Button
     private lateinit var btnFoto: Button
@@ -34,7 +37,7 @@ class RegisterSpecialist : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
 
     private val getImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == RESULT_OK) {
             result.data?.data?.let { uri ->
                 selectedImageUri = uri
                 imagen.setImageURI(uri)
@@ -46,6 +49,7 @@ class RegisterSpecialist : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registro_especialista)
         auth = Firebase.auth
+        firestore = FirebaseFirestore.getInstance()
 
         // Set variables por id
         btnRegistro = findViewById(R.id.btnRegistrarse_especialista)
@@ -100,7 +104,7 @@ class RegisterSpecialist : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (pass == pass2) {
-                registrarNuevoUsuario(correo, pass)
+                registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, pass)
             } else {
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
             }
@@ -117,10 +121,13 @@ class RegisterSpecialist : AppCompatActivity() {
         }
     }
 
-    private fun registrarNuevoUsuario(correo: String, pass: String) {
+    private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, profesion: String, pass: String) {
         auth.createUserWithEmailAndPassword(correo, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    //valida el usuario y usa la funcion savedata
+                    val user = auth.currentUser
+                    saveAdditionalUserData(user!!.uid, nombre, rut, correo, telefono, profesion)
                     // Usuario creado correctamente, redirigir a Home
                     val intent = Intent(this, Home::class.java)
                     intent.putExtra("correo", correo)
@@ -130,6 +137,23 @@ class RegisterSpecialist : AppCompatActivity() {
                     // Error al crear usuario
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
+            }
+    }
+    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
+        val user = hashMapOf(
+            "nombre" to nombre,
+            "rut" to rut,
+            "correo" to correo,
+            "telefono" to telefono,
+            "profesion" to profesion
+        )
+        firestore.collection("users").document(uid)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("RegisterSpecialist", "DocumentSnapshot successfully written!")
+            }
+            .addOnFailureListener { e ->
+                Log.w("RegisterSpecialist", "Error writing document", e)
             }
     }
 }
