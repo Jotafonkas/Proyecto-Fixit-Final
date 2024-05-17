@@ -40,7 +40,7 @@
 
     <!-- Strings Home -->
     <string name="titulo_home">Bienvenid@ a Fixit</string>
-    <string name="btn_perfil_home">Perfil</string>
+    <string name="btn_perfil_home">Menú</string>
     <string name="text1_home">Tu trabajo es recompensado</string>
     <string name="text2_home">Te ayudamos en lo que necesites 24/7</string>
     <string name="text3_home">Si ofreces un servicio de calidad, nosotros te pondremos primero.</string>
@@ -112,5 +112,12 @@
     <string name="txt_descripcion_servicio"><u>Descripción:</u></string>
     <string name="txt_precio_servicio"><u>Precio:</u> $</string>
     <string name="btn_ver_perfil_especialista">Ver Perfil</string>
+
+    <!-- Strings Menu Especialista -->
+    <string name="volver_atras">volver atras</string>
+    <string name="ofrecer_nuevo_servicio">Ofrecer nuevo servicio</string>
+    <string name="mis_servicios">Mis servicios</string>
+    <string name="cerrar_sesion">Cerrar sesion</string>
+    <string name="despliege">despliege</string>
 
 </resources>

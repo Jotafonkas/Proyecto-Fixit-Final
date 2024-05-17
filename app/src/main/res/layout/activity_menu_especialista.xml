@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundapp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/menu_especialista"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/color_servicio"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/item3_menu"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:id="@+id/volver"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/volver_atras" />
+
+    <View
+        android:id="@+id/rectangle1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/Perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="130dp"
+        android:text="@string/titulo_perfil"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ico_user1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/logo_persona"
+        android:contentDescription="@string/titulo_perfil" />
+
+    <ImageView
+        android:id="@+id/despliege1"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="135dp"
+        android:src="@drawable/flecha_desplegable"
+        android:contentDescription="@string/despliege" />
+
+    <View
+        android:id="@+id/rectangle2"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/rectangle1"/>
+
+    <TextView
+        android:id="@+id/newservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/ofrecer_nuevo_servicio"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Perfil" />
+
+    <ImageView
+        android:id="@+id/ico_user2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/logo_inge"
+        android:layout_below="@+id/ico_user1"
+        android:contentDescription="@string/ofrecer_nuevo_servicio" />
+
+    <ImageView
+        android:id="@+id/despliege2"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege1"
+        android:contentDescription="@string/despliege" />
+
+    <View
+        android:id="@+id/rectangle3"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/rectangle2"/>
+
+    <TextView
+        android:id="@+id/myservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/mis_servicios"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/newservice"/>
+
+    <ImageView
+        android:id="@+id/ico_user3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="47dp"
+        android:src="@drawable/logo_inge"
+        android:layout_below="@+id/ico_user2"
+        android:contentDescription="@string/despliege" />
+
+    <ImageView
+        android:id="@+id/despliege3"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege2"
+        android:contentDescription="@string/despliege" />
+
+    <View
+        android:id="@+id/rectangle4"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/rectangle3"/>
+
+    <TextView
+        android:id="@+id/Nombre4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/cerrar_sesion"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/myservice"/>
+
+    <ImageView
+        android:id="@+id/ico_user4"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logout"
+        android:layout_below="@+id/ico_user3"
+        android:contentDescription="@string/cerrar_sesion" />
+
+    <ImageView
+        android:id="@+id/despliege4"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege3"
+        android:contentDescription="@string/despliege" />
+
+    <!-- Navbar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@color/header"
+        app:itemIconTint="@color/item_white_menu"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu" />
+
+</RelativeLayout>

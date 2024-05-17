@@ -32,7 +32,7 @@
         android:text="@string/btn_perfil_home"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:onClick="openProfile"/>
+        android:onClick="openMenu"/>
 
     <ImageView
         android:id="@+id/container_image"

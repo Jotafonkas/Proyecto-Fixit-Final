@@ -27,11 +27,11 @@ class Home: AppCompatActivity() {
     }
 
     // Método para abrir el perfil
-    fun openProfile(view: android.view.View) {
+    fun openMenu(view: android.view.View) {
         val user = auth.currentUser
         if (user != null) {
             // Usuario logueado, abrir la actividad de perfil
-            val intent = Intent(this, ProfileSpecialist::class.java)
+            val intent = Intent(this, MenuSpecialist::class.java)
             intent.putExtra("correo", user.email)
             startActivity(intent)
         } else {
