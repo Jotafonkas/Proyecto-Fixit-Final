@@ -65,6 +65,7 @@
             android:layout_marginStart="25dp"/>
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Email_Login_Specialist"
             android:layout_width="347dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -87,6 +88,7 @@
             />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_login_specialist"
             android:layout_width="347dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -97,7 +99,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnSiguiente"
+        android:id="@+id/btn_login_specialist"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/editTextContainer"
@@ -105,8 +107,9 @@
         android:layout_marginEnd="80dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="31dp"
-        android:onClick="OpenRegisterUser"
         android:text="@string/btnLogin"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="openHome"
+        />
 
 </RelativeLayout>
