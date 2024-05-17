@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "72495151205",
+    "project_id": "proyecto-fixit-final-github",
+    "storage_bucket": "proyecto-fixit-final-github.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72495151205:android:8120cfdf3a11a948032e8c",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_fixit_final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcahtWaIh3ruTSogvbusMacbx76IappEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
