@@ -1,27 +1,43 @@
 package fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 
 class ProfileSpecialistFragment : Fragment() {
 
-    private lateinit var edCorreo: EditText
+    private lateinit var edCorreo: TextView
     private lateinit var edRut: EditText
     private lateinit var edNombre: EditText
     private lateinit var edProfesion: EditText
     private lateinit var edTelefono: EditText
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+    private lateinit var imgperfil: ImageView
+    private lateinit var btnUpload: Button
+    private lateinit var btnDelete: Button
+    private lateinit var btnSave: Button
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageReference: StorageReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +49,27 @@ class ProfileSpecialistFragment : Fragment() {
         edNombre = view.findViewById(R.id.edNombre)
         edProfesion = view.findViewById(R.id.edEspecialidad)
         edTelefono = view.findViewById(R.id.edTelefono)
+        imgperfil = view.findViewById(R.id.imgPerfilEspecialista)
+        btnUpload = view.findViewById(R.id.btnFoto)
+        btnDelete = view.findViewById(R.id.btnEliminar)
+        btnSave = view.findViewById(R.id.btnGuardarPerfilEspecialista)
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage.reference
+
+        loadProfileImage(auth.currentUser?.uid)
+
+        btnUpload.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, 123)
+        }
+
+        btnDelete.setOnClickListener {
+            deleteProfileImage(auth.currentUser?.uid)
+        }
+
+        btnSave.setOnClickListener {
+            updateUserData(auth.currentUser?.uid)
+        }
 
         auth = FirebaseAuth.getInstance()
         firestore = Firebase.firestore
@@ -43,9 +80,80 @@ class ProfileSpecialistFragment : Fragment() {
             fetchAndDisplayData(user.uid)
         }
 
-
-
         return view
+    }
+
+    private fun loadProfileImage(uid: String?) {
+        storageReference.child("images/$uid.jpg").downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it).into(imgperfil)
+        }.addOnFailureListener {
+            Toast.makeText(requireContext(), "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun deleteProfileImage(uid: String?) {
+        storageReference.child("images/$uid.jpg").delete().addOnSuccessListener {
+            imgperfil.setImageDrawable(null)
+            Toast.makeText(requireContext(), "Imagen eliminada con éxito.", Toast.LENGTH_LONG).show()
+        }.addOnFailureListener {
+            Toast.makeText(requireContext(), "Error al eliminar la imagen.", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 123 && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
+            val filePath = data.data
+            val ref = storage.reference.child("images/${auth.currentUser?.uid}.jpg")
+            ref.putFile(filePath!!).addOnSuccessListener {
+                Toast.makeText(requireContext(), "Imagen cargada con éxito.", Toast.LENGTH_LONG).show()
+                loadProfileImage(auth.currentUser?.uid)
+            }.addOnFailureListener {
+                Toast.makeText(requireContext(), "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun updateUserData(uid: String?) {
+        val nombre = edNombre.text.toString()
+        val rut = edRut.text.toString()
+        val profesion = edProfesion.text.toString()
+        val telefono = edTelefono.text.toString()
+
+        // Validaciones
+        if (nombre.isEmpty()) {
+            edNombre.error = "Ingrese su nombre"
+            return
+        }
+        if (rut.isEmpty()) {
+            edRut.error = "Ingrese su rut"
+            return
+        }
+        if (profesion.isEmpty()) {
+            edProfesion.error = "Ingrese su profesion/especialidad"
+            return
+        }
+        if (telefono.isEmpty()) {
+            edTelefono.error = "Ingrese su telefono"
+            return
+        }
+
+        val userUpdates: MutableMap<String, Any> = hashMapOf(
+            "nombre" to nombre,
+            "rut" to rut,
+            "profesion" to profesion,
+            "telefono" to telefono
+        )
+
+        firestore.collection("users").document(uid!!)
+            .update(userUpdates)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Perfil actualizado con éxito.", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error al actualizar el perfil: ${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun fetchAndDisplayData(uid: String) {
@@ -57,13 +165,21 @@ class ProfileSpecialistFragment : Fragment() {
                     val rut = document.getString("rut")
                     val profesion = document.getString("profesion")
                     val telefono = document.getString("telefono")
+                    val imageUrl = document.getString("imageUrl")
                     edNombre.setText(nombre)
                     edCorreo.setText(correo)
                     edRut.setText(rut)
                     edProfesion.setText(profesion)
                     edTelefono.setText(telefono)
+                    if (!imageUrl.isNullOrEmpty()) {
+                        Picasso.get().load(imageUrl).into(imgperfil)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "No se encontró el usuario.", Toast.LENGTH_LONG).show()
                 }
             }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error al obtener el usuario: ${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
-
 }
