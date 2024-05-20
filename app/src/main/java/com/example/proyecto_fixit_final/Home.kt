@@ -5,12 +5,19 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import fragments.HelpSpecialistFragment
+import fragments.HomeSpecialistFragment
+import fragments.MenuSpecialistFragment
+import fragments.ProfileSpecialistFragment
+import fragments.ServiceSpecialistFragment
 
-class Home: AppCompatActivity() {
+class Home : AppCompatActivity() {
 
     private lateinit var headerTextView: TextView
     private lateinit var auth: FirebaseAuth
@@ -19,6 +26,7 @@ class Home: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home) // Asegúrate de usar el layout correcto
+
         headerTextView = findViewById(R.id.header)
         auth = FirebaseAuth.getInstance()
         firestore = Firebase.firestore
@@ -29,14 +37,48 @@ class Home: AppCompatActivity() {
             // Recuperar y mostrar el nombre del usuario desde Firestore
             fetchAndDisplayUserName(user.uid)
         }
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    replaceFragment(HomeSpecialistFragment())
+                    true
+                }
+                R.id.services -> {
+                    replaceFragment(ServiceSpecialistFragment())
+                    true
+                }
+                R.id.menu -> {
+                    replaceFragment(MenuSpecialistFragment())
+                    true
+                }
+                R.id.help -> {
+                    replaceFragment(HelpSpecialistFragment())
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
+
+    // Function to open profile
+    fun openProfile() {
+        replaceFragment(ProfileSpecialistFragment())
     }
 
     // Método para abrir el perfil
-    fun openMenu(view: android.view.View) {
+    fun openProfile(view: android.view.View) {
         val user = auth.currentUser
         if (user != null) {
             // Usuario logueado, abrir la actividad de perfil
-            val intent = Intent(this, MenuSpecialist::class.java)
+            val intent = Intent(this, ProfileSpecialist::class.java)
             intent.putExtra("correo", user.email)
             startActivity(intent)
         } else {
@@ -44,6 +86,7 @@ class Home: AppCompatActivity() {
             Toast.makeText(this, "Por favor, inicie sesión para acceder a su perfil", Toast.LENGTH_LONG).show()
         }
     }
+
     private fun fetchAndDisplayUserName(uid: String) {
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { document ->

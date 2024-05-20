@@ -19,13 +19,12 @@
     <string name="email_register_specialist">Correo Electrónico</string>
     <string name="rut_register_specialist">Rut sin puntos ni guión (Ej:101234560)</string>
     <string name="phone_register_specialist">Teléfono</string>
-    <string name="profession_register_specilialist">Profesión/Especialidad\n</string>
+    <string name="profession_register_specilialist">Profesión/Especialidad</string>
     <string name="password_register_specialist">Contraseña</string>
     <string name="password2_register_specialist">Confirme su Contraseña</string>
     <string name="text_certificado_de_antecedentes">Certificado de Antecedentes</string>
     <string name="btn_upload_certificate">Adjuntar</string>
     <string name="btn_register_specialist">Registrarse</string>
-
 
     <!-- Strings Seleccion Usuario -->
     <string name="text_selection_user">ESCOJA SU USUARIO:</string>
@@ -40,7 +39,7 @@
 
     <!-- Strings Home -->
     <string name="titulo_home">Bienvenid@ a Fixit</string>
-    <string name="btn_perfil_home">Menú</string>
+    <string name="btn_perfil_home">Perfil</string>
     <string name="text1_home">Tu trabajo es recompensado</string>
     <string name="text2_home">Te ayudamos en lo que necesites 24/7</string>
     <string name="text3_home">Si ofreces un servicio de calidad, nosotros te pondremos primero.</string>
@@ -69,7 +68,7 @@
 
     <!-- Strings Categorias Especialista -->
     <string name="titulo_categorias">Categorías de servicios</string>
-    <string name="texto_categorias">Escoge entre una de las categorias disponibles:</string>
+    <string name="texto_categorias">Ofrece entre una de las categorias disponibles:</string>
     <string name="txt_limpieza">Limpieza</string>
     <string name="txt_transporte">Transporte</string>
     <string name="txt_electricidad">Electricidad</string>

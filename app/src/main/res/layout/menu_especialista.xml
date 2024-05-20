@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundapp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/drawable_shape"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MenuSpecialist" >
 
     <TextView
         android:id="@+id/menu_especialista"
         android:layout_width="match_parent"
-        android:layout_height="93dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/color_servicio"
-        android:gravity="center"
-        android:padding="16dp"
+        android:layout_height="wrap_content"
         android:text="@string/item3_menu"
+        android:textSize="30sp"
         android:textColor="@color/white"
-        android:textSize="24sp"
         android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:padding="25dp"
         />
 
     <ImageButton
@@ -28,7 +30,8 @@
         android:layout_gravity="top"
         android:background="@drawable/ic_flechavolver"
         android:scaleType="centerInside"
-        android:contentDescription="@string/volver_atras" />
+        android:contentDescription="@string/volver_atras"
+        android:onClick="returnHome"/>
 
     <View
         android:id="@+id/rectangle1"
@@ -191,17 +194,5 @@
         android:layout_below="@+id/despliege3"
         android:contentDescription="@string/despliege" />
 
-    <!-- Navbar -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:background="@color/header"
-        app:itemIconTint="@color/item_white_menu"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu" />
 
 </RelativeLayout>

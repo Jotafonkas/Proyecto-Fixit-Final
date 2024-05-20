@@ -10,3 +10,4 @@ class SpecialistCategorys : AppCompatActivity() {
 
     }
 }
+

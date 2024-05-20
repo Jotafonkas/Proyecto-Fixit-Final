@@ -1,6 +1,8 @@
 package com.example.proyecto_fixit_final
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +24,8 @@ class ProfileSpecialist : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.perfil_especialista)
+
+        setContentView(R.layout.perfil_especialista)
         auth = FirebaseAuth.getInstance()
         firestore = Firebase.firestore
         edCorreo = findViewById(R.id.edCorreo)
@@ -40,6 +44,11 @@ class ProfileSpecialist : AppCompatActivity() {
             // Recuperar y mostrar el nombre del usuario desde Firestore
             fetchAndDisplayData(user.uid)
         }
+    }
+
+    fun backMenu(view: View) {
+        val intent = Intent(this, MenuSpecialist::class.java)
+        startActivity(intent)
     }
 
     private fun fetchAndDisplayData(uid: String) {
@@ -64,5 +73,4 @@ class ProfileSpecialist : AppCompatActivity() {
                 Toast.makeText(this, "Error al obtener el usuario: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
-
 }

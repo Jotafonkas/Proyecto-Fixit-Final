@@ -11,9 +11,15 @@ class MenuSpecialist : AppCompatActivity() {
         setContentView(R.layout.menu_especialista)
     }
 
+    fun returnHome(view: View) {
+        val intent = Intent(this, Home::class.java)
+        startActivity(intent)
+    }
+
     fun openProfile(view: View) {
         val intent = Intent(this, ProfileSpecialist::class.java)
         startActivity(intent)
     }
 
 }
+

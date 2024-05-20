@@ -17,15 +17,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 
 class RegisterSpecialist : AppCompatActivity() {
 
     // Declarar las variables del layout
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
-    private lateinit var storage: FirebaseStorage
     private lateinit var btnRegistro: Button
     private lateinit var btnFoto: Button
     private lateinit var btnEliminar: Button
@@ -48,12 +45,16 @@ class RegisterSpecialist : AppCompatActivity() {
         }
     }
 
+    fun returnRegisterUser(view: View) {
+        val intent = Intent(this, SelectUser::class.java)
+        startActivity(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registro_especialista)
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()
-        storage = Firebase.storage
 
         // Set variables por id
         btnRegistro = findViewById(R.id.btnRegistrarse_especialista)
@@ -131,42 +132,25 @@ class RegisterSpecialist : AppCompatActivity() {
                 if (task.isSuccessful) {
                     //valida el usuario y usa la funcion savedata
                     val user = auth.currentUser
-                    if (user != null) {
-                        if (selectedImageUri != null) {
-                            uploadImageToStorage(user.uid, nombre, rut, correo, telefono, profesion)
-                        } else {
-                            saveAdditionalUserData(user.uid, nombre, rut, correo, telefono, profesion, null)
-                        }
-                    }
+                    saveAdditionalUserData(user!!.uid, nombre, rut, correo, telefono, profesion)
+                    // Usuario creado correctamente, redirigir a Home
+                    val intent = Intent(this, Home::class.java)
+                    intent.putExtra("correo", correo)
+                    startActivity(intent)
+                    finish()
                 } else {
                     // Error al crear usuario
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     }
-    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
-        val ref = storage.reference.child("images/$uid.jpg")
-        val uploadTask = ref.putFile(selectedImageUri!!)
-
-        uploadTask.addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener { uri ->
-                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, uri.toString())
-                navigateToHome()
-            }
-        }.addOnFailureListener { e ->
-            Log.e("RegisterSpecialist", "Error al subir imagen", e)
-            Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String,imageUrl: String?) {
+    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
         val user = hashMapOf(
             "nombre" to nombre,
             "rut" to rut,
             "correo" to correo,
             "telefono" to telefono,
-            "profesion" to profesion,
-            "imageUrl" to imageUrl
+            "profesion" to profesion
         )
         firestore.collection("users").document(uid)
             .set(user)
@@ -176,11 +160,6 @@ class RegisterSpecialist : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w("RegisterSpecialist", "Error writing document", e)
             }
-    }
-    private fun navigateToHome() {
-        val intent = Intent(this, Home::class.java)
-        startActivity(intent)
-        finish()
     }
 }
 

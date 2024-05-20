@@ -14,9 +14,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_logo3"
+        android:icon="@mipmap/ic_launcher4"
         android:label="@string/nombre_app"
-        android:roundIcon="@mipmap/ic_logo3"
+        android:roundIcon="@mipmap/ic_launcher4_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
@@ -111,5 +111,7 @@
             </intent-filter>
         </activity>
     </application>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 </manifest>

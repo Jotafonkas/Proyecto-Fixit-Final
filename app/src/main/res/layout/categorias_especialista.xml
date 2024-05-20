@@ -1,7 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/drawable_shape"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SpecialistCategorys" >
 
     <!-- Encabezado -->
     <TextView
@@ -9,32 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/titulo_categorias"
-        android:textSize="22sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:background="@color/header"
         android:gravity="center"
+        android:layout_alignParentTop="true"
         android:padding="25dp"/>
 
-
+    <!-- Subtítulos Servicios disponibles -->
     <TextView
         android:layout_below="@id/txtCategoriaServiciosEspecialistas"
         android:id="@+id/txtServiciosdispo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
-        android:gravity="center_horizontal|top"
-        android:includeFontPadding="false"
+        android:gravity="center"
         android:text="@string/texto_categorias"
-        android:textColor="#FF000000"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:layout_marginTop="120dp"
+        />
 
-
-
+    <!-- Container Grid Categorías -->
     <GridLayout
         android:id="@+id/gdCategorias"
         android:layout_width="match_parent"
@@ -42,14 +42,14 @@
         android:columnCount="3"
         android:rowCount="3"
         android:layout_below="@id/txtServiciosdispo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp">
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp">
 
+        <!-- Categoría 1 - (Mantener formato de todos los LinearLayout) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -61,17 +61,16 @@
             <ImageButton
                 android:id="@+id/imageButton1"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
+                android:layout_height="80dp"
                 android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -92,17 +91,16 @@
             <ImageButton
                 android:id="@+id/imageButton2"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerInside"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
-            />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_transporte"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -123,17 +121,16 @@
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_electricidad"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -154,17 +151,16 @@
             <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_fontaneria"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -185,17 +181,16 @@
             <ImageButton
                 android:id="@+id/imageButton5"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_tecnologia"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -216,17 +211,16 @@
             <ImageButton
                 android:id="@+id/imageButton6"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_carpinteria"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -247,17 +241,16 @@
             <ImageButton
                 android:id="@+id/imageButton7"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_cuidadopersonal"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -278,17 +271,16 @@
             <ImageButton
                 android:id="@+id/imageButton8"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_comida"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
 
         </LinearLayout>
@@ -309,34 +301,19 @@
             <ImageButton
                 android:id="@+id/imageButton9"
                 android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:scaleType="centerCrop"
+                android:layout_height="80dp"
+                android:src="@drawable/img_limpieza"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_construccion"
+                android:layout_height="30dp"
+                android:text="@string/txt_limpieza"
                 android:gravity="center_horizontal|top"
-                android:includeFontPadding="false"
                 />
-
         </LinearLayout>
 
-</GridLayout>
+    </GridLayout>
 
-
-    <!-- Navbar -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:background="@color/header"
-        app:itemIconTint="@color/item_white_menu"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu" />
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

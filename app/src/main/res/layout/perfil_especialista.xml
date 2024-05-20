@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/drawable_shape"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProfileSpecialist"
+    >
 
     <TextView
         android:id="@+id/txtPerfilEspecialista"
@@ -27,7 +32,7 @@
         android:layout_gravity="top"
         android:background="@drawable/ic_flechavolver"
         android:scaleType="centerInside"
-        android:onClick="backHome"/>
+        android:onClick="backMenu"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -74,7 +79,6 @@
                     />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_below="@id/LLbtnsimagen"
@@ -226,6 +230,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
                     android:text="Guardar Cambios"
                     android:textSize="20sp"
                     />
@@ -233,18 +238,15 @@
             </LinearLayout>
 
         </RelativeLayout>
+
     </ScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <!-- Barra de navegación -->
+    <include
+        layout="@layout/navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:background="@color/header"
-        app:itemIconTint="@color/item_white_menu"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="labeled"
-        android:layout_marginTop="20dp"
-        app:menu="@menu/bottom_menu" />
+        android:layout_alignParentBottom="true" />
+
+
 </RelativeLayout>

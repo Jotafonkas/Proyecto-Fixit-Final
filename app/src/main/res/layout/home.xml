@@ -1,45 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/drawable_shape"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".Home">
 
-    <TextView
-        android:id="@+id/header"
+    <include
+        android:id="@+id/userNameTextView"
+        layout="@layout/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titulo_home"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@color/header"
-        android:gravity="center"
-        android:padding="25dp"/>
+        />
 
     <Button
+        android:id="@+id/btnOpenProfile"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="230dp"
+        android:layout_marginStart="240dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:text="@string/btn_perfil_home"
         android:textColor="@color/white"
+        android:padding="10dp"
         android:textSize="20sp"
-        android:onClick="openMenu"/>
+        android:onClick="openProfile"
+        />
 
     <ImageView
         android:id="@+id/container_image"
         android:layout_width="212dp"
         android:layout_height="222dp"
         android:layout_marginTop="130dp"
-        android:src="@drawable/container_image" />
+        android:src="@drawable/container_image"
+        />
 
     <TextView
         android:id="@+id/text_trabajo_recompensado"
@@ -52,7 +49,8 @@
         android:includeFontPadding="false"
         android:text="@string/text1_home"
         android:textColor="#FF33353C"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        />
 
     <TextView
         android:id="@+id/text_ayuda_necesitas"
@@ -64,7 +62,8 @@
         android:gravity="end"
         android:text="@string/text2_home"
         android:textColor="#FF33353C"
-        android:textSize="19sp" />
+        android:textSize="19sp"
+        />
 
     <TextView
         android:id="@+id/text_servicio_calidad"
@@ -77,14 +76,16 @@
         android:text="@string/text3_home"
         android:textAlignment="center"
         android:textColor="#FF282828"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
     <ImageView
         android:id="@+id/container_image1"
         android:layout_width="179dp"
         android:layout_height="231dp"
         android:layout_marginTop="480dp"
-        android:src="@drawable/container_image1" />
+        android:src="@drawable/container_image1"
+        />
 
     <TextView
         android:id="@+id/text_garantia_especialistas"
@@ -99,19 +100,19 @@
         android:gravity="end"
         android:text="@string/text4_home"
         android:textColor="#FF282828"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        />
 
-    <!-- NavBar -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <!-- Contenedor de fragmentos -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/header"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/item_white_menu"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
-        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        />
+
+    <!-- Barra de navegación -->
+    <include
+        layout="@layout/navbar"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

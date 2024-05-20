@@ -6,16 +6,15 @@
     <TextView
         android:id="@+id/txtRegistroEspecialista"
         android:layout_width="match_parent"
-        android:layout_height="93dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/header_login_specialist"
+        android:background="@color/header"
         android:gravity="center"
-        android:padding="16dp"
         android:text="@string/register_specialist_title"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        />
+        android:padding="25dp" />
 
     <ImageButton
         android:id="@+id/volver"
@@ -32,7 +31,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigationView"
         android:layout_below="@id/txtRegistroEspecialista">
 
         <RelativeLayout
@@ -54,14 +52,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imagen"
                 android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
+                android:layout_centerHorizontal="true" >
 
                 <Button
                     android:id="@+id/btnFoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/image_pencil"
+                    android:drawableEnd="@drawable/image_pencil"
                     android:layout_marginEnd="15dp"
                     android:text="@string/btn_cargar"/>
 
@@ -69,7 +66,7 @@
                     android:id="@+id/btnEliminar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/ic_eliminar"
+                    android:drawableEnd="@drawable/ic_eliminar"
                     android:text="@string/btn_eliminar"
                     />
 
@@ -110,7 +107,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="-0.5dp"
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/rut_register_specialist"
@@ -133,7 +129,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="-0.5dp"
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/email_register_specialist"
@@ -155,7 +150,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="-0.5dp"
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/phone_register_specialist"
@@ -178,11 +172,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="-0.5dp"
-                    android:layout_gravity="top"
-                    android:gravity="center_horizontal|center_vertical"
                     android:text="@string/profession_register_specilialist"
-                    android:textColor="#FF000000"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"
                     />
@@ -264,18 +255,22 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20sp"
                     />
+
+                <Button
+                    android:id="@+id/btnRegistrarse_especialista"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/btn_register_specialist"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="40dp"
+                    android:onClick="openHome"/>
+
             </LinearLayout>
-            <Button
-                android:id="@+id/btnRegistrarse_especialista"
-                android:layout_width="275dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/editTextContainer"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="@string/btn_register_specialist"
-                android:textSize="20sp"
-                android:onClick="openHome"/>
+
         </RelativeLayout>
+
     </ScrollView>
 
 </RelativeLayout>
