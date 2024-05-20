@@ -17,15 +17,19 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 class RegisterSpecialist : AppCompatActivity() {
 
     // Declarar las variables del layout
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+    private lateinit var storage: FirebaseStorage
     private lateinit var btnRegistro: Button
     private lateinit var btnFoto: Button
     private lateinit var btnEliminar: Button
+    private lateinit var btnCertificado: Button
     private lateinit var imagen: ImageView
     private lateinit var nombreEsp: EditText
     private lateinit var rutEsp: EditText
@@ -35,15 +39,8 @@ class RegisterSpecialist : AppCompatActivity() {
     private lateinit var passEsp: EditText
     private lateinit var pass2Esp: EditText
     private var selectedImageUri: Uri? = null
+    private var selectedPdfUri: Uri? = null
 
-    private val getImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            result.data?.data?.let { uri ->
-                selectedImageUri = uri
-                imagen.setImageURI(uri)
-            }
-        }
-    }
 
     fun returnRegisterUser(view: View) {
         val intent = Intent(this, SelectUser::class.java)
@@ -55,11 +52,13 @@ class RegisterSpecialist : AppCompatActivity() {
         setContentView(R.layout.registro_especialista)
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()
+        storage = Firebase.storage
 
         // Set variables por id
         btnRegistro = findViewById(R.id.btnRegistrarse_especialista)
         btnFoto = findViewById(R.id.btnFoto)
         btnEliminar = findViewById(R.id.btnEliminar)
+        btnCertificado = findViewById(R.id.btnCargarCertificado)
         imagen = findViewById(R.id.imagen)
         nombreEsp = findViewById(R.id.edNombre_especialista)
         rutEsp = findViewById(R.id.edRut_especialista)
@@ -117,13 +116,45 @@ class RegisterSpecialist : AppCompatActivity() {
 
         btnFoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            getImage.launch(intent)
+            startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE)
         }
 
         btnEliminar.setOnClickListener {
             imagen.setImageResource(R.drawable.image_perfil) // Cambia esto por el recurso predeterminado que deseas
             selectedImageUri = null
         }
+
+        btnCertificado.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "application/pdf"
+                addCategory(Intent.CATEGORY_OPENABLE)
+            }
+            startActivityForResult(Intent.createChooser(intent, "Seleccionar PDF"), REQUEST_CODE_SELECT_PDF)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_CODE_SELECT_IMAGE -> {
+                    data?.data?.let { uri ->
+                        selectedImageUri = uri
+                        imagen.setImageURI(uri)
+                    }
+                }
+                REQUEST_CODE_SELECT_PDF -> {
+                    data?.data?.let { uri ->
+                        selectedPdfUri = uri
+                        Toast.makeText(this, "PDF seleccionado: $uri", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+    companion object {
+        private const val REQUEST_CODE_SELECT_IMAGE = 1000
+        private const val REQUEST_CODE_SELECT_PDF = 1001
     }
 
     private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, profesion: String, pass: String) {
@@ -132,25 +163,66 @@ class RegisterSpecialist : AppCompatActivity() {
                 if (task.isSuccessful) {
                     //valida el usuario y usa la funcion savedata
                     val user = auth.currentUser
-                    saveAdditionalUserData(user!!.uid, nombre, rut, correo, telefono, profesion)
-                    // Usuario creado correctamente, redirigir a Home
-                    val intent = Intent(this, Home::class.java)
-                    intent.putExtra("correo", correo)
-                    startActivity(intent)
-                    finish()
+                    if (user != null) {
+                        if (selectedImageUri != null) {
+                            uploadImageToStorage(user.uid, nombre, rut, correo, telefono, profesion, null)
+                        } else if (selectedPdfUri != null) {
+                            uploadPdfToStorage(user.uid, nombre, rut, correo, telefono, profesion, null)
+                        } else {
+                            saveAdditionalUserData(user.uid, nombre, rut, correo, telefono, profesion, null, null)
+                            navigateToHome()
+                        }
+                    }
                 } else {
                     // Error al crear usuario
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     }
-    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
+
+    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, pdfUrl: String?) {
+        val ref = storage.reference.child("images/$uid.jpg")
+        val uploadTask = ref.putFile(selectedImageUri!!)
+
+        uploadTask.addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener { uri ->
+                if (selectedPdfUri != null) {
+                    uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, uri.toString())
+                } else {
+                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, uri.toString(), pdfUrl)
+                    navigateToHome()
+                }
+            }
+        }.addOnFailureListener { e ->
+            Log.e("RegisterSpecialist", "Error al subir imagen", e)
+            Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    private fun uploadPdfToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?) {
+        val ref = storage.reference.child("pdfs/$uid.pdf")
+        val uploadTask = ref.putFile(selectedPdfUri!!)
+
+        uploadTask.addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener { uri ->
+                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, imageUrl, uri.toString())
+                navigateToHome()
+            }
+        }.addOnFailureListener { e ->
+            Log.e("RegisterSpecialist", "Error al subir PDF", e)
+            Toast.makeText(this, "Error al subir PDF: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?, pdfUrl: String?) {
         val user = hashMapOf(
             "nombre" to nombre,
             "rut" to rut,
             "correo" to correo,
             "telefono" to telefono,
-            "profesion" to profesion
+            "profesion" to profesion,
+            "imageUrl" to imageUrl,
+            "pdfUrl" to pdfUrl
         )
         firestore.collection("users").document(uid)
             .set(user)
@@ -161,5 +233,11 @@ class RegisterSpecialist : AppCompatActivity() {
                 Log.w("RegisterSpecialist", "Error writing document", e)
             }
     }
-}
 
+    private fun navigateToHome() {
+        val intent = Intent(this, Home::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+}
