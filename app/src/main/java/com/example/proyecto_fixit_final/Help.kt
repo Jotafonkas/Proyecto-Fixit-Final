@@ -27,5 +27,4 @@ class Help : AppCompatActivity() {
         startActivity(intent)
     }
 
-
 }

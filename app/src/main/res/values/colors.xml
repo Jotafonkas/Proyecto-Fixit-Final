@@ -17,10 +17,9 @@
     <color name="item_white_menu">#BFBFBF</color>
 
     <!-- Colores del perfil especialista -->
-    <color name="edit_texts2">#E3E3E3</color>
-
-    <!-- Colores del perfil especialista -->
     <color name="input_categoria">#CFCFCF</color>
+    <color name="gris">#686767</color>
+    <color name="edit_texts2">#E3E3E3</color>
 
     <!-- Colores de Visualizacion Especialista -->
     <color name="red">#AF5050</color>

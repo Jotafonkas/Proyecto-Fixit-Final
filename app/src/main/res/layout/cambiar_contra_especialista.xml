@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/LoginEspecialista"
+        android:id="@+id/txtCambiarpassEspecialista"
         android:layout_width="match_parent"
         android:layout_height="93dp"
         android:layout_alignParentTop="true"
         android:background="@color/header_login_specialist"
         android:gravity="center"
         android:padding="16dp"
-        android:text="@string/login_specialist_title"
+        android:text="@string/cambiar_contrase_a"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -27,107 +27,128 @@
         android:layout_gravity="top"
         android:background="@drawable/ic_flechavolver"
         android:scaleType="centerInside"
-        android:onClick="ReturnRegisterUser"
+        android:onClick="volverMenu"
         />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imagen"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_below="@id/LoginEspecialista"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/image_perfil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_centerHorizontal="true"
-        app:shapeAppearanceOverlay="@style/radius4"/>
-
     <LinearLayout
-        android:layout_below="@id/imagen"
-        android:layout_marginTop="20dp"
-        android:id="@+id/editTextContainer"
+        android:layout_below="@id/txtCambiarpassEspecialista"
+        android:layout_marginTop="100dp"
+        android:id="@+id/containerContraseñasEspecialista"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true">
 
-
         <TextView
-            android:id="@+id/name_register_specialist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/email_login_specialist"
-            android:textColor="#FF000000"
-            android:textSize="20sp"
-            android:layout_marginStart="25dp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_login_specialist_layout"
-            android:layout_width="347dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            app:startIconDrawable="@drawable/ic_email">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Email_Login_Specialist"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingStart="10dp"
-                android:background="@drawable/image_rectangle1"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/TVrut"
+            android:id="@+id/txtContraseñaActual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="-0.5dp"
             android:layout_gravity="top"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/password_login_specialist"
+            android:text="@string/contrase_a_actual"
             android:textColor="#FF000000"
             android:textSize="20sp"
             android:layout_marginStart="30dp"
             />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_login_specialist_layout"
+            android:id="@+id/edPassActualLayout"
             android:layout_width="347dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            app:startIconDrawable="@drawable/ic_pass"
             app:endIconMode="password_toggle">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_login_specialist"
+            <EditText
+                android:id="@+id/edpassactual"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:hint="@string/inserte_su_contrase_a_actual"
                 android:paddingStart="10dp"
                 android:inputType="textPassword"
                 android:background="@drawable/image_rectangle1"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/txtContraseñaNueva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-0.5dp"
+            android:layout_gravity="top"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/contrase_a_nueva"
+            android:textColor="#FF000000"
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edNuevaContraseñaLayout"
+            android:layout_width="347dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            app:endIconMode="password_toggle">
+
+            <EditText
+                android:id="@+id/edNuevaContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/inserte_su_nueva_contrase_a"
+                android:paddingStart="10dp"
+                android:inputType="textPassword"
+                android:background="@drawable/image_rectangle1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtConfirmarContraseña"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-0.5dp"
+            android:layout_gravity="top"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/confirmar_contrase_a"
+            android:textColor="#FF000000"
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edConfirmarContraseñaLayout"
+            android:layout_width="347dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            app:endIconMode="password_toggle">
+
+            <EditText
+                android:id="@+id/edConfirmarContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/confirme_su_nueva_contrase_a"
+                android:paddingStart="10dp"
+                android:inputType="textPassword"
+                android:background="@drawable/image_rectangle1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_login_specialist"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/editTextContainer"
+        android:id="@+id/btncambiarpassEspecialista"
+        android:layout_width="275dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/containerContraseñasEspecialista"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="80dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="31dp"
-        android:text="@string/btnLogin"
+        android:text="@string/btn_cambiar_contrase_a"
         android:textSize="20sp"
-        android:onClick="openHome"
         />
 
 </RelativeLayout>

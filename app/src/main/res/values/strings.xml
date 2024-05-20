@@ -55,6 +55,14 @@
     <string name="titulo_perfil">Mi Perfil</string>
     <string name="edit_profile_pic">Foto de Perfil</string>
     <string name="btn_cargarfoto_perfil">Cargar</string>
+    <string name="btn_eliminarfoto_perfil">Eliminar</string>
+    <string name="nombre_y_apellido">Nombre y Apellido</string>
+    <string name="rut">Rut</string>
+    <string name="correo_electr_nico">Correo Electrónico</string>
+    <string name="tel_fono">Teléfono</string>
+    <string name="profesi_n_especialidad">Profesión/Especialidad</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
+
 
     <!-- Strings Crear Servicio Especialista -->
     <string name="crear_servicio">Crear servicio</string>
@@ -63,7 +71,6 @@
     <string name="precio_del_servicio">Precio del Servicio</string>
     <string name="btn_cargar_imgservicio_especialista">Cargar</string>
     <string name="btn_publicar_servicio">Publicar Servicio</string>
-    <string name="btn_eliminarfoto_perfil">Eliminar</string>
     <string name="imagenes_de_tus_trabajos_opcional">Imagenes de tus trabajos (Opcional)</string>
 
     <!-- Strings Categorias Especialista -->
@@ -118,5 +125,18 @@
     <string name="mis_servicios">Mis servicios</string>
     <string name="cerrar_sesion">Cerrar sesion</string>
     <string name="despliege">despliege</string>
+    <string name="menu_cambiar_contrase_a">Cambiar Contraseña</string>
+
+
+    <!-- Strings Cambiar Contraseña Especialista -->
+    <string name="cambiar_contrase_a">Cambiar Contraseña</string>
+    <string name="contrase_a_actual">Contraseña Actual</string>
+    <string name="inserte_su_contrase_a_actual">Inserte su contraseña actual</string>
+    <string name="contrase_a_nueva">Contraseña Nueva</string>
+    <string name="inserte_su_nueva_contrase_a">Inserte su nueva contraseña</string>
+    <string name="confirmar_contrase_a">Confirmar Contraseña</string>
+    <string name="confirme_su_nueva_contrase_a">Confirme su nueva contraseña</string>
+    <string name="btn_cambiar_contrase_a">Cambiar Contraseña</string>
+
 
 </resources>

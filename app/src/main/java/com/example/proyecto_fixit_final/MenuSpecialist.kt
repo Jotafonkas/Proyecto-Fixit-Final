@@ -21,5 +21,10 @@ class MenuSpecialist : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun openCredentialsSpecialist(view: View) {
+        val intent = Intent(this, ChangePasswordSpecialist::class.java)
+        startActivity(intent)
+    }
+
 }
 
