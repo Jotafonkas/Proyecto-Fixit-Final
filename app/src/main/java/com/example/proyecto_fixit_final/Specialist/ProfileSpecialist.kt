@@ -1,29 +1,27 @@
-package fragments
+package com.example.proyecto_fixit_final.Specialist
 
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.proyecto_fixit_final.R
-import com.google.firebase.Firebase
+import com.example.proyecto_fixit_final.fragments.MenuFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
-class ProfileSpecialistFragment : Fragment() {
+class ProfileSpecialist : AppCompatActivity() {
 
     private lateinit var edCorreo: TextView
     private lateinit var edRut: EditText
@@ -39,20 +37,23 @@ class ProfileSpecialistFragment : Fragment() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageReference: StorageReference
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.perfil_especialista, container, false)
-        edCorreo = view.findViewById(R.id.edCorreo)
-        edRut = view.findViewById(R.id.edRut)
-        edNombre = view.findViewById(R.id.edNombre)
-        edProfesion = view.findViewById(R.id.edEspecialidad)
-        edTelefono = view.findViewById(R.id.edTelefono)
-        imgperfil = view.findViewById(R.id.imgPerfilEspecialista)
-        btnUpload = view.findViewById(R.id.btnFoto)
-        btnDelete = view.findViewById(R.id.btnEliminar)
-        btnSave = view.findViewById(R.id.btnGuardarPerfilEspecialista)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.perfil_especialista)
+
+        setContentView(R.layout.perfil_especialista)
+        auth = FirebaseAuth.getInstance()
+        firestore = Firebase.firestore
+        edCorreo = findViewById(R.id.edCorreo)
+        edRut = findViewById(R.id.edRut)
+        edNombre = findViewById(R.id.edNombre)
+        edProfesion = findViewById(R.id.edEspecialidad)
+        edTelefono = findViewById(R.id.edTelefono)
+        edCorreo = findViewById(R.id.edCorreo)
+        imgperfil = findViewById(R.id.imgPerfilEspecialista)
+        btnUpload = findViewById(R.id.btnFoto)
+        btnDelete = findViewById(R.id.btnEliminar)
+        btnSave = findViewById(R.id.btnGuardarPerfilEspecialista)
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference
 
@@ -71,46 +72,45 @@ class ProfileSpecialistFragment : Fragment() {
             updateUserData(auth.currentUser?.uid)
         }
 
-        auth = FirebaseAuth.getInstance()
-        firestore = Firebase.firestore
+        // Recibir el correo pasado desde HomeActivity
+        val correo = intent.getStringExtra("correo")
 
+        // Poner el correo en el campo de EditText
         val user = auth.currentUser
         if (user != null) {
             // Recuperar y mostrar el nombre del usuario desde Firestore
             fetchAndDisplayData(user.uid)
         }
-
-        return view
     }
 
     private fun loadProfileImage(uid: String?) {
         storageReference.child("images/$uid.jpg").downloadUrl.addOnSuccessListener {
             Picasso.get().load(it).into(imgperfil)
         }.addOnFailureListener {
-            Toast.makeText(requireContext(), "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun deleteProfileImage(uid: String?) {
         storageReference.child("images/$uid.jpg").delete().addOnSuccessListener {
             imgperfil.setImageDrawable(null)
-            Toast.makeText(requireContext(), "Imagen eliminada con éxito.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Imagen eliminada con éxito.", Toast.LENGTH_LONG).show()
         }.addOnFailureListener {
-            Toast.makeText(requireContext(), "Error al eliminar la imagen.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error al eliminar la imagen.", Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 123 && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
+        if (requestCode == 123 && resultCode == RESULT_OK && data != null && data.data != null) {
             val filePath = data.data
             val ref = storage.reference.child("images/${auth.currentUser?.uid}.jpg")
             ref.putFile(filePath!!).addOnSuccessListener {
-                Toast.makeText(requireContext(), "Imagen cargada con éxito.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Imagen cargada con éxito.", Toast.LENGTH_LONG).show()
                 loadProfileImage(auth.currentUser?.uid)
             }.addOnFailureListener {
-                Toast.makeText(requireContext(), "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -149,11 +149,16 @@ class ProfileSpecialistFragment : Fragment() {
         firestore.collection("users").document(uid!!)
             .update(userUpdates)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Perfil actualizado con éxito.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Perfil actualizado con éxito.", Toast.LENGTH_LONG).show()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error al actualizar el perfil: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Error al actualizar el perfil: ${e.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    fun backMenu(view: View) {
+        val intent = Intent(this, MenuFragment::class.java)
+        startActivity(intent)
     }
 
     private fun fetchAndDisplayData(uid: String) {
@@ -174,12 +179,15 @@ class ProfileSpecialistFragment : Fragment() {
                     if (!imageUrl.isNullOrEmpty()) {
                         Picasso.get().load(imageUrl).into(imgperfil)
                     }
+                    Log.d("ProfileSpecialist", "Datos del usuario: $document")
                 } else {
-                    Toast.makeText(requireContext(), "No se encontró el usuario.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "No se encontró el usuario.", Toast.LENGTH_LONG).show()
+                    Log.d("ProfileSpecialist", "No se encontró el usuario con el ID: $uid")
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error al obtener el usuario: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Error al obtener el usuario: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.d("ProfileSpecialist", "Error al obtener el usuario: ${e.message}")
             }
     }
 }

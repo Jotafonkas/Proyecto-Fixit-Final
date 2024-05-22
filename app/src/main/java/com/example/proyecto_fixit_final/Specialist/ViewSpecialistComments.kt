@@ -1,10 +1,11 @@
-package com.example.proyecto_fixit_final
+package com.example.proyecto_fixit_final.Specialist
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.proyecto_fixit_final.R
 
 class ViewSpecialistComments : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

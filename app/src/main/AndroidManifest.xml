@@ -22,7 +22,10 @@
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
         <activity
-            android:name=".ChangePasswordSpecialist"
+            android:name=".NavBar"
+            android:exported="false" />
+        <activity
+            android:name=".Specialist.ChangePasswordSpecialist"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -34,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterSpecialist"
+            android:name=".Specialist.RegisterSpecialist"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -79,7 +82,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateServicesSpecialist"
+            android:name=".Specialist.CreateServicesSpecialist"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,7 +100,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileSpecialist"
+            android:name=".Specialist.ProfileSpecialist"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

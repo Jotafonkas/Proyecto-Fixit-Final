@@ -3,16 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/drawable_shape"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Home">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include
-        android:id="@+id/userNameTextView"
-        layout="@layout/header"
+    <TextView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:text="@string/titulo_home"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:padding="25dp"/>
 
     <Button
         android:id="@+id/btnOpenProfile"
@@ -102,17 +105,4 @@
         android:textColor="#FF282828"
         android:textSize="16sp"
         />
-
-    <!-- Contenedor de fragmentos -->
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <!-- Barra de navegación -->
-    <include
-        layout="@layout/navbar"
-        />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

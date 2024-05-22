@@ -1,4 +1,4 @@
-package com.example.proyecto_fixit_final
+package com.example.proyecto_fixit_final.Specialist
 
 import android.app.Activity
 import android.content.Intent
@@ -11,8 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto_fixit_final.R
+import com.example.proyecto_fixit_final.SelectUser
+import com.example.proyecto_fixit_final.fragments.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -235,7 +237,7 @@ class RegisterSpecialist : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, Home::class.java)
+        val intent = Intent(this, HomeFragment::class.java)
         startActivity(intent)
         finish()
     }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    tools:context=".ViewSpecialistProfile"
+    tools:context=".Specialist.ViewSpecialistProfile"
     >
 
     <!-- Header -->
@@ -150,7 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/image"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:text="@string/esp_nombrecompleto"
         android:textColor="@color/black"
         android:textSize="15sp"
@@ -172,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/nombredelespecialista"
         android:text="@string/esp_profesion"
         android:textColor="@color/black"
@@ -195,6 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/profesiondelespecialista"
         android:text="@string/esp_descripcion"
         android:textColor="@color/black"
@@ -217,7 +218,8 @@
         android:layout_width="98dp"
         android:layout_height="92dp"
         android:layout_marginStart="265dp"
-        android:layout_above="@+id/bottomNavigationView"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/descripciondelperfil"
         android:layout_marginBottom="25dp"
         android:scaleType="centerInside"
         android:src="@drawable/timbre_antecedentes" />
@@ -227,42 +229,20 @@
         android:layout_width="196dp"
         android:layout_height="39dp"
         android:layout_marginStart="30dp"
-        android:layout_above="@+id/botoncontactar"
+        android:layout_below="@+id/descripciondelperfil"
         android:layout_marginTop="40dp"
         android:text="@string/btnservicios"
         android:textSize="14sp"/>
-
-    <Button
-        android:id="@+id/botoncontactar"
-        android:layout_width="196dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="30dp"
-        android:text="@string/btncontactar"
-        android:layout_above="@id/botoncomentarios" />
 
     <Button
         android:id="@+id/botoncomentarios"
         android:layout_width="196dp"
         android:layout_height="39dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/btncomentarios"
-        android:layout_above="@+id/bottomNavigationView"
+        android:layout_below="@+id/botonservicios"
         android:layout_marginBottom="10dp"
-        />
-
-
-    <!-- NavBar -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/header"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/item_white_menu"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
         />
 
 </RelativeLayout>

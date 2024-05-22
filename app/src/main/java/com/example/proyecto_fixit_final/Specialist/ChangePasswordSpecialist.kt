@@ -1,4 +1,4 @@
-package com.example.proyecto_fixit_final
+package com.example.proyecto_fixit_final.Specialist
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto_fixit_final.R
+import com.example.proyecto_fixit_final.fragments.MenuFragment
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
@@ -22,7 +24,6 @@ class ChangePasswordSpecialist : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.cambiar_contra_especialista)
-
         auth = FirebaseAuth.getInstance()
         edCurrentPassword = findViewById(R.id.edpassactual)
         edNewPassword = findViewById(R.id.edNuevaContraseña)
@@ -34,6 +35,7 @@ class ChangePasswordSpecialist : AppCompatActivity() {
         }
     }
 
+    // Funcion para cambiar la contraseña
     private fun changePassword() {
         val currentPassword = edCurrentPassword.text.toString()
         val newPassword = edNewPassword.text.toString()
@@ -53,6 +55,7 @@ class ChangePasswordSpecialist : AppCompatActivity() {
             return
         }
 
+        // Comparacion de contraseñas ingresadas
         if (newPassword == confirmPassword) {
             val user = auth.currentUser
             if (user != null && user.email != null) {
@@ -75,8 +78,10 @@ class ChangePasswordSpecialist : AppCompatActivity() {
             Toast.makeText(this, "La nueva contraseña y la confirmación de la contraseña no coinciden.", Toast.LENGTH_LONG).show()
         }
     }
+
+    // Funcion para volver al menu principal
     fun volverMenu(view: View) {
-        val intent = Intent(this, MenuSpecialist::class.java)
+        val intent = Intent(this, MenuFragment::class.java)
         startActivity(intent)
     }
 }

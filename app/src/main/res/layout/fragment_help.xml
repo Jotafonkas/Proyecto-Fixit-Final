@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundapp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Help">
+    >
 
     <TextView
         android:id="@+id/text_contactanos"
@@ -33,50 +31,51 @@
         android:onClick="llamar"
         />
 
-    <TextView
-        android:id="@+id/txtnumerocontacto"
+    <Button
+        android:id="@+id/btnLlamar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_below="@id/imgcontactollamar"
-        android:text="@string/numero_de_contacto"
-        android:textColor="@color/black"
+        android:text="Llamar"
+        android:textColor="@color/white"
         android:textSize="22sp" />
 
     <ImageView
         android:id="@+id/imgcontactocorreo"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/txtnumerocontacto"
+        android:layout_below="@+id/btnLlamar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
         android:src="@drawable/ic_mail"
         android:scaleType="centerInside"
         android:onClick="correoEnviar"/>
 
-    <TextView
-        android:id="@+id/txtmailcontacto"
+    <Button
+        android:id="@+id/btnCorreo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_below="@id/imgcontactocorreo"
-        android:text="@string/txt_correo"
-        android:textColor="@color/black"
-        android:textSize="22sp"/>
+        android:text="Contactar por correo"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/txtfixit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/txtmailcontacto"
+        android:layout_below="@id/btnCorreo"
         android:text="@string/fixit_tittle"
         android:layout_marginTop="40dp"
         android:textColor="@color/black"
         android:textSize="46sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/txtserviciosdomicilio"

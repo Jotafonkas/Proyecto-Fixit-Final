@@ -18,10 +18,11 @@ class LoginSpecialist : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_especialista)
+        // Inicializar Firebase Auth
         auth = FirebaseAuth.getInstance()
-        Email_Login_Specialist = findViewById(R.id.Email_Login_Specialist)
-        password_login_specialist = findViewById(R.id.password_login_specialist)
-        btn_login_specialist = findViewById(R.id.btn_login_specialist)
+        Email_Login_Specialist = findViewById(R.id.Email_Login_Specialist) // Obtener el correo
+        password_login_specialist = findViewById(R.id.password_login_specialist) // Obtener la contraseña
+        btn_login_specialist = findViewById(R.id.btn_login_specialist) // Obtener el botón
 
         // login en click al botón
         btn_login_specialist.setOnClickListener {
@@ -41,12 +42,13 @@ class LoginSpecialist : AppCompatActivity() {
         }
     }
 
+    // Iniciar sesión
     private fun iniciarSesion(correo: String, pass: String) {
         auth.signInWithEmailAndPassword(correo, pass)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Conectado correctamente", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, Home::class.java)
+                    val intent = Intent(this, NavBar::class.java)
                     intent.putExtra("correo", correo) // Pasar el correo a la actividad Home
                     startActivity(intent)
                     finish() // Opcional: Llama a finish() si deseas cerrar la actividad de login
