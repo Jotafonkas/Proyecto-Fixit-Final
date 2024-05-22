@@ -36,5 +36,11 @@
         <item name="cornerSizeBottomLeft">10dp</item>
         <item name="cornerSizeBottomRight">10dp</item>
     </style>
+    <style name="radius7">
+        <item name="cornerSizeTopRight">75dp</item>
+        <item name="cornerSizeTopLeft">75dp</item>
+        <item name="cornerSizeBottomLeft">75dp</item>
+        <item name="cornerSizeBottomRight">75dp</item>
+    </style>
 
 </resources>

@@ -39,7 +39,7 @@
         android:layout_marginTop="115dp"
         android:layout_marginEnd="16dp"
         android:background="@color/white"
-        android:onClick="openProfile"/>
+        android:onClick="openProfile" />
 
     <TextView
         android:id="@+id/Perfil"
@@ -77,7 +77,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:layout_below="@+id/rectangle1"/>
+        android:layout_below="@+id/rectangle1"
+        android:onClick="goOfferNewService"/>
 
     <TextView
         android:id="@+id/newservice"
@@ -118,7 +119,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:layout_below="@+id/rectangle2"/>
+        android:layout_below="@+id/rectangle2"
+        android:onClick="goServices"/>
 
     <TextView
         android:id="@+id/myservice"

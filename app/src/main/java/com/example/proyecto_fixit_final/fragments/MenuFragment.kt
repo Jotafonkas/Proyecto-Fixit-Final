@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.proyecto_fixit_final.Specialist.ProfileSpecialist
 import com.example.proyecto_fixit_final.Specialist.ChangePasswordSpecialist
 import com.example.proyecto_fixit_final.R
+import com.example.proyecto_fixit_final.Specialist.CreateServicesSpecialist
+import com.example.proyecto_fixit_final.Specialist.ViewSpecialistServices
 
 class MenuFragment : Fragment() {
 
@@ -27,6 +29,8 @@ class MenuFragment : Fragment() {
         view.findViewById<View>(R.id.volver).setOnClickListener { v -> returnHome() }
         view.findViewById<View>(R.id.rectangle1).setOnClickListener { v -> openProfile() }
         view.findViewById<View>(R.id.rectangle4).setOnClickListener { v -> openCredentialsSpecialist() }
+        view.findViewById<View>(R.id.rectangle2).setOnClickListener { v -> goOfferNewService() }
+        view.findViewById<View>(R.id.rectangle3).setOnClickListener { v -> goServices() }
     }
 
     // Función para volver a la pantalla principal
@@ -44,6 +48,17 @@ class MenuFragment : Fragment() {
     // Función para abrir las credenciales
     fun openCredentialsSpecialist() {
         val intent = Intent(requireActivity(), ChangePasswordSpecialist::class.java)
+        startActivity(intent)
+    }
+
+    // Función para abrir la lista de ofertas de servicios
+    fun goOfferNewService() {
+        val intent = Intent(requireActivity(), CreateServicesSpecialist::class.java)
+        startActivity(intent)
+    }
+
+    fun goServices() {
+        val intent = Intent(requireActivity(), ViewSpecialistServices::class.java)
         startActivity(intent)
     }
 }

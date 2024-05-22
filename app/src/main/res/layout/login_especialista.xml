@@ -32,16 +32,16 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagen"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_below="@id/LoginEspecialista"
         android:layout_marginTop="30dp"
-        android:background="@drawable/image_perfil"
+        android:background="@drawable/imagen_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_centerHorizontal="true"
-        app:shapeAppearanceOverlay="@style/radius4"/>
+        app:shapeAppearanceOverlay="@style/radius7"/>
 
     <LinearLayout
         android:layout_below="@id/imagen"

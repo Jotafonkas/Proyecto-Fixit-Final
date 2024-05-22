@@ -111,13 +111,13 @@
     <string name="titulo_comentarios_especialista">Comentarios</string>
     <string name="esp_nombrecliente">Nombre Cliente</string>
 
-    <!-- Strings Servicios Especialista -->
+    <!-- Strings Ver Servicios Especialista -->
     <string name="titulo_servicios_especialista">Servicios</string>
     <string name="btn_ver_servicio">Ver Servicio</string>
     <string name="txt_nombre_servicio"><u>Nombre Servicio</u></string>
     <string name="txt_descripcion_servicio"><u>Descripción:</u></string>
     <string name="txt_precio_servicio"><u>Precio:</u> $</string>
-    <string name="btn_ver_perfil_especialista">Ver Perfil</string>
+    <string name="txt_ayuda_especialista"><u>¿Necesitas Ayuda?</u></string>
 
     <!-- Strings Menu Especialista -->
     <string name="volver_atras">volver atras</string>
