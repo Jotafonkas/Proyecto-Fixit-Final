@@ -29,14 +29,13 @@
         android:scaleType="centerInside"
         android:onClick="backMenu"/>
 
-
     <TextView
         android:id="@+id/txtNombreServicio"
         android:layout_below="@id/txtCrearServicio"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginLeft="21dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="-0.5dp"
         android:layout_gravity="top|left"
         android:gravity="center_horizontal|center_vertical"
@@ -48,25 +47,61 @@
         android:textSize="20sp"
         tools:ignore="RtlHardcoded" />
 
-       <EditText
-           android:id="@+id/edNombreServicio"
-           android:layout_width="347dp"
-           android:layout_height="45dp"
-           android:layout_marginLeft="21dp"
-           android:layout_marginTop="10dp"
-           android:layout_gravity="top|left"
-           android:background="@drawable/drawable_shape_2"
-           android:inputType="text"
-           android:hint="@string/nombre_del_servicio"
-           android:layout_below="@id/txtNombreServicio"
-           tools:ignore="RtlHardcoded" />
+    <EditText
+        android:id="@+id/edNombreServicio"
+        android:layout_width="347dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="top|left"
+        android:background="@drawable/drawable_shape_2"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:paddingStart="10dp"
+        android:hint="@string/nombre_del_servicio"
+        android:layout_below="@id/txtNombreServicio"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/txtCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-0.5dp"
+        android:layout_gravity="top|left"
+        android:gravity="center_horizontal|center_vertical"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Categoría"
+        android:textColor="#FF000000"
+        android:textSize="20sp"
+        android:layout_below="@id/edNombreServicio"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/edCategoriaServicio"
+        android:layout_width="347dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="top|left"
+        android:paddingStart="10dp"
+        android:includeFontPadding="true"
+        android:paddingTop="12dp"
+        android:background="@drawable/drawable_shape_4"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:layout_below="@id/txtCategoria"
+        tools:ignore="RtlHardcoded,RtlSymmetry,TextViewEdits" />
 
     <TextView
         android:id="@+id/txtDescripcionServicio"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginLeft="21dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="-0.5dp"
         android:layout_gravity="top|left"
         android:gravity="center_horizontal|center_vertical"
@@ -76,7 +111,7 @@
         android:text="@string/descripcion_del_servicio"
         android:textColor="#FF000000"
         android:textSize="20sp"
-        android:layout_below="@id/edNombreServicio"
+        android:layout_below="@id/edCategoriaServicio"
         tools:ignore="RtlHardcoded" />
 
     <EditText
@@ -86,8 +121,10 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="top|left"
+        android:paddingStart="10dp"
         android:background="@drawable/drawable_shape_4"
         android:inputType="text"
+        android:textSize="20sp"
         android:hint="@string/descripcion_del_servicio"
         android:layout_below="@id/txtDescripcionServicio"
         tools:ignore="RtlHardcoded" />
@@ -97,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginLeft="21dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="-0.5dp"
         android:layout_gravity="top|left"
         android:gravity="center_horizontal|center_vertical"
@@ -113,14 +150,17 @@
     <EditText
         android:id="@+id/edPrecio"
         android:layout_width="347dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="21dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="top|left"
         android:background="@drawable/drawable_shape_3"
         android:inputType="text"
         android:layout_below="@id/txtPrecio"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        android:textSize="20sp"
+        android:paddingStart="10dp"
+        android:hint="$" />
 
     <TextView
         android:id="@+id/txtCargarImagenes"
@@ -153,7 +193,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:textSize="22sp"
         android:text="@string/btn_publicar_servicio"
         android:textColor="@color/white"

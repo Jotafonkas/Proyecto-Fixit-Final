@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.databinding.CrearServicioEspecialistaBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
@@ -17,6 +18,7 @@ class CreateServicesSpecialist : AppCompatActivity() {
     private lateinit var binding: CrearServicioEspecialistaBinding
     private var imageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
+    private lateinit var uid: String
 
     // Función para crear la vista de la actividad
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,11 @@ class CreateServicesSpecialist : AppCompatActivity() {
         // Crear la vista de la actividad
         binding = CrearServicioEspecialistaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Obtener el nombre del servicio seleccionado y el UID del usuario
+        val serviceName = intent.getStringExtra("serviceName")
+        uid = intent.getStringExtra("uid") ?: ""
+        binding.edCategoriaServicio.text = serviceName
 
         // Botón para cargar imágenes
         binding.btnCargarImagenes.setOnClickListener {
@@ -60,16 +67,17 @@ class CreateServicesSpecialist : AppCompatActivity() {
         val nombreServicio = binding.edNombreServicio.text.toString().trim()
         val descripcionServicio = binding.edDescripcionServicio.text.toString().trim()
         val precio = binding.edPrecio.text.toString().trim()
+        val categoria = binding.edCategoriaServicio.text.toString().trim()
 
         // Validar que los campos no estén vacíos
-        if (nombreServicio.isEmpty() || descripcionServicio.isEmpty() || precio.isEmpty() || imageUri == null) {
+        if (nombreServicio.isEmpty() || descripcionServicio.isEmpty() || precio.isEmpty() || imageUri == null || categoria.isEmpty()) {
             Toast.makeText(this, "Por favor, complete todos los campos y cargue una imagen.", Toast.LENGTH_SHORT).show()
             return
         }
 
         // Subir la imagen a Firebase Storage
         val storageReference = FirebaseStorage.getInstance().reference
-        val fileReference = storageReference.child("servicios/${UUID.randomUUID()}.jpg")
+        val fileReference = storageReference.child("servicios/${uid}/${UUID.randomUUID()}.jpg")
 
         // Subir la imagen a Firebase Storage
         fileReference.putFile(imageUri!!)
@@ -81,14 +89,17 @@ class CreateServicesSpecialist : AppCompatActivity() {
                         "nombreServicio" to nombreServicio,
                         "descripcionServicio" to descripcionServicio,
                         "precio" to precio,
-                        "imagenUrl" to downloadUrl
+                        "categoria" to categoria,
+                        "imagenUrl" to downloadUrl,
+                        "uid" to uid
                     )
-                    // Guardar el servicio en Firestore
-                    db.collection("servicios")
+                    // Guardar el servicio en Firestore bajo la colección del usuario
+                    db.collection("users").document(uid).collection("servicios")
                         .add(servicio)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Servicio publicado exitosamente.", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, ViewSpecialistServices::class.java)
+                            intent.putExtra("uid", uid) // Pasar el UID a la siguiente actividad
                             startActivity(intent)
                             finish()
                         }

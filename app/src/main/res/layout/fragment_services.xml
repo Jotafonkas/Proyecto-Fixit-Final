@@ -5,6 +5,7 @@
     android:background="@drawable/drawable_shape"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/Base.Theme.Fixit2"
     >
 
     <!-- Encabezado -->
@@ -31,6 +32,7 @@
         android:text="@string/texto_categorias"
         android:textColor="@color/black"
         android:textSize="22sp"
+        android:textStyle="bold"
         android:layout_marginTop="120dp"
         />
 
@@ -43,12 +45,13 @@
         android:rowCount="3"
         android:layout_below="@id/txtServiciosdispo"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="100dp">
 
         <!-- Categoría 1 - (Mantener formato de todos los LinearLayout) -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout1"
+            android:layout_width="40dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
@@ -66,20 +69,23 @@
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
                 android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+                android:textColor="@color/black"
+                android:textSize="9sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2"
+            android:layout_width="40dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -90,26 +96,31 @@
 
             <ImageButton
                 android:id="@+id/imageButton2"
-                android:layout_width="95dp"
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/gasfiter"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Gasfiter"
+                android:layout_marginTop="-5dp"
+                android:textColor="@color/black"
+                android:textSize="9sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_width="40dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -118,28 +129,31 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
+        <ImageButton
                 android:id="@+id/imageButton3"
-                android:layout_width="95dp"
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
+                android:src="@drawable/tecnico"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Técnico"
+                android:textColor="@color/black"
+                android:textSize="9sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout4"
+            android:layout_width="30dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -148,28 +162,32 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="95dp"
-                android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
-                android:background="@drawable/styles_imagen_redondeada_categorias"
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/cerrajero"
+            android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Cerrajero"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout5"
+            android:layout_width="30dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -178,28 +196,32 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
+
+        <ImageButton
                 android:id="@+id/imageButton5"
-                android:layout_width="95dp"
+                android:layout_width="70dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
+                android:src="@drawable/carpintero"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Carpintero"
+                android:textColor="@color/black"
+                android:textSize="8.5sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout6"
+            android:layout_width="30dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -208,28 +230,32 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="95dp"
-                android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
-                android:background="@drawable/styles_imagen_redondeada_categorias"
-                />
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="2.5dp"
+            android:src="@drawable/plomero"
+            android:background="@drawable/styles_imagen_redondeada_categorias"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Plomero"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout7"
+            android:layout_width="30dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -238,28 +264,31 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
+        <ImageButton
                 android:id="@+id/imageButton7"
-                android:layout_width="95dp"
+                android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
+                android:src="@drawable/jardinero"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Jardinero"
+                android:textColor="@color/black"
+                android:textSize="9sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout8"
+            android:layout_width="30dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -268,28 +297,32 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
+
+        <ImageButton
                 android:id="@+id/imageButton8"
                 android:layout_width="95dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
+                android:src="@drawable/constructor"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Constructor"
+                android:textColor="@color/black"
+                android:textSize="7.8sp"
+                android:textStyle="bold"
+                tools:ignore="SmallSp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout9"
+            android:layout_width="30dp"
+            android:layout_height="120dp"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -298,20 +331,24 @@
             android:gravity="center_horizontal"
             android:background="@drawable/styles_imagen_redondeada_categorias">
 
-            <ImageButton
+
+        <ImageButton
                 android:id="@+id/imageButton9"
                 android:layout_width="95dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_limpieza"
+                android:src="@drawable/electrico"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/txt_limpieza"
-                android:gravity="center_horizontal|top"
-                />
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="91.5dp"
+                android:layout_height="40dp"
+                android:text="Eléctrico"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                tools:ignore="SmallSp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
     </GridLayout>

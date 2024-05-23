@@ -13,7 +13,7 @@ class LoginSpecialist : AppCompatActivity() {
     private lateinit var Email_Login_Specialist: TextInputEditText
     private lateinit var password_login_specialist: TextInputEditText
     private lateinit var btn_login_specialist: Button
-    private lateinit var auth : FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +48,9 @@ class LoginSpecialist : AppCompatActivity() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Conectado correctamente", Toast.LENGTH_LONG).show()
+                    val user = auth.currentUser
                     val intent = Intent(this, NavBar::class.java)
-                    intent.putExtra("correo", correo) // Pasar el correo a la actividad Home
+                    intent.putExtra("uid", user?.uid) // Pasar el UID del usuario a la actividad Home
                     startActivity(intent)
                     finish() // Opcional: Llama a finish() si deseas cerrar la actividad de login
                 } else {

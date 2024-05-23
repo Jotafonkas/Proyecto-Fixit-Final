@@ -93,7 +93,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Specialist.ViewSpecialistProfileService"
+            android:name=".Specialist.ViewSpecialistDetailService"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
