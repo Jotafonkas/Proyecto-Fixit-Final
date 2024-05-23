@@ -14,16 +14,19 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imagen_portada"
-            android:layout_width="220dp"
-            android:layout_height="310dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:src="@drawable/imagen_portada"
             android:scaleType="centerCrop"
             android:layout_marginTop="110dp"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintHeight_percent="0.4"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/radius"/>
+
 
         <TextView
             android:id="@+id/textView"
@@ -67,7 +70,7 @@
             android:id="@+id/btnInicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginStart="80dp"
             android:layout_marginEnd="80dp"
             android:padding="15dp"
@@ -92,12 +95,12 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:gravity="center"
             android:text="@string/registro_portada"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"

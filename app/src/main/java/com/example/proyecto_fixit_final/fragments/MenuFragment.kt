@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.proyecto_fixit_final.MainActivity
 import com.example.proyecto_fixit_final.Specialist.ProfileSpecialist
 import com.example.proyecto_fixit_final.Specialist.ChangePasswordSpecialist
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.CreateServicesSpecialist
 import com.example.proyecto_fixit_final.Specialist.ViewSpecialistServices
+import com.google.firebase.auth.FirebaseAuth
 
 class MenuFragment : Fragment() {
 
@@ -31,6 +34,7 @@ class MenuFragment : Fragment() {
         view.findViewById<View>(R.id.rectangle4).setOnClickListener { v -> openCredentialsSpecialist() }
         view.findViewById<View>(R.id.rectangle2).setOnClickListener { v -> goOfferNewService() }
         view.findViewById<View>(R.id.rectangle3).setOnClickListener { v -> goServices() }
+        view.findViewById<View>(R.id.rectangle5).setOnClickListener { v -> outSesion() }
     }
 
     // Función para volver a la pantalla principal
@@ -60,5 +64,11 @@ class MenuFragment : Fragment() {
     fun goServices() {
         val intent = Intent(requireActivity(), ViewSpecialistServices::class.java)
         startActivity(intent)
+    }
+    fun outSesion() {
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        startActivity(intent)
+        Toast.makeText(requireContext(), "Sesión cerrada exitosamente", Toast.LENGTH_SHORT).show()
     }
 }

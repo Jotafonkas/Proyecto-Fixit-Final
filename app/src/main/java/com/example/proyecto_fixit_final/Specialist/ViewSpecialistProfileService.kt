@@ -20,9 +20,5 @@ class ViewSpecialistProfileService : AppCompatActivity() {
             insets
         }
 
-        fun openListOfServices(view: View) {
-            val intent = Intent(this, ViewSpecialistServices::class.java)
-            startActivity(intent)
-        }
     }
 }

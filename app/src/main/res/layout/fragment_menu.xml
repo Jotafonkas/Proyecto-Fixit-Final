@@ -204,7 +204,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:layout_below="@+id/rectangle4"
-        />
+        android:onClick="outSession"/>
+
 
     <TextView
         android:id="@+id/Nombre5"

@@ -91,6 +91,12 @@ class ViewSpecialistServices : AppCompatActivity() {
             Picasso.get().load(imagenUrl).into(imagenServicio)
         }
 
+        // Agregar OnClickListener al servicioView
+        servicioView.setOnClickListener {
+            val intent = Intent(this, ViewSpecialistProfileService::class.java)
+            startActivity(intent)
+        }
+
         // Se agrega el servicio al contenedor
         serviciosContainer.addView(servicioView)
     }
