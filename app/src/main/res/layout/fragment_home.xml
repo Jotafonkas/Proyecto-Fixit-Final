@@ -24,7 +24,7 @@
         android:id="@+id/container_image"
         android:layout_width="212dp"
         android:layout_height="222dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="110dp"
         android:src="@drawable/container_image"
         />
 
@@ -34,7 +34,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="190dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="180dp"
         android:gravity="center_horizontal"
         android:includeFontPadding="false"
         android:text="@string/text1_home"
@@ -52,26 +52,26 @@
         android:gravity="end"
         android:text="@string/text2_home"
         android:textColor="#FF33353C"
-        android:textSize="19sp"
+        android:textSize="20sp"
         />
 
     <TextView
         android:id="@+id/text_servicio_calidad"
         android:layout_width="323dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
         android:text="@string/text3_home"
         android:textAlignment="center"
         android:textColor="#FF282828"
-        android:textSize="20sp"
+        android:textSize="22sp"
         />
 
     <ImageView
         android:id="@+id/container_image1"
-        android:layout_width="179dp"
+        android:layout_width="159dp"
         android:layout_height="231dp"
         android:layout_marginTop="480dp"
         android:src="@drawable/container_image1"
@@ -80,16 +80,14 @@
     <TextView
         android:id="@+id/text_garantia_especialistas"
         android:layout_width="217dp"
-        android:layout_height="63dp"
+        android:layout_height="72dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="580dp"
         android:layout_marginEnd="30dp"
         android:gravity="end"
         android:text="@string/text4_home"
         android:textColor="#FF282828"
-        android:textSize="16sp"
-        />
+        android:textSize="19sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
