@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,102 +7,123 @@
     android:gravity="center">
 
     <!-- Card del servicio -->
-    <com.google.android.material.imageview.ShapeableImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_service"
         android:layout_width="350dp"
         android:layout_height="230dp"
         android:layout_gravity="center"
-        android:background="@color/color_servicio"
-        app:shapeAppearanceOverlay="@style/radius5"
-        />
+        app:cardBackgroundColor="@color/color_servicio"
+        app:shapeAppearanceOverlay="@style/radius5">
 
-    <!-- Imagen del servicio -->
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imagen_servicio"
-        android:layout_width="140dp"
-        android:layout_height="210dp"
-        android:layout_margin="10dp"
-        android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/radius5"
-        />
+        <!-- Contenido del card -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <!-- Nombre del servicio -->
-    <TextView
-        android:id="@+id/txt_nombreservicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_nombre_servicio"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toEndOf="@id/imagen_servicio"
-        android:layout_marginTop="10dp"
-        />
+            <!-- Botón de eliminar servicio -->
+            <ImageButton
+                android:id="@+id/btnEliminarServicio"
+                android:layout_width="50dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/eliminar"
+                android:contentDescription="@string/eliminar_servicio"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
+                app:tint="@color/red2" />
 
-    <!-- Campo de texto para el nombre del servicio -->
-    <TextView
-        android:id="@+id/edNombreServicio"
-        android:layout_width="180dp"
-        android:layout_height="25dp"
-        android:layout_toEndOf="@id/imagen_servicio"
-        android:layout_below="@+id/txt_nombreservicio"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:background="@color/color_servicio2"
-        />
+            <!-- Imagen del servicio -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen_servicio"
+                android:layout_width="140dp"
+                android:layout_height="210dp"
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/radius5"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
 
-    <!-- Descripción del servicio -->
-    <TextView
-        android:id="@+id/txt_descripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_descripcion_servicio"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/edNombreServicio"
-        android:layout_toEndOf="@id/imagen_servicio"
-        android:layout_marginTop="3dp"
-        />
+            <!-- Nombre del servicio -->
+            <TextView
+                android:id="@+id/txt_nombreservicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_nombre_servicio"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_toEndOf="@id/imagen_servicio"
+                android:layout_marginTop="10dp"
+                />
 
-    <!-- Campo de texto para la descripción del servicio -->
-    <TextView
-        android:id="@+id/edDescripcionServicio"
-        android:layout_width="180dp"
-        android:layout_height="80dp"
-        android:layout_toEndOf="@id/imagen_servicio"
-        android:layout_below="@+id/txt_descripcion"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:background="@color/color_servicio2"
-        />
+            <!-- Campo de texto para el nombre del servicio -->
+            <TextView
+                android:id="@+id/edNombreServicio"
+                android:layout_width="180dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@id/imagen_servicio"
+                android:layout_below="@id/txt_nombreservicio"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:background="@color/color_servicio2"
+                />
 
-    <!-- Precio del servicio -->
-    <TextView
-        android:id="@+id/txt_precioservicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_precio_servicio"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/edDescripcionServicio"
-        android:layout_toEndOf="@id/imagen_servicio"
-        android:layout_marginTop="12dp"
-        />
+            <!-- Descripción del servicio -->
+            <TextView
+                android:id="@+id/txt_descripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_descripcion_servicio"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_below="@id/edNombreServicio"
+                android:layout_toEndOf="@id/imagen_servicio"
+                android:layout_marginTop="3dp"
+                />
 
-    <!-- Campo de texto para el precio del servicio -->
-    <TextView
-        android:id="@+id/edPrecio"
-        android:layout_width="90dp"
-        android:layout_height="30dp"
-        android:layout_toEndOf="@id/txt_precioservicio"
-        android:layout_below="@+id/edDescripcionServicio"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/white"
-        android:background="@color/color_servicio2"
-        />
+            <!-- Campo de texto para la descripción del servicio -->
+            <TextView
+                android:id="@+id/edDescripcionServicio"
+                android:layout_width="180dp"
+                android:layout_height="80dp"
+                android:layout_toEndOf="@id/imagen_servicio"
+                android:layout_below="@id/txt_descripcion"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:background="@color/color_servicio2"
+                />
+
+            <!-- Precio del servicio -->
+            <TextView
+                android:id="@+id/txt_precioservicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_precio_servicio"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_below="@id/edDescripcionServicio"
+                android:layout_toEndOf="@id/imagen_servicio"
+                android:layout_marginTop="12dp"
+                />
+
+            <!-- Campo de texto para el precio del servicio -->
+            <TextView
+                android:id="@+id/edPrecio"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@id/txt_precioservicio"
+                android:layout_below="@id/edDescripcionServicio"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:background="@color/color_servicio2"
+                />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
-
-

@@ -95,7 +95,7 @@
     <string name="fixit_tittle">Fixit</string>
     <string name="txt_slogan_help">Te conectamos con los especialistas que necesitas.</string>
 
-    <!-- Strings Visualizacion Especialista -->
+    <!-- Strings Visualizacion Servicio Especialista -->
     <string name="titulo_perfil_especialista">Perfil de Servicio</string>
     <string name="txt_excelente">Excelente</string>
     <string name="txt_deficiente">Deficiente</string>
@@ -107,6 +107,7 @@
     <string name="btnservicios">Servicios</string>
     <string name="btncontactar">Contactar</string>
     <string name="btncomentarios">Comentarios</string>
+    <string name="eliminar_servicio">X</string>
 
     <!-- Strings Comentarios Especialista -->
     <string name="titulo_comentarios_especialista">Comentarios</string>

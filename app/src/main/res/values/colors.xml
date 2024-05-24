@@ -32,4 +32,7 @@
     <color name="color_servicio">#2F2F2F</color>
     <color name="color_servicio2">#3A3A3A</color>
 
+    <!-- Colores de Visualizacion Servicio Especialista -->
+    <color name="red2">#EA4545</color>
+
 </resources>

@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.proyecto_fixit_final.MainActivity
+import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.ProfileSpecialist
 import com.example.proyecto_fixit_final.Specialist.ChangePasswordSpecialist
-import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.CreateServicesSpecialist
 import com.example.proyecto_fixit_final.Specialist.ViewSpecialistServices
 import com.google.firebase.auth.FirebaseAuth
@@ -34,7 +35,7 @@ class MenuFragment : Fragment() {
         view.findViewById<View>(R.id.rectangle4).setOnClickListener { openCredentialsSpecialist() }
         view.findViewById<View>(R.id.rectangle2).setOnClickListener { goOfferNewService() }
         view.findViewById<View>(R.id.rectangle3).setOnClickListener { goServices() }
-        view.findViewById<View>(R.id.rectangle5).setOnClickListener { outSesion() }
+        view.findViewById<View>(R.id.rectangle5).setOnClickListener { mostrarDialogoConfirmacion() }
     }
 
     // Función para volver a la pantalla principal
@@ -63,9 +64,11 @@ class MenuFragment : Fragment() {
 
     // Función para abrir la lista de servicios del especialista
     fun goServices() {
+        // Obtener el uid del usuario autenticado
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {
             val intent = Intent(requireActivity(), ViewSpecialistServices::class.java)
+            // Pasamos el uid como parámetro de la siguiente actividad
             intent.putExtra("uid", uid)
             startActivity(intent)
         } else {
@@ -73,7 +76,29 @@ class MenuFragment : Fragment() {
         }
     }
 
-    fun outSesion() {
+    // Función para mostrar el diálogo de confirmación antes de cerrar sesión
+    private fun mostrarDialogoConfirmacion() {
+        // Creamos un diálogo de alerta
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Cerrar Sesión")
+        builder.setMessage("¿Está seguro que desea cerrar sesión?")
+
+        // Botones del diálogo
+        builder.setPositiveButton("Sí") { dialog, _ ->
+            cerrarSesion()
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    // Función para cerrar sesión
+    private fun cerrarSesion() {
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)

@@ -18,6 +18,7 @@
         android:gravity="center"
         android:padding="25dp"/>
 
+    <!-- Botón de volver -->
     <ImageButton
         android:id="@+id/imgbtnVolver"
         android:layout_width="24dp"
@@ -29,6 +30,7 @@
         android:scaleType="centerInside"
         android:onClick="backMenu"/>
 
+    <!-- Nombre del servicio -->
     <TextView
         android:id="@+id/txtNombreServicio"
         android:layout_below="@id/txtCrearServicio"
@@ -48,6 +50,7 @@
         android:textSize="20sp"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Campo de texto para el nombre del servicio -->
     <EditText
         android:id="@+id/edNombreServicio"
         android:layout_width="347dp"
@@ -64,6 +67,7 @@
         android:layout_below="@id/txtNombreServicio"
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 
+    <!-- Categoría del servicio -->
     <TextView
         android:id="@+id/txtCategoria"
         android:layout_width="wrap_content"
@@ -83,6 +87,7 @@
         android:layout_below="@id/edNombreServicio"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Campo de texto para la categoría del servicio -->
     <TextView
         android:id="@+id/edCategoriaServicio"
         android:layout_width="347dp"
@@ -101,6 +106,7 @@
         android:layout_below="@id/txtCategoria"
         tools:ignore="RtlHardcoded,RtlSymmetry,TextViewEdits" />
 
+    <!-- Descripción del servicio -->
     <TextView
         android:id="@+id/txtDescripcionServicio"
         android:layout_width="wrap_content"
@@ -120,6 +126,7 @@
         android:layout_below="@id/edCategoriaServicio"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Campo de texto para la descripción del servicio -->
     <EditText
         android:id="@+id/edDescripcionServicio"
         android:layout_width="347dp"
@@ -136,6 +143,7 @@
         android:layout_below="@id/txtDescripcionServicio"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Precio del servicio -->
     <TextView
         android:id="@+id/txtPrecio"
         android:layout_width="wrap_content"
@@ -155,6 +163,7 @@
         android:layout_below="@id/edDescripcionServicio"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Campo de texto para el precio del servicio -->
     <EditText
         android:id="@+id/edPrecio"
         android:layout_width="347dp"
@@ -171,6 +180,7 @@
         android:paddingStart="10dp"
         android:drawableStart="@drawable/ic_precio" />
 
+    <!-- Cargar imágenes -->
     <TextView
         android:id="@+id/txtCargarImagenes"
         android:layout_width="match_parent"
@@ -185,6 +195,7 @@
         android:layout_below="@id/edPrecio"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Botón para cargar imágenes -->
     <Button
         android:id="@+id/btnCargarImagenes"
         android:layout_width="wrap_content"
@@ -198,6 +209,7 @@
         android:layout_centerHorizontal="true"
         />
 
+    <!-- Botón para publicar el servicio -->
     <Button
         android:layout_below="@id/btnCargarImagenes"
         android:id="@+id/btnPublicar"
