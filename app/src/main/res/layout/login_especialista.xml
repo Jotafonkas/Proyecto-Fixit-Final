@@ -1,56 +1,62 @@
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/LoginEspecialista"
-        android:layout_width="match_parent"
-        android:layout_height="93dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="409dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/header_login_specialist"
         android:gravity="center"
-        android:padding="16dp"
         android:text="@string/login_specialist_title"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/volver"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="33dp"
-        android:layout_gravity="top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/ic_flechavolver"
-        android:scaleType="centerInside"
         android:onClick="ReturnRegisterUser"
-        />
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagen"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/LoginEspecialista"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/imagen_login"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginEspecialista"
         app:shapeAppearanceOverlay="@style/radius7"/>
 
     <LinearLayout
-        android:layout_below="@id/imagen"
-        android:layout_marginTop="20dp"
         android:id="@+id/editTextContainer"
-        android:layout_width="400dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        android:layout_centerHorizontal="true">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagen">
 
 
         <TextView
@@ -58,76 +64,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:layout_marginStart="25dp"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/email_login_specialist"
             android:textColor="#FF000000"
-            android:textSize="20sp"
-            android:layout_marginStart="25dp"/>
+            android:textSize="20sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_login_specialist_layout"
             android:layout_width="347dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             app:startIconDrawable="@drawable/ic_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Email_Login_Specialist"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/image_rectangle1"
-                />
+                android:paddingStart="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/TVrut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="-0.5dp"
-            android:layout_gravity="top"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/password_login_specialist"
             android:textColor="#FF000000"
-            android:textSize="20sp"
-            android:layout_marginStart="30dp"
-            />
+            android:textSize="20sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_login_specialist_layout"
             android:layout_width="347dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_gravity="center"
-            app:startIconDrawable="@drawable/ic_pass"
-            app:endIconMode="password_toggle">
+            android:layout_marginTop="5dp"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/lock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_login_specialist"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingStart="10dp"
-                android:inputType="textPassword"
+                android:layout_height="wrap_content"
                 android:background="@drawable/image_rectangle1"
-                />
+                android:inputType="textPassword"
+                android:paddingStart="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_login_specialist"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/editTextContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="80dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="31dp"
+        android:onClick="openHome"
         android:text="@string/btnLogin"
         android:textSize="20sp"
-        android:onClick="openHome"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextContainer" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
