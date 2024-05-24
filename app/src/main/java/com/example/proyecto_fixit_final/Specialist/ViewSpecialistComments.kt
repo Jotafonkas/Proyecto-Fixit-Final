@@ -1,13 +1,13 @@
 package com.example.proyecto_fixit_final.Specialist
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
+import android.content.Intent
+import android.widget.ImageView
 
 class ViewSpecialistComments : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
@@ -15,6 +15,13 @@ class ViewSpecialistComments : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ver_comentarios_especialista)
+
+        // Configura el listener para la flecha de volver atrás
+        findViewById<ImageView>(R.id.flechavolver_comments).setOnClickListener {
+            val intent = Intent(this, ViewSpecialistDetailService::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         loadComentarios()
     }
@@ -50,3 +57,4 @@ class ViewSpecialistComments : AppCompatActivity() {
             }
     }
 }
+
