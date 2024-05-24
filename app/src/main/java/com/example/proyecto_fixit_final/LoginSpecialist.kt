@@ -55,7 +55,7 @@ class LoginSpecialist : AppCompatActivity() {
                     startActivity(intent)
                     finish() // Opcional: Llama a finish() si deseas cerrar la actividad de login
                 } else {
-                    Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Hubo un problema al iniciar sesión", Toast.LENGTH_LONG).show()
                 }
             }
     }

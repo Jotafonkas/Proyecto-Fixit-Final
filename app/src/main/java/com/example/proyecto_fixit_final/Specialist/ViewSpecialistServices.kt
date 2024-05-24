@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import android.app.AlertDialog
 import android.content.DialogInterface
+import com.example.proyecto_fixit_final.NavBar
 
 // Clase que muestra los servicios del especialista
 class ViewSpecialistServices : AppCompatActivity() {
@@ -42,7 +43,9 @@ class ViewSpecialistServices : AppCompatActivity() {
 
     // Función para regresar al menú principal
     fun backMenu(view: View) {
-        super.onBackPressed()
+        val intent = Intent(this, NavBar::class.java)
+        startActivity(intent)
+        finish()
     }
 
     // Función para cargar los servicios del especialista

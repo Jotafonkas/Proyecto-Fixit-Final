@@ -181,21 +181,22 @@
         android:drawableStart="@drawable/ic_precio" />
 
     <!-- Cargar imágenes -->
+
+    <!-- Botón para cargar imágenes -->
     <TextView
         android:id="@+id/txtCargarImagenes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/edPrecio"
+        android:layout_marginTop="19dp"
+        android:gravity="center"
         android:includeFontPadding="false"
         android:text="@string/imagenes_de_tus_trabajos"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:gravity="center"
-        android:layout_below="@id/edPrecio"
+        android:textStyle="bold"
         tools:ignore="RtlHardcoded" />
 
-    <!-- Botón para cargar imágenes -->
     <Button
         android:id="@+id/btnCargarImagenes"
         android:layout_width="wrap_content"

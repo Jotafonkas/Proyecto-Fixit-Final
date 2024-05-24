@@ -72,7 +72,7 @@
     <string name="precio_del_servicio"><u>Precio del Servicio: </u></string>
     <string name="btn_cargar_imgservicio_especialista">Cargar</string>
     <string name="btn_publicar_servicio">Publicar Servicio</string>
-    <string name="imagenes_de_tus_trabajos"><u>Imagenes de tus trabajos: </u></string>
+    <string name="imagenes_de_tus_trabajos"><u>Imagen de tu trabajo: </u></string>
 
     <!-- Strings Categorias Especialista -->
     <string name="titulo_categorias">Categorías de servicios</string>

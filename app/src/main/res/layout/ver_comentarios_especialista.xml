@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Specialist.ViewSpecialistComments"
     >
 
     <!-- Header -->
@@ -23,6 +23,7 @@
         android:padding="25dp"
         />
     <ImageView
+        android:id="@+id/flechavolver_comments"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="11dp"
@@ -34,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header"
-        android:layout_above="@id/bottomNavigationView"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,12 +45,11 @@
 
             <!-- Cliente 1 -->
             <LinearLayout
-                android:id="@+id/cliente1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp"
+                android:padding="8dp"
                 >
 
                 <ImageView
@@ -58,7 +57,6 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/iv_user"
-                    android:layout_marginEnd="8dp"
                     />
 
                 <TextView
@@ -66,12 +64,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@string/esp_nombrecliente"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    android:paddingStart="8dp"
                     />
 
                 <RatingBar
@@ -80,8 +81,6 @@
                     android:layout_height="wrap_content"
                     android:numStars="5"
                     android:stepSize="1.0"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     />
             </LinearLayout>
@@ -94,16 +93,16 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:padding="10dp"
+                android:layout_marginBottom="20dp"
                 />
 
             <!-- Cliente 2 -->
             <LinearLayout
-                android:id="@+id/cliente2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp"
+                android:padding="8dp"
                 >
 
                 <ImageView
@@ -111,7 +110,6 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/iv_user"
-                    android:layout_marginEnd="8dp"
                     />
 
                 <TextView
@@ -119,12 +117,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@string/esp_nombrecliente"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    android:paddingStart="8dp"
                     />
 
                 <RatingBar
@@ -133,8 +134,6 @@
                     android:layout_height="wrap_content"
                     android:numStars="5"
                     android:stepSize="1.0"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     />
             </LinearLayout>
@@ -147,16 +146,16 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:padding="10dp"
+                android:layout_marginBottom="20dp"
                 />
 
             <!-- Cliente 3 -->
             <LinearLayout
-                android:id="@+id/cliente3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp"
+                android:padding="8dp"
                 >
 
                 <ImageView
@@ -164,7 +163,6 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/iv_user"
-                    android:layout_marginEnd="8dp"
                     />
 
                 <TextView
@@ -172,12 +170,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@string/esp_nombrecliente"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    android:paddingStart="8dp"
                     />
 
                 <RatingBar
@@ -186,8 +187,6 @@
                     android:layout_height="wrap_content"
                     android:numStars="5"
                     android:stepSize="1.0"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     />
             </LinearLayout>
@@ -200,10 +199,9 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:padding="10dp"
+                android:layout_marginBottom="20dp"
                 />
 
         </LinearLayout>
     </ScrollView>
-
-
 </RelativeLayout>
