@@ -32,7 +32,7 @@ class HelpFragment : Fragment() {
     fun llamar(view: View) {
         // Crear un intent para iniciar la aplicación de marcado de teléfono con el número deseado
         val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:+56934709635")
+        intent.data = Uri.parse("tel:+56975010313")
         startActivity(intent)
     }
 

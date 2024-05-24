@@ -90,6 +90,7 @@
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/text1_register_specialist"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     android:layout_marginStart="25dp"/>
@@ -105,7 +106,7 @@
                     <EditText
                         android:id="@+id/edNombre_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -119,6 +120,7 @@
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/rut_register_specialist"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"
@@ -135,7 +137,7 @@
                     <EditText
                         android:id="@+id/edRut_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -149,6 +151,7 @@
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/email_register_specialist"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"/>
@@ -178,6 +181,7 @@
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/phone_register_specialist"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"
@@ -194,7 +198,7 @@
                     <EditText
                         android:id="@+id/edTelefono_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -207,6 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/profession_register_specilialist"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"
@@ -223,7 +228,7 @@
                     <EditText
                         android:id="@+id/edEspecialidad"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -238,6 +243,7 @@
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/password_register_specialist"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"
@@ -255,7 +261,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edContraseña_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:inputType="textPassword"
                         android:background="@drawable/image_rectangle1"
@@ -271,6 +277,7 @@
                     android:layout_gravity="top"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/password2_register_specialist"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"
@@ -288,7 +295,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edConfirmaContraseña_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:inputType="textPassword"
                         android:background="@drawable/image_rectangle1"
@@ -303,6 +310,7 @@
                     android:layout_marginBottom="-0.5dp"
                     android:gravity="center"
                     android:text="@string/text_certificado_de_antecedentes"
+                    android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
                     />

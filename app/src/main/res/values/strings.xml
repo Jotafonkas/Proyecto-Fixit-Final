@@ -15,14 +15,14 @@
     <string name="register_specialist_title">Registro Especialista</string>
     <string name="btn_cargar">Cargar</string>
     <string name="btn_eliminar">Eliminar</string>
-    <string name="text1_register_specialist">Nombre y Apellido</string>
-    <string name="email_register_specialist">Correo Electrónico</string>
-    <string name="rut_register_specialist">Rut sin puntos ni guión (Ej:101234560)</string>
-    <string name="phone_register_specialist">Teléfono</string>
-    <string name="profession_register_specilialist">Profesión/Especialidad</string>
-    <string name="password_register_specialist">Contraseña</string>
-    <string name="password2_register_specialist">Confirme su Contraseña</string>
-    <string name="text_certificado_de_antecedentes">Certificado de Antecedentes</string>
+    <string name="text1_register_specialist"><u>Nombre y Apellido: </u></string>
+    <string name="email_register_specialist"><u>Correo Electrónico: </u></string>
+    <string name="rut_register_specialist"><u>Rut sin puntos ni guión (Ej:101234560): </u></string>
+    <string name="phone_register_specialist"><u>Teléfono: </u></string>
+    <string name="profession_register_specilialist"><u>Profesión/Especialidad: </u></string>
+    <string name="password_register_specialist"><u>Contraseña: </u></string>
+    <string name="password2_register_specialist"><u>Confirme su Contraseña: </u></string>
+    <string name="text_certificado_de_antecedentes"><u>Certificado de Antecedentes: </u></string>
     <string name="btn_upload_certificate">Adjuntar</string>
     <string name="btn_register_specialist">Registrarse</string>
 
@@ -33,8 +33,8 @@
 
     <!-- Strings Login Especialista -->
     <string name="login_specialist_title">Iniciar Sesión</string>
-    <string name="email_login_specialist">Correo Electrónico</string>
-    <string name="password_login_specialist">Contraseña</string>
+    <string name="email_login_specialist"><u>Correo Electrónico: </u></string>
+    <string name="password_login_specialist"><u>Contraseña: </u></string>
     <string name="btnLogin">Ingresar</string>
 
     <!-- Strings Home -->
@@ -56,22 +56,23 @@
     <string name="edit_profile_pic">Foto de Perfil</string>
     <string name="btn_cargarfoto_perfil">Cargar</string>
     <string name="btn_eliminarfoto_perfil">Eliminar</string>
-    <string name="nombre_y_apellido">Nombre y Apellido</string>
-    <string name="rut">Rut</string>
-    <string name="correo_electr_nico">Correo Electrónico</string>
-    <string name="tel_fono">Teléfono</string>
-    <string name="profesi_n_especialidad">Profesión/Especialidad</string>
+    <string name="nombre_y_apellido"><u>Nombre y Apellido: </u></string>
+    <string name="rut"><u>Rut: </u></string>
+    <string name="correo_electr_nico"><u>Correo Electrónico: </u></string>
+    <string name="tel_fono"><u>Teléfono: </u></string>
+    <string name="profesi_n_especialidad"><u>Profesión/Especialidad: </u></string>
     <string name="guardar_cambios">Guardar Cambios</string>
 
 
     <!-- Strings Crear Servicio Especialista -->
     <string name="crear_servicio">Crear servicio</string>
-    <string name="nombre_del_servicio">Nombre del Servicio</string>
-    <string name="descripcion_del_servicio">Descripción del Servicio</string>
-    <string name="precio_del_servicio">Precio del Servicio</string>
+    <string name="nombre_del_servicio"><u>Nombre del Servicio: </u></string>
+    <string name="categoria_servicio"><u>Categoría: </u></string>
+    <string name="descripcion_del_servicio"><u>Descripción del Servicio: </u></string>
+    <string name="precio_del_servicio"><u>Precio del Servicio: </u></string>
     <string name="btn_cargar_imgservicio_especialista">Cargar</string>
     <string name="btn_publicar_servicio">Publicar Servicio</string>
-    <string name="imagenes_de_tus_trabajos_opcional">Imagenes de tus trabajos (Opcional)</string>
+    <string name="imagenes_de_tus_trabajos"><u>Imagenes de tus trabajos: </u></string>
 
     <!-- Strings Categorias Especialista -->
     <string name="titulo_categorias">Categorías de servicios</string>
@@ -111,12 +112,12 @@
     <string name="titulo_comentarios_especialista">Comentarios</string>
     <string name="esp_nombrecliente">Nombre Cliente</string>
 
-    <!-- Strings Ver Servicios Especialista -->
+    <!-- Strings Cards Servicios Especialista -->
     <string name="titulo_servicios_especialista">Servicios</string>
     <string name="btn_ver_servicio">Ver Servicio</string>
     <string name="txt_nombre_servicio"><u>Nombre Servicio</u></string>
     <string name="txt_descripcion_servicio"><u>Descripción:</u></string>
-    <string name="txt_precio_servicio"><u>Precio:</u> $</string>
+    <string name="txt_precio_servicio"><u>Precio:</u></string>
     <string name="txt_ayuda_especialista"><u>¿Necesitas Ayuda?</u></string>
 
     <!-- Strings Menu Especialista -->
@@ -130,11 +131,11 @@
 
     <!-- Strings Cambiar Contraseña Especialista -->
     <string name="cambiar_contrase_a">Cambiar Contraseña</string>
-    <string name="contrase_a_actual">Contraseña Actual</string>
+    <string name="contrase_a_actual"><u>Contraseña Actual: </u></string>
     <string name="inserte_su_contrase_a_actual">Inserte su contraseña actual</string>
-    <string name="contrase_a_nueva">Contraseña Nueva</string>
+    <string name="contrase_a_nueva"><u>Contraseña Nueva: </u></string>
     <string name="inserte_su_nueva_contrase_a">Inserte su nueva contraseña</string>
-    <string name="confirmar_contrase_a">Confirmar Contraseña</string>
+    <string name="confirmar_contrase_a"><u>Confirmar Contraseña: </u></string>
     <string name="confirme_su_nueva_contrase_a">Confirme su nueva contraseña</string>
     <string name="btn_cambiar_contrase_a">Cambiar Contraseña</string>
 
