@@ -15,23 +15,10 @@
         android:textStyle="bold"
         android:background="@color/header"
         android:gravity="center"
-        android:padding="30dp"/>
-
-    <Button
-        android:id="@+id/btnOpenProfile"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="240dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginTop="120dp"
-        android:text="@string/btn_perfil_home"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:onClick="openProfile"
-        />
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"/>
 
     <ImageView
         android:id="@+id/container_image"

@@ -29,19 +29,11 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Botones en el layout con los ids 'volver', 'rectangle1', 'rectangle2', 'rectangle3', 'rectangle4', y 'rectangle5'
-        view.findViewById<View>(R.id.volver).setOnClickListener { returnHome() }
+        // Botones en el layout con los ids 'rectangle1', 'rectangle3', 'rectangle4', y 'rectangle5'
         view.findViewById<View>(R.id.rectangle1).setOnClickListener { openProfile() }
         view.findViewById<View>(R.id.rectangle4).setOnClickListener { openCredentialsSpecialist() }
-        view.findViewById<View>(R.id.rectangle2).setOnClickListener { goOfferNewService() }
         view.findViewById<View>(R.id.rectangle3).setOnClickListener { goServices() }
         view.findViewById<View>(R.id.rectangle5).setOnClickListener { mostrarDialogoConfirmacion() }
-    }
-
-    // Función para volver a la pantalla principal
-    fun returnHome() {
-        val intent = Intent(requireActivity(), HomeFragment::class.java)
-        startActivity(intent)
     }
 
     // Función para abrir el perfil

@@ -95,15 +95,15 @@
     <string name="fixit_tittle">Fixit</string>
     <string name="txt_slogan_help">Te conectamos con los especialistas que necesitas.</string>
 
-    <!-- Strings Visualizacion Servicio Especialista -->
-    <string name="titulo_perfil_especialista">Perfil de Servicio</string>
+    <!-- Strings Detalles Servicio Especialista -->
+    <string name="titulo_detalle_servicio_especialista">Detalles del Servicio</string>
     <string name="txt_excelente">Excelente</string>
     <string name="txt_deficiente">Deficiente</string>
     <string name="txt_calificacion">Calificación</string>
-    <string name="calificacion_numero">5.0</string>
-    <string name="esp_nombrecompleto"><u>Nombre del Especialista: </u></string>
-    <string name="esp_profesion"><u>Profesión: </u></string>
-    <string name="esp_descripcion"><u>Descripción: </u></string>
+    <string name="nombreservicio"><u>Nombre del servicio: </u></string>
+    <string name="categoriaservicio"><u>Categoría del servicio: </u></string>
+    <string name="precio_servicio"><u>Precio del servicio: </u></string>
+    <string name="descripcion_servicio"><u>Descripción del servicio: </u></string>
     <string name="btnservicios">Servicios</string>
     <string name="btncontactar">Contactar</string>
     <string name="btncomentarios">Comentarios</string>

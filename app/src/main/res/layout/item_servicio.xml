@@ -13,7 +13,8 @@
         android:layout_height="230dp"
         android:layout_gravity="center"
         app:cardBackgroundColor="@color/color_servicio"
-        app:shapeAppearanceOverlay="@style/radius5">
+        app:shapeAppearanceOverlay="@style/radius5"
+        android:onClick="goDetail">
 
         <!-- Contenido del card -->
         <RelativeLayout

@@ -1,14 +1,11 @@
 package com.example.proyecto_fixit_final.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.proyecto_fixit_final.Specialist.ProfileSpecialist
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,23 +28,12 @@ class HomeFragment : Fragment() {
         headerTextView = view.findViewById(R.id.header)
         auth = FirebaseAuth.getInstance()
         firestore = Firebase.firestore
-        val buttonOpenProfile: Button = view.findViewById(R.id.btnOpenProfile)
         val user = auth.currentUser
         if (user != null) {
             fetchAndDisplayUserName(user.uid)
         }
 
-        buttonOpenProfile.setOnClickListener {
-            openProfile()
-        }
-
         return view
-    }
-
-    // Función para abrir el perfil
-    private fun openProfile() {
-        val intent = Intent(requireActivity(), ProfileSpecialist::class.java)
-        startActivity(intent)
     }
 
     // Función para obtener y mostrar el nombre del usuario

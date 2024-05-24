@@ -60,9 +60,10 @@ class ViewSpecialistServices : AppCompatActivity() {
                     val descripcionServicio = document.getString("descripcionServicio") ?: ""
                     val precio = document.getString("precio") ?: ""
                     val imagenUrl = document.getString("imagenUrl") ?: ""
+                    val categoriaServicio = document.getString("categoriaServicio") ?: ""
                     val documentId = document.id
 
-                    agregarServicio(nombreServicio, descripcionServicio, precio, imagenUrl, documentId)
+                    agregarServicio(nombreServicio, descripcionServicio, precio, imagenUrl, categoriaServicio, documentId)
                 }
             }
             .addOnFailureListener { exception ->
@@ -71,7 +72,7 @@ class ViewSpecialistServices : AppCompatActivity() {
     }
 
     // Función que agrega un servicio al contenedor
-    private fun agregarServicio(nombre: String, descripcion: String, precio: String, imagenUrl: String, documentId: String) {
+    private fun agregarServicio(nombre: String, descripcion: String, precio: String, imagenUrl: String, categoria: String, documentId: String) {
         val servicioView = LayoutInflater.from(this).inflate(R.layout.item_servicio, serviciosContainer, false)
         val imagenServicio = servicioView.findViewById<ImageView>(R.id.imagen_servicio)
         val txtNombreServicio = servicioView.findViewById<TextView>(R.id.edNombreServicio)
@@ -83,6 +84,17 @@ class ViewSpecialistServices : AppCompatActivity() {
         txtNombreServicio.text = nombre
         txtDescripcionServicio.text = descripcion
         txtPrecioServicio.text = precio
+
+        // Agregar clic listener para abrir la actividad de detalle con los datos del servicio
+        servicioView.setOnClickListener {
+            val intent = Intent(this@ViewSpecialistServices, ViewSpecialistDetailService::class.java)
+            intent.putExtra("nombreServicio", nombre)
+            intent.putExtra("descripcionServicio", descripcion)
+            intent.putExtra("precio", precio)
+            intent.putExtra("imagenUrl", imagenUrl)
+            intent.putExtra("categoria", categoria)
+            startActivity(intent)
+        }
 
         // Cargamos la imagen del servicio
         if (imagenUrl.isNotEmpty()) {
@@ -97,6 +109,27 @@ class ViewSpecialistServices : AppCompatActivity() {
 
         // Agregamos la vista al contenedor
         serviciosContainer.addView(servicioView)
+    }
+
+    // Función que se ejecuta al presionar una card
+    fun goDetail(view: View) {
+        // Obtener el servicio seleccionado
+        val cardView = view.parent as View
+        val nombreServicio = cardView.findViewById<TextView>(R.id.edNombreServicio).text.toString()
+        val descripcionServicio = cardView.findViewById<TextView>(R.id.edDescripcionServicio).text.toString()
+        val precio = cardView.findViewById<TextView>(R.id.edPrecio).text.toString()
+
+        // Crear un Intent para la siguiente actividad
+        val intent = Intent(this, ViewSpecialistDetailService::class.java)
+
+        // Pasar los detalles del servicio como extras en el Intent
+        intent.putExtra("nombreServicio", nombreServicio)
+        intent.putExtra("descripcionServicio", descripcionServicio)
+        intent.putExtra("precio", precio)
+        intent.putExtra("uid", uid)
+
+        // Iniciar la siguiente actividad
+        startActivity(intent)
     }
 
     // Función para mostrar un diálogo de confirmación antes de eliminar el servicio
