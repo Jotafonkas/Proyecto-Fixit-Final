@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.proyecto_fixit_final.NavBar
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.SelectUser
 import com.example.proyecto_fixit_final.fragments.HomeFragment
@@ -23,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
-@Suppress("DEPRECATION")
 class RegisterSpecialist : AppCompatActivity() {
 
     // Declarar las variables del layout
@@ -83,57 +81,38 @@ class RegisterSpecialist : AppCompatActivity() {
             val pass2: String = pass2Esp.text.toString()
 
             // Validaciones
-            if (nombre.isEmpty() || !nombre.matches(Regex("^[a-zA-Z ]+$"))) {
-                nombreEsp.error = "Ingrese su nombre (solo letras)"
+            if (nombre.isEmpty()) {
+                nombreEsp.error = "Ingrese su nombre"
                 return@setOnClickListener
             }
-
-            if (rut.isEmpty() || rut.toDoubleOrNull() == null) {
-                rutEsp.error = "Ingrese su rut (solo números)"
+            if (rut.isEmpty()) {
+                rutEsp.error = "Ingrese su rut"
                 return@setOnClickListener
             }
-
             if (correo.isEmpty()) {
                 correoEsp.error = "Ingrese su correo"
                 return@setOnClickListener
             }
-
-            if (telefono.isEmpty() || telefono.toDoubleOrNull() == null || telefono.length != 9) {
-                telefonoEsp.error = "Ingrese su telefono (9 números)"
+            if (telefono.isEmpty()) {
+                telefonoEsp.error = "Ingrese su telefono"
                 return@setOnClickListener
             }
-
-            if (profesion.isEmpty() || !profesion.matches(Regex("^[a-zA-Z ]+$"))) {
-                profesionEsp.error = "Ingrese su profesion/especialidad (solo letras)"
+            if (profesion.isEmpty()) {
+                profesionEsp.error = "Ingrese su profesion/especialidad"
                 return@setOnClickListener
             }
-
             if (pass.isEmpty()) {
                 passEsp.error = "Ingrese su contraseña"
                 return@setOnClickListener
             }
-
             if (pass2.isEmpty()) {
                 pass2Esp.error = "Repita su contraseña"
                 return@setOnClickListener
             }
-
-            if (selectedImageUri == null) {
-                Toast.makeText(this, "Por favor, suba su imagen de perfil.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            if (selectedPdfUri == null) {
-                Toast.makeText(this, "Por favor, suba su certificado de antecedentes.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
             if (pass == pass2) {
                 registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, pass)
             } else {
-                pass2Esp.error = "Las contraseñas no coinciden"
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
             }
         }
 
@@ -258,7 +237,7 @@ class RegisterSpecialist : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, NavBar::class.java)
+        val intent = Intent(this, HomeFragment::class.java)
         startActivity(intent)
         finish()
     }

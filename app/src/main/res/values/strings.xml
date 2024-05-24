@@ -54,7 +54,7 @@
     <!-- Strings Perfil Especialista -->
     <string name="titulo_perfil">Mi Perfil</string>
     <string name="edit_profile_pic">Foto de Perfil</string>
-    <string name="btn_cargarfoto_perfil">Foto</string>
+    <string name="btn_cargarfoto_perfil">Cargar</string>
     <string name="btn_eliminarfoto_perfil">Eliminar</string>
     <string name="nombre_y_apellido">Nombre y Apellido</string>
     <string name="rut">Rut</string>
@@ -67,12 +67,11 @@
     <!-- Strings Crear Servicio Especialista -->
     <string name="crear_servicio">Crear servicio</string>
     <string name="nombre_del_servicio">Nombre del Servicio</string>
-    <string name="categoria_servicio">Categoría</string>
     <string name="descripcion_del_servicio">Descripción del Servicio</string>
     <string name="precio_del_servicio">Precio del Servicio</string>
     <string name="btn_cargar_imgservicio_especialista">Cargar</string>
     <string name="btn_publicar_servicio">Publicar Servicio</string>
-    <string name="imagenes_de_tus_trabajos_opcional">Imagenes de tus trabajos</string>
+    <string name="imagenes_de_tus_trabajos_opcional">Imagenes de tus trabajos (Opcional)</string>
 
     <!-- Strings Categorias Especialista -->
     <string name="titulo_categorias">Categorías de servicios</string>

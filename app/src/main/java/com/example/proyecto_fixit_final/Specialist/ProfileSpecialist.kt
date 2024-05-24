@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,9 +21,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
-@Suppress("DEPRECATION")
 class ProfileSpecialist : AppCompatActivity() {
-    // Declaración de variables
+
     private lateinit var edCorreo: TextView
     private lateinit var edRut: EditText
     private lateinit var edNombre: EditText
@@ -38,33 +36,26 @@ class ProfileSpecialist : AppCompatActivity() {
     private lateinit var btnSave: Button
     private lateinit var storage: FirebaseStorage
     private lateinit var storageReference: StorageReference
-    private lateinit var btnEditNombre: ImageButton
-    private lateinit var btnEditRut: ImageButton
-    private lateinit var btnEditTelefono: ImageButton
-    private lateinit var btnEditEspecialidad: ImageButton
 
-    // Función para cargar la vista de perfil del especialista
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.perfil_especialista)
-        auth = FirebaseAuth.getInstance() // Inicializar Firebase
-        firestore = Firebase.firestore  // Inicializar Firestore
-        edCorreo = findViewById(R.id.edCorreo) // Obtener el campo de correo
-        edRut = findViewById(R.id.edRut) // Obtener el campo de RUT
-        edNombre = findViewById(R.id.edNombre) // Obtener el campo de nombre
-        edProfesion = findViewById(R.id.edEspecialidad) // Obtener el campo de especialidad
-        edTelefono = findViewById(R.id.edTelefono) // Obtener el campo de teléfono
-        edCorreo = findViewById(R.id.edCorreo) // Obtener el campo de correo
-        imgperfil = findViewById(R.id.imgPerfilEspecialista) // Obtener la imagen de perfil
-        btnUpload = findViewById(R.id.btnFoto) // Obtener el botón de subir foto
-        btnDelete = findViewById(R.id.btnEliminar) // Obtener el botón de eliminar foto
-        btnSave = findViewById(R.id.btnGuardarPerfilEspecialista) // Obtener el botón de guardar perfil
-        storage = FirebaseStorage.getInstance() // Inicializar Firebase Storage
-        storageReference = storage.reference // Inicializar la referencia de Storage
-        btnEditNombre = findViewById(R.id.btnEditNombre) // Obtener el botón de editar nombre
-        btnEditRut = findViewById(R.id.btnEditRut) // Obtener el botón de editar RUT
-        btnEditTelefono = findViewById(R.id.btnEditTelefono) // Obtener el botón de editar teléfono
-        btnEditEspecialidad = findViewById(R.id.btnEditEspecialidad) // Obtener el botón de editar especialidad
+
+        setContentView(R.layout.perfil_especialista)
+        auth = FirebaseAuth.getInstance()
+        firestore = Firebase.firestore
+        edCorreo = findViewById(R.id.edCorreo)
+        edRut = findViewById(R.id.edRut)
+        edNombre = findViewById(R.id.edNombre)
+        edProfesion = findViewById(R.id.edEspecialidad)
+        edTelefono = findViewById(R.id.edTelefono)
+        edCorreo = findViewById(R.id.edCorreo)
+        imgperfil = findViewById(R.id.imgPerfilEspecialista)
+        btnUpload = findViewById(R.id.btnFoto)
+        btnDelete = findViewById(R.id.btnEliminar)
+        btnSave = findViewById(R.id.btnGuardarPerfilEspecialista)
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage.reference
 
         loadProfileImage(auth.currentUser?.uid)
 
@@ -81,30 +72,6 @@ class ProfileSpecialist : AppCompatActivity() {
             updateUserData(auth.currentUser?.uid)
         }
 
-        btnEditNombre.setOnClickListener {
-            edNombre.isFocusableInTouchMode = true
-            edNombre.isFocusable = true
-            edNombre.requestFocus()
-        }
-
-        btnEditRut.setOnClickListener {
-            edRut.isFocusableInTouchMode = true
-            edRut.isFocusable = true
-            edRut.requestFocus()
-        }
-
-        btnEditTelefono.setOnClickListener {
-            edTelefono.isFocusableInTouchMode = true
-            edTelefono.isFocusable = true
-            edTelefono.requestFocus()
-        }
-
-        btnEditEspecialidad.setOnClickListener {
-            edProfesion.isFocusableInTouchMode = true
-            edProfesion.isFocusable = true
-            edProfesion.requestFocus()
-        }
-
         // Recibir el correo pasado desde HomeActivity
         val correo = intent.getStringExtra("correo")
 
@@ -116,7 +83,6 @@ class ProfileSpecialist : AppCompatActivity() {
         }
     }
 
-    // Función para cargar la imagen de perfil
     private fun loadProfileImage(uid: String?) {
         storageReference.child("images/$uid.jpg").downloadUrl.addOnSuccessListener {
             Picasso.get().load(it).into(imgperfil)
@@ -125,7 +91,6 @@ class ProfileSpecialist : AppCompatActivity() {
         }
     }
 
-    // Función para eliminar la imagen de perfil
     private fun deleteProfileImage(uid: String?) {
         storageReference.child("images/$uid.jpg").delete().addOnSuccessListener {
             imgperfil.setImageDrawable(null)
@@ -135,7 +100,6 @@ class ProfileSpecialist : AppCompatActivity() {
         }
     }
 
-    // Función para cargar la imagen de perfil
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -151,7 +115,6 @@ class ProfileSpecialist : AppCompatActivity() {
         }
     }
 
-    // Función para actualizar los datos del usuario
     private fun updateUserData(uid: String?) {
         val nombre = edNombre.text.toString()
         val rut = edRut.text.toString()
@@ -163,42 +126,19 @@ class ProfileSpecialist : AppCompatActivity() {
             edNombre.error = "Ingrese su nombre"
             return
         }
-
-        if (!nombre.matches(Regex("^[a-zA-Z ]+$"))) {
-            edNombre.error = "El nombre solo puede contener letras"
-            return
-        }
-
         if (rut.isEmpty()) {
             edRut.error = "Ingrese su rut"
             return
         }
-
-        if (!rut.matches(Regex("^\\d+$"))) {
-            edRut.error = "El RUT solo puede contener números"
-            return
-        }
-
         if (profesion.isEmpty()) {
             edProfesion.error = "Ingrese su profesion/especialidad"
             return
         }
-
-        if (!profesion.matches(Regex("^[a-zA-Z ]+$"))) {
-            edProfesion.error = "La profesión solo puede contener letras"
-            return
-        }
-
         if (telefono.isEmpty()) {
             edTelefono.error = "Ingrese su telefono"
             return
         }
 
-        if (!telefono.matches(Regex("^\\d{9}$"))) {
-            edTelefono.error = "El teléfono debe ser un número de 9 dígitos"
-            return
-        }
-         // Actualizar los datos del usuario en Firestore
         val userUpdates: MutableMap<String, Any> = hashMapOf(
             "nombre" to nombre,
             "rut" to rut,
@@ -216,13 +156,11 @@ class ProfileSpecialist : AppCompatActivity() {
             }
     }
 
-    // Función para volver al menú
     fun backMenu(view: View) {
         val intent = Intent(this, MenuFragment::class.java)
         startActivity(intent)
     }
 
-    // Función para obtener y mostrar los datos del usuario
     private fun fetchAndDisplayData(uid: String) {
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { document ->

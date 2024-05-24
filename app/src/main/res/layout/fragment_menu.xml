@@ -20,6 +20,18 @@
         android:padding="25dp"
         />
 
+    <ImageButton
+        android:id="@+id/volver"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/volver_atras"
+        android:onClick="returnHome"/>
+
     <View
         android:id="@+id/rectangle1"
         android:layout_width="match_parent"

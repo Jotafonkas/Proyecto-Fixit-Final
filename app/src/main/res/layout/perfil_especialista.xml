@@ -37,6 +37,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationView"
         android:layout_below="@id/txtPerfilEspecialista">
 
         <RelativeLayout
@@ -49,7 +50,7 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/imagen_login"
+                android:background="@drawable/image_perfil"
                 android:scaleType="fitXY"
                 app:shapeAppearanceOverlay="@style/radius4"/>
 
@@ -64,15 +65,15 @@
 
                 <Button
                     android:id="@+id/btnFoto"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_addimage"
+                    android:drawableEnd="@drawable/ic_editar"
                     android:layout_marginEnd="15dp"
                     android:text="@string/btn_cargarfoto_perfil"/>
 
                 <Button
                     android:id="@+id/btnEliminar"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_eliminar"
                     android:text="@string/btn_eliminarfoto_perfil"
@@ -100,40 +101,22 @@
                     android:textSize="20sp"
                     android:layout_marginStart="25dp"/>
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nombre_especialista_layout"
                     android:layout_width="347dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp">
+                    app:startIconDrawable="@drawable/logo_persona">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nombre_especialista_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:startIconDrawable="@drawable/logo_persona">
-
-                        <EditText
-                            android:id="@+id/edNombre"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/image_rectangle1"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:inputType="none"
-                            android:paddingStart="10dp"
-                            android:paddingTop="15dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageButton
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/btnEditNombre"
-                        android:layout_width="50dp"
+                    <EditText
+                        android:id="@+id/edNombre"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/image_pencil"
-                        android:background="?attr/selectableItemBackgroundBorderless"/>
-                </LinearLayout>
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/txtRut"
@@ -149,40 +132,22 @@
                     android:layout_marginStart="30dp"
                     />
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/rut_especialista_layout"
                     android:layout_width="347dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp">
+                    app:startIconDrawable="@drawable/ic_rut">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/rut_especialista_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:startIconDrawable="@drawable/ic_rut">
-
-                        <EditText
-                            android:id="@+id/edRut"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:paddingTop="15dp"
-                            android:background="@drawable/image_rectangle1"
-                            android:inputType="none"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageButton
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/btnEditRut"
-                        android:layout_width="50dp"
+                    <EditText
+                        android:id="@+id/edRut"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/image_pencil"
-                        android:background="?attr/selectableItemBackgroundBorderless"/>
-                </LinearLayout>
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/txtCorreo"
@@ -199,20 +164,14 @@
 
                 <TextView
                     android:id="@+id/edCorreo"
-                    android:layout_width="300dp"
+                    android:layout_width="347dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="23dp"
+                    android:layout_gravity="center"
                     android:drawableStart="@drawable/ic_email"
                     android:drawableTint="@color/gris"
-                    android:drawablePadding="18dp"
                     android:background="@drawable/image_rectangle1"
                     android:paddingStart="10dp"
-                    android:paddingTop="13dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     />
 
                 <TextView
@@ -229,39 +188,22 @@
                     android:layout_marginStart="30dp"
                     />
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/telefono_especialista_layout"
                     android:layout_width="347dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp">
+                    app:startIconDrawable="@drawable/ic_phone2">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/telefono_especialista_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:startIconDrawable="@drawable/ic_phone2">
-
-                        <EditText
-                            android:id="@+id/edTelefono"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:background="@drawable/image_rectangle1"
-                            android:inputType="none"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageButton
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/btnEditTelefono"
-                        android:layout_width="50dp"
+                    <EditText
+                        android:id="@+id/edTelefono"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/image_pencil"
-                        android:background="?attr/selectableItemBackgroundBorderless"/>
-                </LinearLayout>
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/TxtEspecialidad"
@@ -277,39 +219,23 @@
                     android:layout_marginStart="30dp"
                     />
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/especialidad_especialista_layout"
                     android:layout_width="347dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp">
+                    app:startIconDrawable="@drawable/logo_inge">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/especialidad_especialista_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:startIconDrawable="@drawable/logo_inge">
-
-                        <EditText
-                            android:id="@+id/edEspecialidad"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:background="@drawable/image_rectangle1"
-                            android:inputType="none"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageButton
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/btnEditEspecialidad"
-                        android:layout_width="50dp"
+                    <EditText
+                        android:id="@+id/edEspecialidad"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/image_pencil"
-                        android:background="?attr/selectableItemBackgroundBorderless"/>
-                </LinearLayout>
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <Button
                     android:id="@+id/btnGuardarPerfilEspecialista"

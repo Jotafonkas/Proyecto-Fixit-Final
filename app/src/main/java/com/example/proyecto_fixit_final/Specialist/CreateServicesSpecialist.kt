@@ -70,52 +70,8 @@ class CreateServicesSpecialist : AppCompatActivity() {
         val categoria = binding.edCategoriaServicio.text.toString().trim()
 
         // Validar que los campos no estén vacíos
-        if (nombreServicio.isEmpty()) {
-            binding.edNombreServicio.error = "Por favor, complete este campo."
-            return
-        }
-
-        if (descripcionServicio.isEmpty()) {
-            binding.edDescripcionServicio.error = "Por favor, complete este campo."
-            return
-        }
-
-        if (precio.isEmpty()) {
-            binding.edPrecio.error = "Por favor, complete este campo."
-            return
-        }
-
-        if (imageUri == null) {
-            Toast.makeText(this, "Por favor, seleccione al menos una imagen.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (categoria.isEmpty()) {
-            binding.edCategoriaServicio.error = "Por favor, complete este campo."
-            return
-        }
-
-        // Validar que el nombre del servicio solo contenga letras
-        if (!nombreServicio.matches(Regex("^[a-zA-Z ]+$"))) {
-            binding.edNombreServicio.error = "El nombre del servicio solo puede contener letras."
-            return
-        }
-
-        // Validar que la descripción no exceda los 150 caracteres
-        if (descripcionServicio.length > 150) {
-            binding.edDescripcionServicio.error = "La descripción no puede exceder los 150 caracteres."
-            return
-        }
-
-        // Validar que el precio solo contenga números
-        if (precio.toDoubleOrNull() == null) {
-            binding.edPrecio.error = "El precio solo puede contener números."
-            return
-        }
-
-        // Validar que se haya seleccionado al menos una imagen
-        if (imageUri == null) {
-            Toast.makeText(this, "Por favor, seleccione al menos una imagen.", Toast.LENGTH_SHORT).show()
+        if (nombreServicio.isEmpty() || descripcionServicio.isEmpty() || precio.isEmpty() || imageUri == null || categoria.isEmpty()) {
+            Toast.makeText(this, "Por favor, complete todos los campos y cargue una imagen.", Toast.LENGTH_SHORT).show()
             return
         }
 

@@ -43,7 +43,7 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/imagen_login"
+                android:background="@drawable/image_perfil"
                 android:scaleType="fitXY"
                 app:shapeAppearanceOverlay="@style/radius4"/>
 
@@ -105,7 +105,7 @@
                     <EditText
                         android:id="@+id/edNombre_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -135,7 +135,7 @@
                     <EditText
                         android:id="@+id/edRut_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -194,7 +194,7 @@
                     <EditText
                         android:id="@+id/edTelefono_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -223,7 +223,7 @@
                     <EditText
                         android:id="@+id/edEspecialidad"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
@@ -255,7 +255,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edContraseña_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:inputType="textPassword"
                         android:background="@drawable/image_rectangle1"
@@ -288,7 +288,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edConfirmaContraseña_especialista"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="10dp"
                         android:inputType="textPassword"
                         android:background="@drawable/image_rectangle1"
@@ -304,16 +304,17 @@
                     android:gravity="center"
                     android:text="@string/text_certificado_de_antecedentes"
                     android:textColor="#FF000000"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    />
 
                 <Button
                     android:id="@+id/btnCargarCertificado"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:drawableEnd="@drawable/ic_upload"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:text="@string/btn_upload_certificate"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
+                    android:textSize="20sp"
                     />
 
                 <Button

@@ -56,10 +56,9 @@
         android:layout_gravity="top|left"
         android:background="@drawable/drawable_shape_2"
         android:inputType="text"
-        android:drawableStart="@drawable/ic_nameservice"
         android:textSize="20sp"
-        android:drawablePadding="10dp"
         android:paddingStart="10dp"
+        android:hint="@string/nombre_del_servicio"
         android:layout_below="@id/txtNombreServicio"
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 
@@ -75,7 +74,7 @@
         android:includeFontPadding="false"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="@string/categoria_servicio"
+        android:text="Categoría"
         android:textColor="#FF000000"
         android:textSize="20sp"
         android:layout_below="@id/edNombreServicio"
@@ -91,10 +90,8 @@
         android:paddingStart="10dp"
         android:includeFontPadding="true"
         android:paddingTop="12dp"
-        android:drawableStart="@drawable/ic_category"
         android:background="@drawable/drawable_shape_4"
         android:inputType="text"
-        android:drawablePadding="10dp"
         android:textSize="20sp"
         android:layout_below="@id/txtCategoria"
         tools:ignore="RtlHardcoded,RtlSymmetry,TextViewEdits" />
@@ -127,9 +124,8 @@
         android:paddingStart="10dp"
         android:background="@drawable/drawable_shape_4"
         android:inputType="text"
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_description"
         android:textSize="20sp"
+        android:hint="@string/descripcion_del_servicio"
         android:layout_below="@id/txtDescripcionServicio"
         tools:ignore="RtlHardcoded" />
 
@@ -160,17 +156,16 @@
         android:layout_gravity="top|left"
         android:background="@drawable/drawable_shape_3"
         android:inputType="text"
-        android:drawablePadding="10dp"
         android:layout_below="@id/txtPrecio"
         tools:ignore="RtlHardcoded"
         android:textSize="20sp"
         android:paddingStart="10dp"
-        android:drawableStart="@drawable/ic_precio" />
+        android:hint="$" />
 
     <TextView
         android:id="@+id/txtCargarImagenes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:includeFontPadding="false"
         android:text="@string/imagenes_de_tus_trabajos_opcional"
@@ -182,16 +177,14 @@
 
     <Button
         android:id="@+id/btnCargarImagenes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_below="@+id/txtCargarImagenes"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:paddingStart="10dp"
-        android:drawableEnd="@drawable/ic_upload"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         android:textSize="22sp"
-        android:layout_centerHorizontal="true"
-        />
+        android:text="@string/btn_cargar_imgservicio_especialista" />
 
     <Button
         android:layout_below="@id/btnCargarImagenes"
@@ -200,7 +193,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textSize="22sp"
         android:text="@string/btn_publicar_servicio"
         android:textColor="@color/white"
