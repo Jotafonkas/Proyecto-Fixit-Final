@@ -28,13 +28,13 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Botones en el layout con los ids 'volver', 'rectangle1' y 'rectangle4'
-        view.findViewById<View>(R.id.volver).setOnClickListener { v -> returnHome() }
-        view.findViewById<View>(R.id.rectangle1).setOnClickListener { v -> openProfile() }
-        view.findViewById<View>(R.id.rectangle4).setOnClickListener { v -> openCredentialsSpecialist() }
-        view.findViewById<View>(R.id.rectangle2).setOnClickListener { v -> goOfferNewService() }
-        view.findViewById<View>(R.id.rectangle3).setOnClickListener { v -> goServices() }
-        view.findViewById<View>(R.id.rectangle5).setOnClickListener { v -> outSesion() }
+        // Botones en el layout con los ids 'volver', 'rectangle1', 'rectangle2', 'rectangle3', 'rectangle4', y 'rectangle5'
+        view.findViewById<View>(R.id.volver).setOnClickListener { returnHome() }
+        view.findViewById<View>(R.id.rectangle1).setOnClickListener { openProfile() }
+        view.findViewById<View>(R.id.rectangle4).setOnClickListener { openCredentialsSpecialist() }
+        view.findViewById<View>(R.id.rectangle2).setOnClickListener { goOfferNewService() }
+        view.findViewById<View>(R.id.rectangle3).setOnClickListener { goServices() }
+        view.findViewById<View>(R.id.rectangle5).setOnClickListener { outSesion() }
     }
 
     // Función para volver a la pantalla principal
@@ -61,10 +61,18 @@ class MenuFragment : Fragment() {
         startActivity(intent)
     }
 
+    // Función para abrir la lista de servicios del especialista
     fun goServices() {
-        val intent = Intent(requireActivity(), ViewSpecialistServices::class.java)
-        startActivity(intent)
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            val intent = Intent(requireActivity(), ViewSpecialistServices::class.java)
+            intent.putExtra("uid", uid)
+            startActivity(intent)
+        } else {
+            Toast.makeText(requireContext(), "Error: Usuario no autenticado.", Toast.LENGTH_SHORT).show()
+        }
     }
+
     fun outSesion() {
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(requireActivity(), MainActivity::class.java)

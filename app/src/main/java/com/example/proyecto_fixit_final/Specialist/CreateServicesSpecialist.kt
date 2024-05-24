@@ -93,7 +93,7 @@ class CreateServicesSpecialist : AppCompatActivity() {
                         "imagenUrl" to downloadUrl,
                         "uid" to uid
                     )
-                    // Guardar el servicio en Firestore bajo la colección del usuario
+                    // Guardar el servicio en Firestore bajo la colección del usuario actual
                     db.collection("users").document(uid).collection("servicios")
                         .add(servicio)
                         .addOnSuccessListener {

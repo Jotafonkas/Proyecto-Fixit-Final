@@ -26,7 +26,12 @@ class ViewSpecialistServices : AppCompatActivity() {
         setContentView(R.layout.ver_servicios_especialista)
 
         // Obtener el UID del usuario logeado
-        uid = intent.getStringExtra("uid") ?: ""
+        uid = intent.getStringExtra("uid").toString()
+        if (uid.isEmpty()) {
+            Toast.makeText(this, "Error: no se proporcionó un UID de usuario.", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
         // Se obtiene el contenedor de servicios
         serviciosContainer = findViewById(R.id.servicios_container)
