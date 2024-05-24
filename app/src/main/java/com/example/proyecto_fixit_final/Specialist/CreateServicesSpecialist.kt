@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.databinding.CrearServicioEspecialistaBinding
@@ -157,5 +158,10 @@ class CreateServicesSpecialist : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al cargar la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    //funcion para volver atras
+    fun backMenu(view: View) {
+        super.onBackPressed()
     }
 }

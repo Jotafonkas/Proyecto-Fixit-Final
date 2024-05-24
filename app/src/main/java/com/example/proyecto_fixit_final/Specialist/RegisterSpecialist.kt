@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.NavBar
@@ -42,6 +43,7 @@ class RegisterSpecialist : AppCompatActivity() {
     private lateinit var profesionEsp: EditText
     private lateinit var passEsp: EditText
     private lateinit var pass2Esp: EditText
+    private lateinit var loader: ProgressBar
     private var selectedImageUri: Uri? = null
     private var selectedPdfUri: Uri? = null
 
@@ -58,7 +60,7 @@ class RegisterSpecialist : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         storage = Firebase.storage
 
-        // Set variables por id
+        // Declarar las variables del layout
         btnRegistro = findViewById(R.id.btnRegistrarse_especialista)
         btnFoto = findViewById(R.id.btnFoto)
         btnEliminar = findViewById(R.id.btnEliminar)
@@ -71,6 +73,7 @@ class RegisterSpecialist : AppCompatActivity() {
         profesionEsp = findViewById(R.id.edEspecialidad)
         passEsp = findViewById(R.id.edContraseña_especialista)
         pass2Esp = findViewById(R.id.edConfirmaContraseña_especialista)
+        loader = findViewById(R.id.loader)
 
         btnRegistro.setOnClickListener {
             // Obtener datos del registro
@@ -129,6 +132,7 @@ class RegisterSpecialist : AppCompatActivity() {
             }
 
             if (pass == pass2) {
+                loader.visibility = View.VISIBLE
                 registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, pass)
             } else {
                 pass2Esp.error = "Las contraseñas no coinciden"
@@ -155,7 +159,7 @@ class RegisterSpecialist : AppCompatActivity() {
             startActivityForResult(Intent.createChooser(intent, "Seleccionar PDF"), REQUEST_CODE_SELECT_PDF)
         }
     }
-
+    // Método llamado al recibir resultados de actividades externas
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -179,31 +183,24 @@ class RegisterSpecialist : AppCompatActivity() {
         private const val REQUEST_CODE_SELECT_IMAGE = 1000
         private const val REQUEST_CODE_SELECT_PDF = 1001
     }
-
+    // Método para registrar un nuevo usuario en Firebase Auth
     private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, profesion: String, pass: String) {
         auth.createUserWithEmailAndPassword(correo, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    //valida el usuario y usa la funcion savedata
                     val user = auth.currentUser
-                    if (user != null) {
+                    user?.let {
                         if (selectedImageUri != null) {
-                            uploadImageToStorage(user.uid, nombre, rut, correo, telefono, profesion, null)
-                        } else if (selectedPdfUri != null) {
-                            uploadPdfToStorage(user.uid, nombre, rut, correo, telefono, profesion, null)
-                        } else {
-                            saveAdditionalUserData(user.uid, nombre, rut, correo, telefono, profesion, null, null)
-                            navigateToHome()
+                            uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion)
                         }
                     }
                 } else {
-                    // Error al crear usuario
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     }
-
-    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, pdfUrl: String?) {
+    // Método para subir la imagen al almacenamiento de Firebase
+    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
         val ref = storage.reference.child("images/$uid.jpg")
         val uploadTask = ref.putFile(selectedImageUri!!)
 
@@ -212,8 +209,7 @@ class RegisterSpecialist : AppCompatActivity() {
                 if (selectedPdfUri != null) {
                     uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, uri.toString())
                 } else {
-                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, uri.toString(), pdfUrl)
-                    navigateToHome()
+                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, uri.toString(), null)
                 }
             }
         }.addOnFailureListener { e ->
@@ -222,7 +218,7 @@ class RegisterSpecialist : AppCompatActivity() {
         }
     }
 
-
+    // Método para subir el PDF al almacenamiento de Firebase
     private fun uploadPdfToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?) {
         val ref = storage.reference.child("pdfs/$uid.pdf")
         val uploadTask = ref.putFile(selectedPdfUri!!)
@@ -230,13 +226,13 @@ class RegisterSpecialist : AppCompatActivity() {
         uploadTask.addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener { uri ->
                 saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, imageUrl, uri.toString())
-                navigateToHome()
             }
         }.addOnFailureListener { e ->
             Log.e("RegisterSpecialist", "Error al subir PDF", e)
             Toast.makeText(this, "Error al subir PDF: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
+    // Método para guardar datos adicionales del usuario
     private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?, pdfUrl: String?) {
         val user = hashMapOf(
             "nombre" to nombre,
@@ -251,16 +247,28 @@ class RegisterSpecialist : AppCompatActivity() {
             .set(user)
             .addOnSuccessListener {
                 Log.d("RegisterSpecialist", "DocumentSnapshot successfully written!")
+                loader.visibility = View.INVISIBLE
+                navigateToHome()
             }
             .addOnFailureListener { e ->
                 Log.w("RegisterSpecialist", "Error writing document", e)
             }
     }
-
+    // Método para navegar a la pantalla principal
     private fun navigateToHome() {
         val intent = Intent(this, NavBar::class.java)
         startActivity(intent)
         finish()
     }
 
+    //funcion para volver atras
+    fun backMenu(view: View) {
+        super.onBackPressed()
+    }
+
+
 }
+
+
+
+

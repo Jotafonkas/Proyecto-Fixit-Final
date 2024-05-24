@@ -217,9 +217,9 @@ class ProfileSpecialist : AppCompatActivity() {
     }
 
     // Función para volver al menú
+    //funcion para volver atras
     fun backMenu(view: View) {
-        val intent = Intent(this, MenuFragment::class.java)
-        startActivity(intent)
+        super.onBackPressed()
     }
 
     // Función para obtener y mostrar los datos del usuario

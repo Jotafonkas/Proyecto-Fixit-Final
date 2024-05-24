@@ -2,6 +2,7 @@ package com.example.proyecto_fixit_final
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -57,5 +58,9 @@ class LoginSpecialist : AppCompatActivity() {
                     Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    fun backMenu(view: View) {
+        super.onBackPressed()
     }
 }

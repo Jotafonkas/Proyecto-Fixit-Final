@@ -80,8 +80,7 @@ class ChangePasswordSpecialist : AppCompatActivity() {
     }
 
     // Funcion para volver al menu principal
-    fun volverMenu(view: View) {
-        val intent = Intent(this, MenuFragment::class.java)
-        startActivity(intent)
+    fun backMenu(view: View) {
+        super.onBackPressed()
     }
 }

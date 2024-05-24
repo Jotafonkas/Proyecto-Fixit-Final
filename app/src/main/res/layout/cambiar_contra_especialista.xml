@@ -27,7 +27,7 @@
         android:layout_gravity="top"
         android:background="@drawable/ic_flechavolver"
         android:scaleType="centerInside"
-        android:onClick="volverMenu"
+        android:onClick="backMenu"
         />
 
     <LinearLayout

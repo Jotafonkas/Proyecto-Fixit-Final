@@ -42,8 +42,7 @@ class ViewSpecialistServices : AppCompatActivity() {
 
     // Función para regresar al menú principal
     fun backMenu(view: View) {
-        val intent = Intent(this, MenuFragment::class.java)
-        startActivity(intent)
+        super.onBackPressed()
     }
 
     // Función para cargar los servicios del especialista
