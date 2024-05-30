@@ -206,7 +206,7 @@ class ProfileSpecialist : AppCompatActivity() {
             "telefono" to telefono
         )
 
-        firestore.collection("users").document(uid!!)
+        firestore.collection("especialistas").document(uid!!)
             .update(userUpdates)
             .addOnSuccessListener {
                 Toast.makeText(this, "Perfil actualizado con éxito.", Toast.LENGTH_LONG).show()
@@ -224,7 +224,7 @@ class ProfileSpecialist : AppCompatActivity() {
 
     // Función para obtener y mostrar los datos del usuario
     private fun fetchAndDisplayData(uid: String) {
-        firestore.collection("users").document(uid).get()
+        firestore.collection("especialistas").document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val nombre = document.getString("nombre")

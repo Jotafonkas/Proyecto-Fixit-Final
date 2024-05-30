@@ -94,6 +94,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/boton1_seleccion_user"
         app:layout_constraintTop_toBottomOf="@id/boton1_seleccion_user"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:onClick="openRegisterClient"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.proyecto_fixit_final.Specialist
+package com.example.proyecto_fixit_final.Client
 
 import android.app.Activity
 import android.content.Intent
@@ -15,8 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.NavBar
 import com.example.proyecto_fixit_final.R
-import com.example.proyecto_fixit_final.SelectUser
-import com.example.proyecto_fixit_final.fragments.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,8 +22,9 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
+
 @Suppress("DEPRECATION")
-class RegisterSpecialist : AppCompatActivity() {
+class RegisterClient: AppCompatActivity() {
 
     // Declarar las variables del layout
     private lateinit var firestore: FirebaseFirestore
@@ -34,85 +33,74 @@ class RegisterSpecialist : AppCompatActivity() {
     private lateinit var btnRegistro: Button
     private lateinit var btnFoto: Button
     private lateinit var btnEliminar: Button
-    private lateinit var btnCertificado: Button
     private lateinit var imagen: ImageView
-    private lateinit var nombreEsp: EditText
-    private lateinit var rutEsp: EditText
-    private lateinit var correoEsp: EditText
-    private lateinit var telefonoEsp: EditText
-    private lateinit var profesionEsp: EditText
-    private lateinit var passEsp: EditText
-    private lateinit var pass2Esp: EditText
+    private lateinit var nombreCliente: EditText
+    private lateinit var rutCliente: EditText
+    private lateinit var correoCliente: EditText
+    private lateinit var telefonoCliente: EditText
+    private lateinit var passCliente: EditText
+    private lateinit var pass2Cliente: EditText
     private lateinit var loader: ProgressBar
     private var selectedImageUri: Uri? = null
-    private var selectedPdfUri: Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.registro_especialista)
+        setContentView(R.layout.registro_cliente)
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()
         storage = Firebase.storage
 
         // Declarar las variables del layout
-        btnRegistro = findViewById(R.id.btnRegistrarse_especialista)
+        btnRegistro = findViewById(R.id.btnRegistrarse_cliente)
         btnFoto = findViewById(R.id.btnFoto)
         btnEliminar = findViewById(R.id.btnEliminar)
-        btnCertificado = findViewById(R.id.btnCargarCertificado)
         imagen = findViewById(R.id.imagen)
-        nombreEsp = findViewById(R.id.edNombre_especialista)
-        rutEsp = findViewById(R.id.edRut_especialista)
-        correoEsp = findViewById(R.id.edCorreo_especialista)
-        telefonoEsp = findViewById(R.id.edTelefono_especialista)
-        profesionEsp = findViewById(R.id.edEspecialidad)
-        passEsp = findViewById(R.id.edContraseña_especialista)
-        pass2Esp = findViewById(R.id.edConfirmaContraseña_especialista)
+        nombreCliente = findViewById(R.id.edNombre_cliente)
+        rutCliente = findViewById(R.id.edRut_cliente)
+        correoCliente = findViewById(R.id.edCorreo_cliente)
+        telefonoCliente = findViewById(R.id.edTelefono_cliente)
+        passCliente = findViewById(R.id.edContraseña_cliente)
+        pass2Cliente = findViewById(R.id.edConfirmaContraseña_cliente)
         loader = findViewById(R.id.loader)
 
         btnRegistro.setOnClickListener {
             // Obtener datos del registro
-            val nombre: String = nombreEsp.text.toString()
-            val rut: String = rutEsp.text.toString()
-            val correo: String = correoEsp.text.toString()
-            val telefono: String = telefonoEsp.text.toString()
-            val profesion: String = profesionEsp.text.toString()
-            val pass: String = passEsp.text.toString()
-            val pass2: String = pass2Esp.text.toString()
+            val nombre: String = nombreCliente.text.toString()
+            val rut: String = rutCliente.text.toString()
+            val correo: String = correoCliente.text.toString()
+            val telefono: String = telefonoCliente.text.toString()
+            val pass: String = passCliente.text.toString()
+            val pass2: String = pass2Cliente.text.toString()
 
             // Validaciones
             if (nombre.isEmpty() || !nombre.matches(Regex("^[a-zA-Z ]+$"))) {
-                nombreEsp.error = "Ingrese su nombre (solo letras)"
+                nombreCliente.error = "Ingrese su nombre (solo letras)"
                 return@setOnClickListener
             }
 
             if (rut.isEmpty() || rut.length > 9 || rut.toDoubleOrNull() == null) {
-                rutEsp.error = "Ingrese su rut (solo números)"
+                rutCliente.error = "Ingrese su rut ( maximo 9 digitos y solo números)"
                 return@setOnClickListener
             }
 
             if (correo.isEmpty()) {
-                correoEsp.error = "Ingrese su correo"
+                correoCliente.error = "Ingrese su correo"
                 return@setOnClickListener
             }
 
             if (telefono.isEmpty() || telefono.toDoubleOrNull() == null || telefono.length != 9) {
-                telefonoEsp.error = "Ingrese su telefono (9 números)"
-                return@setOnClickListener
-            }
-
-            if (profesion.isEmpty() || !profesion.matches(Regex("^[a-zA-Z ]+$"))) {
-                profesionEsp.error = "Ingrese su profesion/especialidad (solo letras)"
+                telefonoCliente.error = "Ingrese su telefono (9 números)"
                 return@setOnClickListener
             }
 
             if (pass.isEmpty()) {
-                passEsp.error = "Ingrese su contraseña"
+                passCliente.error = "Ingrese su contraseña"
                 return@setOnClickListener
             }
 
             if (pass2.isEmpty()) {
-                pass2Esp.error = "Repita su contraseña"
+                pass2Cliente.error = "Repita su contraseña"
                 return@setOnClickListener
             }
 
@@ -121,24 +109,18 @@ class RegisterSpecialist : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (selectedPdfUri == null) {
-                Toast.makeText(this, "Por favor, suba su certificado de antecedentes.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
             validarRut(rut) { isRutValido ->
                 if (isRutValido) {
                     // El RUT es válido, proceder con el registro
-
                     if (pass == pass2) {
                         loader.visibility = View.VISIBLE
-                        registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, pass)
+                        registrarNuevoUsuario(nombre, rut, correo, telefono, pass)
                     } else {
-                        pass2Esp.error = "Las contraseñas no coinciden"
+                        pass2Cliente.error = "Las contraseñas no coinciden"
                         Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
                     }
                 } else {
-                    rutEsp.error = "Este RUT ya está registrado"
+                    rutCliente.error = "Este RUT ya está registrado"
                     Toast.makeText(this, "Este RUT ya está registrado", Toast.LENGTH_LONG).show()
                 }
             }
@@ -146,22 +128,15 @@ class RegisterSpecialist : AppCompatActivity() {
 
         btnFoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE)
+            startActivityForResult(intent, RegisterClient.REQUEST_CODE_SELECT_IMAGE)
         }
 
         btnEliminar.setOnClickListener {
             imagen.setImageResource(R.drawable.image_perfil) // Cambia esto por el recurso predeterminado que deseas
             selectedImageUri = null
         }
-
-        btnCertificado.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-                type = "application/pdf"
-                addCategory(Intent.CATEGORY_OPENABLE)
-            }
-            startActivityForResult(Intent.createChooser(intent, "Seleccionar PDF"), REQUEST_CODE_SELECT_PDF)
-        }
     }
+
     // Método llamado al recibir resultados de actividades externas
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -173,23 +148,16 @@ class RegisterSpecialist : AppCompatActivity() {
                         imagen.setImageURI(uri)
                     }
                 }
-                REQUEST_CODE_SELECT_PDF -> {
-                    data?.data?.let { uri ->
-                        selectedPdfUri = uri
-                        Toast.makeText(this, "PDF seleccionado: $uri", Toast.LENGTH_SHORT).show()
-                    }
-                }
             }
         }
     }
     companion object {
         private const val REQUEST_CODE_SELECT_IMAGE = 1000
-        private const val REQUEST_CODE_SELECT_PDF = 1001
     }
 
     //metodo para validar si el rut esta repetido
     private fun validarRut(rut: String, callback: (Boolean) -> Unit) {
-        firestore.collection("especialistas")
+        firestore.collection("clientes")
             .whereEqualTo("rut", rut)
             .get()
             .addOnSuccessListener { documents ->
@@ -203,14 +171,14 @@ class RegisterSpecialist : AppCompatActivity() {
     }
 
     // Método para registrar un nuevo usuario en Firebase Auth
-    private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, profesion: String, pass: String) {
+    private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, pass: String) {
         auth.createUserWithEmailAndPassword(correo, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     user?.let {
                         if (selectedImageUri != null) {
-                            uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion)
+                            uploadImageToStorage(it.uid, nombre, rut, correo, telefono)
                         }
                     }
                 } else {
@@ -218,63 +186,45 @@ class RegisterSpecialist : AppCompatActivity() {
                 }
             }
     }
-    // Método para subir la imagen al almacenamiento de Firebase
-    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
+
+    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String) {
         val ref = storage.reference.child("images/$uid.jpg")
         val uploadTask = ref.putFile(selectedImageUri!!)
 
         uploadTask.addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener { uri ->
-                if (selectedPdfUri != null) {
-                    uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, uri.toString())
-                } else {
-                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, uri.toString(), null)
-                }
+
+                saveAdditionalUserData(uid, nombre, rut, correo, telefono, uri.toString())
             }
         }.addOnFailureListener { e ->
-            Log.e("RegisterSpecialist", "Error al subir imagen", e)
+            Log.e("RegisterClient", "Error al subir imagen", e)
             Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
-    // Método para subir el PDF al almacenamiento de Firebase
-    private fun uploadPdfToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?) {
-        val ref = storage.reference.child("pdfs/$uid.pdf")
-        val uploadTask = ref.putFile(selectedPdfUri!!)
-
-        uploadTask.addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener { uri ->
-                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, imageUrl, uri.toString())
-            }
-        }.addOnFailureListener { e ->
-            Log.e("RegisterSpecialist", "Error al subir PDF", e)
-            Toast.makeText(this, "Error al subir PDF: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
     // Método para guardar datos adicionales del usuario
-    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?, pdfUrl: String?) {
+    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, imageUrl: String?) {
         val user = hashMapOf(
             "nombre" to nombre,
             "rut" to rut,
             "correo" to correo,
             "telefono" to telefono,
-            "profesion" to profesion,
-            "imageUrl" to imageUrl,
-            "pdfUrl" to pdfUrl
+            "imageUrl" to imageUrl
         )
-        // Referencia a la subcolección "especialistas" directamente dentro de la colección "especialistas"
-        val specialistRef = firestore.collection("especialistas").document(uid)
+        // Referencia a la subcolección "Cliente" directamente dentro de la colección "users"
+        val ClientRef = firestore.collection("clientes").document(uid)
 
-        specialistRef.set(user)
+        ClientRef.set(user)
             .addOnSuccessListener {
-                Log.d("RegisterSpecialist", "DocumentSnapshot successfully written!")
+                Log.d("RegisterClient", "DocumentSnapshot successfully written!")
                 loader.visibility = View.INVISIBLE
                 navigateToHome()
             }
             .addOnFailureListener { e ->
-                Log.w("RegisterSpecialist", "Error writing document", e)
+                Log.w("RegisterClient", "Error writing document", e)
             }
     }
+
     // Método para navegar a la pantalla principal
     private fun navigateToHome() {
         val intent = Intent(this, NavBar::class.java)
@@ -286,10 +236,4 @@ class RegisterSpecialist : AppCompatActivity() {
     fun backMenu(view: View) {
         super.onBackPressed()
     }
-
-
 }
-
-
-
-

@@ -53,7 +53,7 @@ class ViewSpecialistServices : AppCompatActivity() {
         // Obtenemos la colección de servicios del especialista
         val db = FirebaseFirestore.getInstance()
         // Obtenemos los servicios del especialista
-        db.collection("users").document(uid).collection("servicios")
+        db.collection("especialistas").document(uid).collection("servicios")
             .get()
             // Si se obtienen los servicios exitosamente se agregan al contenedor
             .addOnSuccessListener { result ->
@@ -160,7 +160,7 @@ class ViewSpecialistServices : AppCompatActivity() {
     private fun eliminarServicio(view: View, documentId: String) {
         val db = FirebaseFirestore.getInstance()
         // Eliminamos el servicio de Firestore
-        db.collection("users").document(uid).collection("servicios").document(documentId)
+        db.collection("especialistas").document(uid).collection("servicios").document(documentId)
             .delete()
             .addOnSuccessListener {
                 // Eliminamos la vista del servicio del contenedor

@@ -140,6 +140,18 @@
     <string name="confirme_su_nueva_contrase_a">Confirme su nueva contraseña</string>
     <string name="btn_cambiar_contrase_a">Cambiar Contraseña</string>
 
+    <!-- Strings Registro Cliente -->
+    <string name="register_client_title">Registro Cliente</string>
+    <string name="btn_cargar_client">Cargar</string>
+    <string name="btn_eliminar_client">Eliminar</string>
+    <string name="text1_register_client"><u>Nombre y Apellido: </u></string>
+    <string name="email_register_client"><u>Correo Electrónico: </u></string>
+    <string name="rut_register_client"><u>Rut sin puntos ni guión (Ej:101234560): </u></string>
+    <string name="phone_register_client"><u>Teléfono: </u></string>
+    <string name="password_register_client"><u>Contraseña: </u></string>
+    <string name="password2_register_client"><u>Confirme su Contraseña: </u></string>
+    <string name="btn_register_client">Registrarse</string>
+
 
 
 </resources>

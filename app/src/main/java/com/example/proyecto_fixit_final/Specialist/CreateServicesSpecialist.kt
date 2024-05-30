@@ -139,7 +139,7 @@ class CreateServicesSpecialist : AppCompatActivity() {
                         "uid" to uid
                     )
                     // Guardar el servicio en Firestore bajo la colección del usuario actual
-                    db.collection("users").document(uid).collection("servicios")
+                    db.collection("especialistas").document(uid).collection("servicios")
                         .add(servicio)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Servicio publicado exitosamente.", Toast.LENGTH_SHORT).show()

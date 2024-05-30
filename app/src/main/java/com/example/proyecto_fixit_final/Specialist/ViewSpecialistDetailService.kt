@@ -46,7 +46,7 @@ class ViewSpecialistDetailService : AppCompatActivity() {
 
         // Recuperar la imagenUrl y la categoría del servicio desde Firestore
         val db = FirebaseFirestore.getInstance()
-        db.collection("users").document(uid)
+        db.collection("especialistas").document(uid)
             .collection("servicios")
             .whereEqualTo("nombreServicio", nombreServicio)
             .get()

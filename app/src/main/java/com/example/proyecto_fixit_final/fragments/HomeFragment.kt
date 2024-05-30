@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
 
     // Función para obtener y mostrar el nombre del usuario
     private fun fetchAndDisplayUserName(uid: String) {
-        firestore.collection("users").document(uid).get()
+        firestore.collection("especialistas").document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val nombre = document.getString("nombre")

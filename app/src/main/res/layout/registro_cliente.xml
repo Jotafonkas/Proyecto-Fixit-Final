@@ -1,0 +1,301 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/txtRegistroEspecialista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/header"
+        android:gravity="center"
+        android:text="@string/register_client_title"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:padding="25dp" />
+
+    <ImageButton
+        android:id="@+id/volver"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside"
+        android:onClick="backMenu"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtRegistroEspecialista">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/imagen_login"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/radius4"/>
+
+            <LinearLayout
+                android:id="@+id/LLbtnsimagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagen"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true" >
+
+                <Button
+                    android:id="@+id/btnFoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/image_pencil"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/btn_cargar_client"/>
+
+                <Button
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_eliminar"
+                    android:text="@string/btn_eliminar_client"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_below="@id/LLbtnsimagen"
+                android:layout_marginTop="20dp"
+                android:id="@+id/editTextContainer"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/txtNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/text1_register_client"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="25dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nombre_cliente_layout"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/logo_persona">
+
+                    <EditText
+                        android:id="@+id/edNombre_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtRut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/rut_register_client"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/rut_cliente_layout"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/ic_rut">
+
+                    <EditText
+                        android:id="@+id/edRut_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtCorreo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/email_register_client"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_cliente_layout"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/ic_email">
+
+                    <EditText
+                        android:id="@+id/edCorreo_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtTelefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/phone_register_client"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/telefono_cliente_layout"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/ic_phone2">
+
+                    <EditText
+                        android:id="@+id/edTelefono_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/txtContraseña"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/password_register_client"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_register_specialist_layout"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/ic_pass"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edContraseña_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:inputType="textPassword"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtConfirmaContraseña"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/password2_register_client"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_register_specialist_layout2"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/ic_pass"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edConfirmaContraseña_cliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:inputType="textPassword"
+                        android:background="@drawable/image_rectangle1"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/btnRegistrarse_cliente"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/btn_register_client"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="40dp"
+                    android:onClick="openHome"/>
+
+                <ProgressBar
+                    android:id="@+id/loader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
