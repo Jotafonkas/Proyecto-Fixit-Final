@@ -14,6 +14,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.NavBar
+import com.example.proyecto_fixit_final.NavBarClient
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -164,7 +165,7 @@ class RegisterClient: AppCompatActivity() {
                 callback(documents.isEmpty)
             }
             .addOnFailureListener { exception ->
-                Log.e("RegisterSpecialist", "Error al validar el RUT: ${exception.message}", exception)
+                Log.e("RegisterClient", "Error al validar el RUT: ${exception.message}", exception)
                 // Manejar el error apropiadamente
                 callback(false)
             }
@@ -227,7 +228,7 @@ class RegisterClient: AppCompatActivity() {
 
     // Método para navegar a la pantalla principal
     private fun navigateToHome() {
-        val intent = Intent(this, NavBar::class.java)
+        val intent = Intent(this, NavBarClient::class.java)
         startActivity(intent)
         finish()
     }

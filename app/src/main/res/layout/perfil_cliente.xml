@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/drawable_shape"
+    >
+
+    <TextView
+        android:id="@+id/txtPerfilCliente"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/header"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/titulo_perfil"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:id="@+id/imgbtnvolver"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside"
+        android:onClick="backMenu"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtPerfilCliente">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgPerfilCliente"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/imagen_login"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/radius4"/>
+
+            <LinearLayout
+                android:id="@+id/LLbtnsimagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgPerfilCliente"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnFoto"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_addimage"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/btn_cargarfoto_perfil"/>
+
+                <Button
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_eliminar"
+                    android:text="@string/btn_eliminarfoto_perfil"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@id/LLbtnsimagen"
+                android:layout_marginTop="20dp"
+                android:id="@+id/editTextContainer"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/txtNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/nombre_y_apellido"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="25dp"/>
+
+                <LinearLayout
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nombre_cliente_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:startIconDrawable="@drawable/logo_persona">
+
+                        <EditText
+                            android:id="@+id/edNombre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/image_rectangle1"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:inputType="none"
+                            android:paddingStart="10dp"
+                            android:paddingTop="15dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/btnEditNombre"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/image_pencil"
+                        android:background="?attr/selectableItemBackgroundBorderless"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtRut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/rut"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <TextView
+                    android:id="@+id/edRut"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="23dp"
+                    android:drawableStart="@drawable/ic_rut"
+                    android:drawableTint="@color/gris"
+                    android:drawablePadding="18dp"
+                    android:background="@drawable/image_rectangle1"
+                    android:paddingStart="10dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/txtCorreo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/correo_electr_nico"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"/>
+
+                <TextView
+                    android:id="@+id/edCorreo"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="23dp"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawableTint="@color/gris"
+                    android:drawablePadding="18dp"
+                    android:background="@drawable/image_rectangle1"
+                    android:paddingStart="10dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtTelefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/tel_fono"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/telefono_cliente_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:startIconDrawable="@drawable/ic_phone2">
+
+                        <EditText
+                            android:id="@+id/edTelefono"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:background="@drawable/image_rectangle1"
+                            android:inputType="none"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/btnEditTelefono"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/image_pencil"
+                        android:background="?attr/selectableItemBackgroundBorderless"/>
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btnGuardarPerfilCliente"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:text="@string/guardar_cambios"
+                    android:textSize="20sp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openLogin(view: View) {
-        val intent = Intent(this, LoginSpecialist::class.java)
+        val intent = Intent(this, Login::class.java)
         startActivity(intent)
     }
 

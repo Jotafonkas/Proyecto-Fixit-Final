@@ -9,8 +9,9 @@
         android:required="false" /> <!-- Permiso para realizar llamadas telefónicas -->
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permiso para enviar correos electrónicos -->
     <uses-permission android:name="android.permission.SENDTO" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
     <application
@@ -23,11 +24,18 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
+
+        <activity
+            android:name=".NavBarClient"
+            android:exported="false" />
         <activity
             android:name=".NavBar"
             android:exported="false" />
         <activity
             android:name=".Specialist.ChangePasswordSpecialist"
+            android:exported="false" />
+        <activity
+            android:name=".Client.ChangePasswordClient"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -48,16 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginSpecialist"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Client.RegisterClient"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -119,6 +118,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name=".Client.RegisterClient"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Client.ProfileClient"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
 </manifest>

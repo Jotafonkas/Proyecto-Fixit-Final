@@ -6,12 +6,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.databinding.NavBarBinding
 import com.example.proyecto_fixit_final.fragments.HelpFragment
-import com.example.proyecto_fixit_final.fragments.HomeFragment
-import com.example.proyecto_fixit_final.fragments.MenuFragment
+import com.example.proyecto_fixit_final.fragments.HomeClientFragment
+import com.example.proyecto_fixit_final.fragments.MenuClientFragment
 import com.example.proyecto_fixit_final.fragments.ServicesFragment
 
-class NavBar : AppCompatActivity() {
-    //COnfigurar binding
+class NavBarClient : AppCompatActivity() {
+    //Configurar binding
     private lateinit var binding: NavBarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class NavBar : AppCompatActivity() {
         //Cargar un fragment cuando incie la app
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.framelayout, HomeFragment()).commit()
+                .replace(R.id.framelayout, HomeClientFragment()).commit()
         }
 
         //Configurar el bottom navigation view
@@ -33,12 +33,12 @@ class NavBar : AppCompatActivity() {
                 R.id.nav_home -> {
                     //Mostrar el fragment de home
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.framelayout, HomeFragment()).commit()
+                        .replace(R.id.framelayout, HomeClientFragment()).commit()
                     true
                 }
 
                 R.id.nav_services -> {
-                    //Mostrar el fragment de services
+                    //Mostrar el fragment de servicios
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.framelayout, ServicesFragment()).commit()
                     true
@@ -47,12 +47,12 @@ class NavBar : AppCompatActivity() {
                 R.id.nav_menu -> {
                     //Mostrar el fragment de menu
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.framelayout, MenuFragment()).commit()
+                        .replace(R.id.framelayout, MenuClientFragment()).commit()
                     true
                 }
 
                 R.id.nav_help -> {
-                    //Mostrar el fragment de help
+                    //Mostrar el fragment de ayuda
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.framelayout, HelpFragment()).commit()
                     true

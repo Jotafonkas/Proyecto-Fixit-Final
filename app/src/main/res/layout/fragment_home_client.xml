@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_shape"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_home"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"/>
+
+    <ImageView
+        android:id="@+id/container_image"
+        android:layout_width="212dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="110dp"
+        android:src="@drawable/container_image"
+        />
+
+    <TextView
+        android:id="@+id/text_trabajo_recompensado"
+        android:layout_width="218dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="180dp"
+        android:gravity="center_horizontal"
+        android:includeFontPadding="false"
+        android:text="@string/text1_home"
+        android:textColor="#FF33353C"
+        android:textSize="22sp"
+        />
+
+    <TextView
+        android:id="@+id/text_ayuda_necesitas"
+        android:layout_width="247dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="520dp"
+        android:gravity="end"
+        android:text="@string/text2_home"
+        android:textColor="#FF33353C"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/text_servicio_calidad"
+        android:layout_width="323dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="@string/text3_home"
+        android:textAlignment="center"
+        android:textColor="#FF282828"
+        android:textSize="22sp"
+        />
+
+    <ImageView
+        android:id="@+id/container_image1"
+        android:layout_width="159dp"
+        android:layout_height="231dp"
+        android:layout_marginTop="480dp"
+        android:src="@drawable/container_image1"
+        />
+
+    <TextView
+        android:id="@+id/text_garantia_clientes"
+        android:layout_width="217dp"
+        android:layout_height="72dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="end"
+        android:text="@string/text4_home"
+        android:textColor="#FF282828"
+        android:textSize="19sp" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

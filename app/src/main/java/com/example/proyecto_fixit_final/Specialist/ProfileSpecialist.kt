@@ -54,7 +54,6 @@ class ProfileSpecialist : AppCompatActivity() {
         edNombre = findViewById(R.id.edNombre) // Obtener el campo de nombre
         edProfesion = findViewById(R.id.edEspecialidad) // Obtener el campo de especialidad
         edTelefono = findViewById(R.id.edTelefono) // Obtener el campo de teléfono
-        edCorreo = findViewById(R.id.edCorreo) // Obtener el campo de correo
         imgperfil = findViewById(R.id.imgPerfilEspecialista) // Obtener la imagen de perfil
         btnUpload = findViewById(R.id.btnFoto) // Obtener el botón de subir foto
         btnDelete = findViewById(R.id.btnEliminar) // Obtener el botón de eliminar foto
