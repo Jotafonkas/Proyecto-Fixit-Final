@@ -8,7 +8,7 @@ import com.example.proyecto_fixit_final.databinding.NavBarBinding
 import com.example.proyecto_fixit_final.fragments.HelpFragment
 import com.example.proyecto_fixit_final.fragments.HomeClientFragment
 import com.example.proyecto_fixit_final.fragments.MenuClientFragment
-import com.example.proyecto_fixit_final.fragments.ServicesFragment
+import com.example.proyecto_fixit_final.fragments.ServicesFragmentClient
 
 class NavBarClient : AppCompatActivity() {
     //Configurar binding
@@ -40,7 +40,7 @@ class NavBarClient : AppCompatActivity() {
                 R.id.nav_services -> {
                     //Mostrar el fragment de servicios
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.framelayout, ServicesFragment()).commit()
+                        .replace(R.id.framelayout, ServicesFragmentClient()).commit()
                     true
                 }
 

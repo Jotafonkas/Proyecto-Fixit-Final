@@ -13,7 +13,7 @@
         android:id="@+id/txtCategoriaServiciosEspecialistas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titulo_categorias"
+        android:text="Servicios"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -25,13 +25,13 @@
     <!-- Subtítulos Servicios disponibles -->
     <TextView
         android:layout_below="@id/txtCategoriaServiciosEspecialistas"
-        android:id="@+id/txtServiciosdispo"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtServiciosClient"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/texto_categorias"
+        android:text="Escoge el servicio que necesitas:"
         android:textColor="@color/black"
         android:textSize="22sp"
+        android:gravity="center"
         android:textStyle="bold"
         android:layout_marginTop="120dp"
         />
@@ -75,7 +75,7 @@
                 android:layout_height="40dp"
                 android:text="@string/txt_limpieza"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -110,7 +110,7 @@
                 android:layout_height="40dp"
                 android:text="Gasfiter"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:layout_marginTop="-5dp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
@@ -145,7 +145,7 @@
                 android:layout_height="40dp"
                 android:text="Técnico"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -169,7 +169,8 @@
                 android:id="@+id/imageButton4"
                 android:layout_width="60dp"
                 android:layout_height="70dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/cerrajero"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
@@ -180,7 +181,7 @@
                 android:layout_height="40dp"
                 android:text="Cerrajero"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -203,8 +204,9 @@
 
             <ImageButton
                 android:id="@+id/imageButton5"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="80dp"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/carpintero"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
@@ -215,7 +217,7 @@
                 android:layout_height="40dp"
                 android:text="Carpintero"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -237,9 +239,10 @@
 
             <ImageButton
                 android:id="@+id/imageButton6"
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="2.5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/plomero"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
@@ -250,7 +253,7 @@
                 android:layout_height="40dp"
                 android:text="Plomero"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -274,6 +277,7 @@
                 android:id="@+id/imageButton7"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/jardinero"
                 android:background="@drawable/styles_imagen_redondeada_categorias"
                 />
@@ -284,7 +288,7 @@
                 android:layout_height="40dp"
                 android:text="Jardinero"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -319,7 +323,7 @@
                 android:layout_height="40dp"
                 android:text="Constructor"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>
@@ -354,7 +358,7 @@
                 android:layout_height="40dp"
                 android:text="Eléctrico"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="center"
                 tools:ignore="SmallSp"
                 android:textStyle="bold"/>

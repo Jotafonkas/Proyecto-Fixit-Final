@@ -3,16 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
-    <uses-feature
-        android:name="android.hardware.telephony"
-        android:required="false" /> <!-- Permiso para realizar llamadas telefónicas -->
-    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permiso para enviar correos electrónicos -->
     <uses-permission android:name="android.permission.SENDTO" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -25,118 +20,32 @@
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
 
-        <activity
-            android:name=".NavBarClient"
-            android:exported="false" />
-        <activity
-            android:name=".NavBar"
-            android:exported="false" />
-        <activity
-            android:name=".Specialist.ChangePasswordSpecialist"
-            android:exported="false" />
-        <activity
-            android:name=".Client.ChangePasswordClient"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+        <!-- Specialist Activities -->
+        <activity android:name=".Specialist.ChangePasswordSpecialist" android:exported="false" />
+        <activity android:name=".Specialist.RegisterSpecialist" android:exported="true" />
+        <activity android:name=".Specialist.CreateServicesSpecialist" android:exported="true" />
+        <activity android:name=".Specialist.ProfileSpecialist" android:exported="true" />
+        <activity android:name=".Specialist.ViewSpecialistServices" android:exported="true" />
+        <activity android:name=".Specialist.ViewSpecialistDetailService" android:exported="true" />
+        <activity android:name=".Specialist.ViewSpecialistComments" android:exported="true" />
+        <activity android:name=".Specialist.ViewSpecialistsByCategory" android:exported="true" />
+
+        <!-- Client Activities -->
+        <activity android:name=".Client.ChangePasswordClient" android:exported="false" />
+        <activity android:name=".Client.RegisterClient" android:exported="true" />
+        <activity android:name=".Client.ProfileClient" android:exported="true" />
+
+        <!-- Common Activities -->
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Specialist.RegisterSpecialist"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Login"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".SelectUser"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Specialist.CreateServicesSpecialist"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Specialist.ProfileSpecialist"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Specialist.ViewSpecialistServices"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Specialist.ViewSpecialistDetailService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Specialist.ViewSpecialistComments"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".Client.RegisterClient"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Client.ProfileClient"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".NavBarClient" android:exported="false" />
+        <activity android:name=".NavBar" android:exported="false" />
+        <activity android:name=".Login" android:exported="true" />
+        <activity android:name=".SelectUser" android:exported="true" />
 
     </application>
 </manifest>
