@@ -138,9 +138,8 @@
                         android:id="@+id/edRut_cliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="40dp"
+                        android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
-                        android:hint="@string/ej_123456789"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,15 +162,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-
-                    app:startIconDrawable="@drawable/ic_email"
-                    android:hint="@string/correo_ejemplo_com">
+                    app:startIconDrawable="@drawable/ic_email">
 
                     <EditText
                         android:id="@+id/edCorreo_cliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="40dp"
+                        android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -196,14 +193,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    app:startIconDrawable="@drawable/ic_phone2"
-                    android:hint="@string/ej_912345678">
+                    app:startIconDrawable="@drawable/ic_phone2">
 
                     <EditText
                         android:id="@+id/edTelefono_cliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="40dp"
+                        android:paddingStart="10dp"
                         android:background="@drawable/image_rectangle1"
                         />
                 </com.google.android.material.textfield.TextInputLayout>

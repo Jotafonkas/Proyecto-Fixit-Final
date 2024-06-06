@@ -53,18 +53,12 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    if (user?.isEmailVerified == true) {
-                        user?.let {
-                            val uid = it.uid
-                            verificarRolUsuario(uid)
-                        }
-                    } else {
-                        // El correo no está verificado, mostrar mensaje de error
-                        Toast.makeText(this, "Por favor, verifique su correo electrónico antes de iniciar sesión.", Toast.LENGTH_LONG).show()
-                        auth.signOut()
+                    user?.let {
+                        val uid = it.uid
+                        verificarRolUsuario(uid)
                     }
                 } else {
-                    Toast.makeText(this, "Error al iniciar sesión: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Hubo un problema al iniciar sesión", Toast.LENGTH_LONG).show()
                 }
             }
     }

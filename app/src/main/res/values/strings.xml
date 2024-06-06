@@ -17,7 +17,7 @@
     <string name="btn_eliminar">Eliminar</string>
     <string name="text1_register_specialist"><u>Nombre y Apellido: </u></string>
     <string name="email_register_specialist"><u>Correo Electrónico: </u></string>
-    <string name="rut_register_specialist"><u>Rut sin puntos ni guión: </u></string>
+    <string name="rut_register_specialist"><u>Rut sin puntos ni guión (Ej:101234560): </u></string>
     <string name="phone_register_specialist"><u>Teléfono: </u></string>
     <string name="profession_register_specilialist"><u>Profesión/Especialidad: </u></string>
     <string name="password_register_specialist"><u>Contraseña: </u></string>
@@ -146,14 +146,11 @@
     <string name="btn_eliminar_client">Eliminar</string>
     <string name="text1_register_client"><u>Nombre y Apellido: </u></string>
     <string name="email_register_client"><u>Correo Electrónico: </u></string>
-    <string name="rut_register_client"><u>Rut sin puntos ni guión: </u></string>
+    <string name="rut_register_client"><u>Rut sin puntos ni guión (Ej:101234560): </u></string>
     <string name="phone_register_client"><u>Teléfono: </u></string>
     <string name="password_register_client"><u>Contraseña: </u></string>
     <string name="password2_register_client"><u>Confirme su Contraseña: </u></string>
     <string name="btn_register_client">Registrarse</string>
-    <string name="ej_123456789">Ej: 123456789</string>
-    <string name="correo_ejemplo_com">correo@ejemplo.com</string>
-    <string name="ej_912345678">Ej: 912345678</string>
 
 
 </resources>
