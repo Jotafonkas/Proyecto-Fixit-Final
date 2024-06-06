@@ -123,8 +123,7 @@
                     android:textStyle="bold"
                     android:textColor="#FF000000"
                     android:textSize="20sp"
-                    android:layout_marginStart="30dp"
-                    />
+                    android:layout_marginStart="30dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/rut_especialista_layout"
@@ -138,10 +137,11 @@
                         android:id="@+id/edRut_especialista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:paddingStart="40dp"
                         android:background="@drawable/image_rectangle1"
-                        />
+                        android:hint="@string/ej_123456789" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
                 <TextView
                     android:id="@+id/txtCorreo"
@@ -162,13 +162,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    app:startIconDrawable="@drawable/ic_email">
+                    app:startIconDrawable="@drawable/ic_email"
+                    android:hint="@string/correo_ejemplo_com">
 
                     <EditText
                         android:id="@+id/edCorreo_especialista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:paddingStart="40dp"
                         android:background="@drawable/image_rectangle1"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -193,13 +194,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    app:startIconDrawable="@drawable/ic_phone2">
+                    app:startIconDrawable="@drawable/ic_phone2"
+                    android:hint="@string/ej_123456789">
 
                     <EditText
                         android:id="@+id/edTelefono_especialista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:paddingStart="40dp"
                         android:background="@drawable/image_rectangle1"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -317,12 +319,13 @@
 
                 <Button
                     android:id="@+id/btnCargarCertificado"
-                    android:layout_width="170dp"
-                    android:layout_height="50dp"
-                    android:text="@string/btn_upload_certificate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:paddingStart="10dp"
+                    android:drawableEnd="@drawable/ic_upload"
+                    android:textSize="22sp"
                     android:layout_marginTop="10dp"
-                    android:textSize="20sp"
                     />
 
                 <Button
