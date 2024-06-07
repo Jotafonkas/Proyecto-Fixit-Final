@@ -13,6 +13,8 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto_fixit_final.Login
+import androidx.appcompat.app.AlertDialog
 import com.example.proyecto_fixit_final.NavBar
 import com.example.proyecto_fixit_final.NavBarClient
 import com.example.proyecto_fixit_final.R
@@ -177,15 +179,33 @@ class RegisterClient: AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    user?.let {
-                        if (selectedImageUri != null) {
-                            uploadImageToStorage(it.uid, nombre, rut, correo, telefono)
+                    user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
+                        if (verificationTask.isSuccessful) {
+                            showVerificationDialog(user.email)
+                            user?.let {
+                                if (selectedImageUri != null) {
+                                    uploadImageToStorage(it.uid, nombre, rut, correo, telefono)
+                                }
+                            }
+                        } else {
+                            Toast.makeText(this, "Error al enviar el correo de verificación: ${verificationTask.exception?.message}", Toast.LENGTH_LONG).show()
                         }
                     }
                 } else {
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun showVerificationDialog(email: String?) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Correo de verificación enviado")
+        builder.setMessage("Se ha enviado un correo de verificación a $email. Por favor, verifica tu correo electrónico antes de iniciar sesión.")
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String) {
@@ -219,7 +239,7 @@ class RegisterClient: AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d("RegisterClient", "DocumentSnapshot successfully written!")
                 loader.visibility = View.INVISIBLE
-                navigateToHome()
+                navigateToLogin()
             }
             .addOnFailureListener { e ->
                 Log.w("RegisterClient", "Error writing document", e)
@@ -227,8 +247,8 @@ class RegisterClient: AppCompatActivity() {
     }
 
     // Método para navegar a la pantalla principal
-    private fun navigateToHome() {
-        val intent = Intent(this, NavBarClient::class.java)
+    private fun navigateToLogin() {
+        val intent = Intent(this, Login::class.java)
         startActivity(intent)
         finish()
     }

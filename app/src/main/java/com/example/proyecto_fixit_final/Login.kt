@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -59,14 +60,25 @@ class Login : AppCompatActivity() {
                             verificarRolUsuario(uid)
                         }
                     } else {
-                        // El correo no está verificado, mostrar mensaje de error
-                        Toast.makeText(this, "Por favor, verifique su correo electrónico antes de iniciar sesión.", Toast.LENGTH_LONG).show()
+                        // El correo no está verificado, mostrar mensaje de error en ventana emergente
+                        showVerificationRequiredDialog()
                         auth.signOut()
                     }
                 } else {
                     Toast.makeText(this, "Error al iniciar sesión: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun showVerificationRequiredDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Verificación de correo requerida")
+        builder.setMessage("Por favor, verifique su correo electrónico antes de iniciar sesión.")
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     // Verificar rol de usuario en Firestore

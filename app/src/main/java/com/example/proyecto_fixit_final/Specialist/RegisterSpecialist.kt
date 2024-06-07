@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.Login
 import com.example.proyecto_fixit_final.R
@@ -216,7 +217,7 @@ class RegisterSpecialist : AppCompatActivity() {
                     val user = auth.currentUser
                     user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
                         if (verificationTask.isSuccessful) {
-                            Toast.makeText(this, "Correo de verificación enviado a ${user.email}", Toast.LENGTH_LONG).show()
+                            showVerificationDialog(user.email)
                             user.let {
                                 if (selectedImageUri != null) {
                                     uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion)
@@ -230,6 +231,17 @@ class RegisterSpecialist : AppCompatActivity() {
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun showVerificationDialog(email: String?) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Correo de verificación enviado")
+        builder.setMessage("Se ha enviado un correo de verificación a $email. Por favor, verifica tu correo electrónico antes de iniciar sesión.")
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     // Método para subir la imagen al almacenamiento de Firebase
