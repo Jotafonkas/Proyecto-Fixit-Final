@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context=".Specialist.DetailServiceClient"
+    >
+
+    <!-- Título de la vista -->
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_detalle_servicio_especialista"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:padding="25dp"
+        />
+
+    <!-- Botón con ícono para volver atrás -->
+    <ImageButton
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_flechavolver"
+        android:onClick="backServices"
+        />
+
+    <RelativeLayout
+        android:id="@+id/containerimgrating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <!-- Foto del servicio -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageServiceSpecialist"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="28dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/perfil_especialista"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/radius2"
+            />
+
+        <TextView
+            android:id="@+id/txtcalificacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_calificacion"
+            android:layout_toEndOf="@id/imageServiceSpecialist"
+            android:layout_marginTop="30dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imageServiceSpecialist"
+            android:layout_below="@id/txtcalificacion"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:numStars="5"
+            android:rating="2"
+            android:stepSize="5"
+            style="?android:attr/ratingBarStyleIndicator" />
+
+    </RelativeLayout>
+
+    <!-- Nombre del especialista -->
+    <TextView
+        android:id="@+id/txt_nombreEspecialista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/containerimgrating"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:text="Nombre y Apellido"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nombre_especialista_layout"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:layout_below="@id/txt_nombreEspecialista"
+        >
+
+        <TextView
+            android:id="@+id/input_nombre_especialista"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/image_rectangle1"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Nombre del servicio -->
+    <TextView
+        android:id="@+id/txt_nombre_servicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/nombre_especialista_layout"
+        android:text="Nombre del Servicio"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nombre_servicio_layout"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:layout_below="@id/txt_nombre_servicio"
+        >
+        <TextView
+            android:id="@+id/input_nombre_servicio"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/image_rectangle1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Precio del servicio -->
+    <TextView
+        android:id="@+id/txt_descripcion_servicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/nombre_servicio_layout"
+        android:text="Descripción del Servicio"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descripcion_servicio_layout"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:layout_below="@id/txt_descripcion_servicio"
+        >
+        <TextView
+            android:id="@+id/input_descripcion_servicio"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/image_rectangle1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Imagen del timbre de antecedentes -->
+    <ImageView
+        android:id="@+id/timbre_antecedentes"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@+id/descripcion_servicio_layout"
+        android:layout_toEndOf="@+id/botoncomentarios"
+        android:src="@drawable/timbre_antecedentes"
+        />
+
+    <!-- Botón que redirige a la vista de comentarios -->
+    <Button
+        android:id="@+id/botoncomentarios"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/descripcion_servicio_layout"
+        android:text="@string/btncomentarios"
+        android:textSize="18sp"
+        android:includeFontPadding="false"
+        android:onClick="goToComments"
+        />
+
+    <!-- Botón que redirige a la vista de servicios -->
+    <Button
+        android:id="@+id/botonperfilespecialista"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/botoncomentarios"
+        android:text="Perfil"
+        android:textSize="18sp"
+        android:includeFontPadding="false"
+        android:onClick="goToServices"
+        />
+
+    <!-- Botón que redirige al teléfono -->
+    <Button
+        android:id="@+id/botoncontactar"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/botonperfilespecialista"
+        android:text="Contactar"
+        android:textSize="18sp"
+        android:includeFontPadding="false"
+        android:onClick="goToServices"
+        />
+
+</RelativeLayout>

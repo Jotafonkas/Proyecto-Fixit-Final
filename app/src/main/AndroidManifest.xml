@@ -29,6 +29,7 @@
         <activity android:name=".Specialist.ViewSpecialistDetailService" android:exported="true" />
         <activity android:name=".Specialist.ViewSpecialistComments" android:exported="true" />
         <activity android:name=".Specialist.ViewSpecialistsByCategory" android:exported="true" />
+        <activity android:name=".Specialist.DetailServiceClient" android:exported="true" />
 
         <!-- Client Activities -->
         <activity android:name=".Client.ChangePasswordClient" android:exported="false" />
