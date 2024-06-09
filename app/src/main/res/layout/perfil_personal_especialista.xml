@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    tools:context=".Specialist.DetailServiceClient"
+    tools:context=".Specialist.PersonalProfileSpecialist"
     >
 
     <!-- Título de la vista -->
@@ -14,7 +14,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titulo_detalle_servicio_especialista"
+        android:text="Perfil Especialista"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -31,7 +31,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_flechavolver"
-        android:onClick="backServices"
+        android:onClick="backMenu"
         />
 
     <RelativeLayout
@@ -44,8 +44,9 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageServiceSpecialist"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:layout_gravity="top|start"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="28dp"
             android:scaleType="centerCrop"
             android:src="@drawable/perfil_especialista"
@@ -61,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_calificacion"
             android:layout_toEndOf="@id/imageServiceSpecialist"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_marginStart="50dp"
@@ -74,8 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/imageServiceSpecialist"
             android:layout_below="@id/txtcalificacion"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:numStars="5"
             android:rating="2"
@@ -91,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/containerimgrating"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Nombre y Apellido"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -127,7 +128,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/nombre_especialista_layout"
-        android:text="Nombre del Servicio"
+        android:text="Oficio/Profesión"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -161,15 +162,16 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/nombre_servicio_layout"
-        android:text="Descripción del Servicio"
+        android:text="Correo Electrónico"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descripcion_servicio_layout"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
+        android:id="@+id/correo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="5dp"
@@ -177,9 +179,44 @@
         android:layout_below="@id/txt_descripcion_servicio"
         >
         <TextView
-            android:id="@+id/input_descripcion_servicio"
+            android:id="@+id/input_correo"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/image_rectangle1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Descripción Especialista -->
+    <TextView
+        android:id="@+id/txt_ciudad_especialista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/correo_layout"
+        android:text="Ciudad"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ciudad_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:layout_below="@id/txt_ciudad_especialista"
+        >
+        <TextView
+            android:id="@+id/input_ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:paddingTop="5dp"
@@ -190,42 +227,33 @@
     <!-- Imagen del timbre de antecedentes -->
     <ImageView
         android:id="@+id/timbre_antecedentes"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@+id/descripcion_servicio_layout"
-        android:layout_toEndOf="@+id/botoncomentarios"
+        android:layout_below="@+id/ciudad_layout"
+        android:layout_toEndOf="@+id/botoncontactar"
         android:src="@drawable/timbre_antecedentes"
         />
 
     <!-- Botón que redirige a la vista de comentarios -->
-    <Button
-        android:id="@+id/botoncomentarios"
-        android:layout_width="196dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/descripcion_servicio_layout"
-        android:text="@string/btncomentarios"
-        android:textSize="18sp"
-        android:includeFontPadding="false"
-        android:onClick="goToComments"
-        />
 
     <!-- Botón que redirige a la vista de servicios -->
+
+    <!-- Botón que redirige al teléfono -->
     <Button
-        android:id="@+id/botonperfilespecialista"
+        android:id="@+id/botoncontactar"
         android:layout_width="196dp"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/botoncomentarios"
-        android:text="Perfil"
+        android:layout_marginTop="55dp"
+        android:layout_below="@+id/ciudad_layout"
+        android:text="Contactar"
         android:textSize="18sp"
         android:includeFontPadding="false"
-        android:onClick="goToProfileSpecialist" />
+        android:onClick="goPhone"
+        />
 
 </RelativeLayout>

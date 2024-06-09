@@ -1,6 +1,8 @@
 package com.example.proyecto_fixit_final.Specialist
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
 import com.google.android.material.imageview.ShapeableImageView
@@ -50,5 +52,12 @@ class DetailServiceClient : AppCompatActivity() {
             .addOnFailureListener { e ->
                 descripcionTextView.text = "Error al cargar la descripción: ${e.message}"
             }
+    }
+
+    fun goToProfileSpecialist(view: View) {
+        val uid = intent.getStringExtra("uid") ?: ""
+        val intent = Intent(this, PersonalProfileSpecialist::class.java)
+        intent.putExtra("uid", uid) // Pasa el uid del especialista
+        startActivity(intent)
     }
 }
