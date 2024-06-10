@@ -120,9 +120,9 @@
                             android:background="@drawable/image_rectangle1"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
-                            android:inputType="none"
                             android:paddingStart="10dp"
-                            android:paddingTop="15dp" />
+                            android:paddingTop="15dp"
+                            android:inputType="text"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton
@@ -164,7 +164,8 @@
                     android:paddingTop="13dp"
                     android:paddingBottom="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:inputType="number"/>
 
 
                 <TextView
@@ -234,7 +235,7 @@
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
                             android:background="@drawable/image_rectangle1"
-                            android:inputType="none"
+                            android:inputType="number"
                             android:focusable="false"
                             android:focusableInTouchMode="false"/>
                     </com.google.android.material.textfield.TextInputLayout>

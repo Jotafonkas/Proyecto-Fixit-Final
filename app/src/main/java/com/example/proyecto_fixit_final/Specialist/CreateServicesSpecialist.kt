@@ -1,12 +1,15 @@
 package com.example.proyecto_fixit_final.Specialist
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.databinding.CrearServicioEspecialistaBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,10 +23,13 @@ class CreateServicesSpecialist : AppCompatActivity() {
     private var imageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var uid: String
+    private lateinit var loaderDialog: Dialog
 
     // Función para crear la vista de la actividad
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setupLoader()
 
         // Crear la vista de la actividad
         binding = CrearServicioEspecialistaBinding.inflate(layoutInflater)
@@ -50,6 +56,30 @@ class CreateServicesSpecialist : AppCompatActivity() {
         // Botón para volver a la actividad anterior
         binding.imgbtnVolver.setOnClickListener {
             finish() // Volver a la actividad anterior
+        }
+    }
+
+    //setear loader
+    private fun setupLoader() {
+        loaderDialog = Dialog(this)
+        loaderDialog.setContentView(R.layout.loader_registro)
+        loaderDialog.setCancelable(false)
+        loaderDialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+        loaderDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+    //mostrar loader
+    private fun showLoader() {
+        if (!loaderDialog.isShowing) {
+            loaderDialog.show()
+        }
+    }
+    //esconder loader
+    private fun hideLoader() {
+        if (loaderDialog.isShowing) {
+            loaderDialog.dismiss()
         }
     }
 
@@ -97,7 +127,7 @@ class CreateServicesSpecialist : AppCompatActivity() {
         }
 
         // Validar que el nombre del servicio solo contenga letras
-        if (!nombreServicio.matches(Regex("^[a-zA-Z ]+$"))) {
+        if (!nombreServicio.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$"))) {
             binding.edNombreServicio.error = "El nombre del servicio solo puede contener letras."
             return
         }
@@ -119,6 +149,8 @@ class CreateServicesSpecialist : AppCompatActivity() {
             Toast.makeText(this, "Por favor, seleccione al menos una imagen.", Toast.LENGTH_SHORT).show()
             return
         }
+        showLoader()
+
 
         // Subir la imagen a Firebase Storage
         val storageReference = FirebaseStorage.getInstance().reference
@@ -142,6 +174,7 @@ class CreateServicesSpecialist : AppCompatActivity() {
                     db.collection("especialistas").document(uid).collection("servicios")
                         .add(servicio)
                         .addOnSuccessListener {
+                            hideLoader()
                             Toast.makeText(this, "Servicio publicado exitosamente.", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, ViewSpecialistServices::class.java)
                             intent.putExtra("uid", uid) // Pasar el UID a la siguiente actividad
@@ -150,12 +183,14 @@ class CreateServicesSpecialist : AppCompatActivity() {
                         }
                         // Mostrar mensaje de error si no se pudo publicar el servicio
                         .addOnFailureListener { e ->
+                            hideLoader()
                             Toast.makeText(this, "Error al publicar el servicio: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
                 }
             }
             // Mostrar mensaje de error si no se pudo cargar la imagen
             .addOnFailureListener { e ->
+                hideLoader()
                 Toast.makeText(this, "Error al cargar la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }

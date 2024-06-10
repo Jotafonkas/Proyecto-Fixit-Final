@@ -1,12 +1,14 @@
 package com.example.proyecto_fixit_final.Specialist
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -43,7 +45,7 @@ class RegisterSpecialist : AppCompatActivity() {
     private lateinit var profesionEsp: EditText
     private lateinit var passEsp: EditText
     private lateinit var pass2Esp: EditText
-    private lateinit var loader: ProgressBar
+    private lateinit var loaderDialog: Dialog
     private var selectedImageUri: Uri? = null
     private var selectedPdfUri: Uri? = null
 
@@ -67,7 +69,8 @@ class RegisterSpecialist : AppCompatActivity() {
         profesionEsp = findViewById(R.id.edEspecialidad)
         passEsp = findViewById(R.id.edContraseña_especialista)
         pass2Esp = findViewById(R.id.edConfirmaContraseña_especialista)
-        loader = findViewById(R.id.loader)
+
+        setupLoader()
 
         btnRegistro.setOnClickListener {
             // Obtener datos del registro
@@ -80,7 +83,7 @@ class RegisterSpecialist : AppCompatActivity() {
             val pass2: String = pass2Esp.text.toString()
 
             // Validaciones
-            if (nombre.isEmpty() || !nombre.matches(Regex("^[a-zA-Z ]+$"))) {
+            if (nombre.isEmpty() || !nombre.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$"))) {
                 nombreEsp.error = "Ingrese su nombre (solo letras)"
                 return@setOnClickListener
             }
@@ -100,7 +103,7 @@ class RegisterSpecialist : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (profesion.isEmpty() || !profesion.matches(Regex("^[a-zA-Z ]+$"))) {
+            if (profesion.isEmpty() || !profesion.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$"))) {
                 profesionEsp.error = "Ingrese su profesion/especialidad (solo letras)"
                 return@setOnClickListener
             }
@@ -136,7 +139,7 @@ class RegisterSpecialist : AppCompatActivity() {
                     // El RUT es válido, proceder con el registro
 
                     if (pass == pass2) {
-                        loader.visibility = View.VISIBLE
+                        showLoader()
                         registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, pass)
                     } else {
                         pass2Esp.error = "Las contraseñas no coinciden"
@@ -165,6 +168,29 @@ class RegisterSpecialist : AppCompatActivity() {
                 addCategory(Intent.CATEGORY_OPENABLE)
             }
             startActivityForResult(Intent.createChooser(intent, "Seleccionar PDF"), REQUEST_CODE_SELECT_PDF)
+        }
+    }
+    //setear loader
+    private fun setupLoader() {
+        loaderDialog = Dialog(this)
+        loaderDialog.setContentView(R.layout.loader_registro)
+        loaderDialog.setCancelable(false)
+        loaderDialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+        loaderDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+    //mostrar loader
+    private fun showLoader() {
+        if (!loaderDialog.isShowing) {
+            loaderDialog.show()
+        }
+    }
+    //esconder loader
+    private fun hideLoader() {
+        if (loaderDialog.isShowing) {
+            loaderDialog.dismiss()
         }
     }
 
@@ -203,6 +229,7 @@ class RegisterSpecialist : AppCompatActivity() {
                 callback(documents.isEmpty)
             }
             .addOnFailureListener { exception ->
+                hideLoader()
                 Log.e("RegisterSpecialist", "Error al validar el RUT: ${exception.message}", exception)
                 // Manejar el error apropiadamente
                 callback(false)
@@ -217,17 +244,18 @@ class RegisterSpecialist : AppCompatActivity() {
                     val user = auth.currentUser
                     user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
                         if (verificationTask.isSuccessful) {
-                            showVerificationDialog(user.email)
                             user.let {
                                 if (selectedImageUri != null) {
                                     uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion)
                                 }
                             }
                         } else {
+                            hideLoader()
                             Toast.makeText(this, "Error al enviar el correo de verificación: ${verificationTask.exception?.message}", Toast.LENGTH_LONG).show()
                         }
                     }
                 } else {
+                    hideLoader()
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
@@ -238,7 +266,7 @@ class RegisterSpecialist : AppCompatActivity() {
         builder.setTitle("Correo de verificación enviado")
         builder.setMessage("Se ha enviado un correo de verificación a $email. Por favor, verifica tu correo electrónico antes de iniciar sesión.")
         builder.setPositiveButton("OK") { dialog, _ ->
-            dialog.dismiss()
+            navigateToLogin()
         }
         val dialog = builder.create()
         dialog.show()
@@ -295,8 +323,9 @@ class RegisterSpecialist : AppCompatActivity() {
         specialistRef.set(user)
             .addOnSuccessListener {
                 Log.d("RegisterSpecialist", "DocumentSnapshot successfully written!")
-                loader.visibility = View.INVISIBLE
-                navigateToLogin()
+                showVerificationDialog(user["correo"] as String)
+                hideLoader()
+
             }
             .addOnFailureListener { e ->
                 Log.w("RegisterSpecialist", "Error writing document", e)

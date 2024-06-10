@@ -1,12 +1,14 @@
 package com.example.proyecto_fixit_final.Client
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -43,7 +45,7 @@ class RegisterClient: AppCompatActivity() {
     private lateinit var telefonoCliente: EditText
     private lateinit var passCliente: EditText
     private lateinit var pass2Cliente: EditText
-    private lateinit var loader: ProgressBar
+    private lateinit var loaderDialog: Dialog
     private var selectedImageUri: Uri? = null
 
 
@@ -65,7 +67,8 @@ class RegisterClient: AppCompatActivity() {
         telefonoCliente = findViewById(R.id.edTelefono_cliente)
         passCliente = findViewById(R.id.edContraseña_cliente)
         pass2Cliente = findViewById(R.id.edConfirmaContraseña_cliente)
-        loader = findViewById(R.id.loader)
+
+        setupLoader()
 
         btnRegistro.setOnClickListener {
             // Obtener datos del registro
@@ -116,7 +119,7 @@ class RegisterClient: AppCompatActivity() {
                 if (isRutValido) {
                     // El RUT es válido, proceder con el registro
                     if (pass == pass2) {
-                        loader.visibility = View.VISIBLE
+                        showLoader()
                         registrarNuevoUsuario(nombre, rut, correo, telefono, pass)
                     } else {
                         pass2Cliente.error = "Las contraseñas no coinciden"
@@ -137,6 +140,30 @@ class RegisterClient: AppCompatActivity() {
         btnEliminar.setOnClickListener {
             imagen.setImageResource(R.drawable.image_perfil) // Cambia esto por el recurso predeterminado que deseas
             selectedImageUri = null
+        }
+    }
+
+    //setear loader
+    private fun setupLoader() {
+        loaderDialog = Dialog(this)
+        loaderDialog.setContentView(R.layout.loader_registro)
+        loaderDialog.setCancelable(false)
+        loaderDialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+        loaderDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+    //mostrar loader
+    private fun showLoader() {
+        if (!loaderDialog.isShowing) {
+            loaderDialog.show()
+        }
+    }
+    //esconder loader
+    private fun hideLoader() {
+        if (loaderDialog.isShowing) {
+            loaderDialog.dismiss()
         }
     }
 
@@ -167,6 +194,7 @@ class RegisterClient: AppCompatActivity() {
                 callback(documents.isEmpty)
             }
             .addOnFailureListener { exception ->
+                hideLoader()
                 Log.e("RegisterClient", "Error al validar el RUT: ${exception.message}", exception)
                 // Manejar el error apropiadamente
                 callback(false)
@@ -181,17 +209,18 @@ class RegisterClient: AppCompatActivity() {
                     val user = auth.currentUser
                     user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
                         if (verificationTask.isSuccessful) {
-                            showVerificationDialog(user.email)
                             user?.let {
                                 if (selectedImageUri != null) {
                                     uploadImageToStorage(it.uid, nombre, rut, correo, telefono)
                                 }
                             }
                         } else {
+                            hideLoader()
                             Toast.makeText(this, "Error al enviar el correo de verificación: ${verificationTask.exception?.message}", Toast.LENGTH_LONG).show()
                         }
                     }
                 } else {
+                    hideLoader()
                     Toast.makeText(this, "Error al crear usuario: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
@@ -202,7 +231,7 @@ class RegisterClient: AppCompatActivity() {
         builder.setTitle("Correo de verificación enviado")
         builder.setMessage("Se ha enviado un correo de verificación a $email. Por favor, verifica tu correo electrónico antes de iniciar sesión.")
         builder.setPositiveButton("OK") { dialog, _ ->
-            dialog.dismiss()
+            navigateToLogin()
         }
         val dialog = builder.create()
         dialog.show()
@@ -238,8 +267,8 @@ class RegisterClient: AppCompatActivity() {
         ClientRef.set(user)
             .addOnSuccessListener {
                 Log.d("RegisterClient", "DocumentSnapshot successfully written!")
-                loader.visibility = View.INVISIBLE
-                navigateToLogin()
+                showVerificationDialog(user["correo"] as String)
+                hideLoader()
             }
             .addOnFailureListener { e ->
                 Log.w("RegisterClient", "Error writing document", e)
