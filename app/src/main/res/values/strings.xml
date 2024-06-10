@@ -158,7 +158,8 @@
     <!-- Strings Comentarios Clientes -->
     <string name="titulo_comentarios_clientes">Comentarios</string>
     <string name="nombrecliente">Nombre Cliente</string>
-    <string name="nuevocomentario">Nuevo comentario</string>
+    <string name="nuevocomentario"><u>Nuevo comentario: </u></string>
     <string name="publicarcomentario">Publicar comentario</string>
+    <string name="calificar"><u>Calificar: </u></string>
 
 </resources>

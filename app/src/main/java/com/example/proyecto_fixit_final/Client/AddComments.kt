@@ -15,6 +15,8 @@ class AddComments : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var comentarioEditText: EditText
     private lateinit var ratingBar: RatingBar
+    private lateinit var especialistaId: String
+    private lateinit var servicioId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,10 @@ class AddComments : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         comentarioEditText = findViewById(R.id.comentario)
         ratingBar = findViewById(R.id.estrellas)
+
+        // Obtener especialistaId y servicioId del Intent
+        especialistaId = intent.getStringExtra("especialistaId") ?: ""
+        servicioId = intent.getStringExtra("servicioId") ?: ""
     }
 
     fun addComment(view: View) {
@@ -52,11 +58,15 @@ class AddComments : AppCompatActivity() {
             "nombreUsuario" to nombreUsuario
         )
 
-        firestore.collection("comentarios")
+        firestore.collection("especialistas").document(especialistaId)
+            .collection("servicios").document(servicioId)
+            .collection("comentarios")
             .add(commentData)
             .addOnSuccessListener {
                 // Comentario agregado con éxito
                 val intent = Intent(this, ClientsComments::class.java)
+                intent.putExtra("especialistaId", especialistaId)
+                intent.putExtra("servicioId", servicioId)
                 startActivity(intent)
                 finish() // Cerrar la actividad actual para que no esté en el stack
             }

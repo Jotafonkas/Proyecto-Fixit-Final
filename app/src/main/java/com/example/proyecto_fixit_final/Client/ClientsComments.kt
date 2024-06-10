@@ -14,16 +14,25 @@ import com.google.firebase.firestore.QuerySnapshot
 
 class ClientsComments : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var especialistaId: String
+    private lateinit var servicioId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.clientes_comentarios)
         firestore = FirebaseFirestore.getInstance()
+
+        // Obtener especialistaId y servicioId del Intent
+        especialistaId = intent.getStringExtra("especialistaId") ?: ""
+        servicioId = intent.getStringExtra("servicioId") ?: ""
+
         loadComments()
     }
 
     private fun loadComments() {
-        firestore.collection("comentarios")
+        firestore.collection("especialistas").document(especialistaId)
+            .collection("servicios").document(servicioId)
+            .collection("comentarios")
             .get()
             .addOnSuccessListener { result ->
                 displayComments(result)
@@ -60,6 +69,8 @@ class ClientsComments : AppCompatActivity() {
 
     fun goNewComment(view: View) {
         val intent = Intent(this, AddComments::class.java)
+        intent.putExtra("especialistaId", especialistaId)
+        intent.putExtra("servicioId", servicioId)
         startActivity(intent)
     }
 }

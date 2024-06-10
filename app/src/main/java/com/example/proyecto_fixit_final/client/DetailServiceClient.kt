@@ -12,34 +12,34 @@ import com.example.proyecto_fixit_final.Client.ClientsComments
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DetailServiceClient : AppCompatActivity() {
+    private lateinit var especialistaId: String
+    private lateinit var servicioId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detalle_servicio_cliente)
 
         // Obtención de datos pasados por el intent
-        val uid = intent.getStringExtra("uid") ?: ""
+        especialistaId = intent.getStringExtra("uid") ?: ""
         val nombre = intent.getStringExtra("nombre") ?: ""
         val nombreServicio = intent.getStringExtra("nombreServicio") ?: ""
-        // val categoria = intent.getStringExtra("categoria") ?: ""
         val imageUrl = intent.getStringExtra("imageUrl") ?: ""
 
         // Referencias a las vistas
         val imageView: ShapeableImageView = findViewById(R.id.imageServiceSpecialist)
         val nombreTextView: TextView = findViewById(R.id.input_nombre_especialista)
         val nombreServicioTextView: TextView = findViewById(R.id.input_nombre_servicio)
-        // val categoriaTextView: TextView = findViewById(R.id.categoria_servicio)
         val descripcionTextView: TextView = findViewById(R.id.input_descripcion_servicio)
 
         // Asignación de datos a las vistas
         nombreTextView.text = nombre
         nombreServicioTextView.text = nombreServicio
-        // categoriaTextView.text = categoria
         Picasso.get().load(imageUrl).into(imageView)
 
         // Obtener la descripción del servicio desde Firebase
         val db = FirebaseFirestore.getInstance()
         db.collection("especialistas")
-            .document(uid)
+            .document(especialistaId)
             .collection("servicios")
             .whereEqualTo("nombreServicio", nombreServicio)
             .get()
@@ -47,6 +47,7 @@ class DetailServiceClient : AppCompatActivity() {
                 for (serviceDocument in serviceDocuments) {
                     val descripcionServicio = serviceDocument.getString("descripcionServicio") ?: ""
                     descripcionTextView.text = descripcionServicio
+                    servicioId = serviceDocument.id // Guardar el ID del servicio
                 }
             }
             .addOnFailureListener { e ->
@@ -55,14 +56,15 @@ class DetailServiceClient : AppCompatActivity() {
     }
 
     fun goToProfileSpecialist(view: View) {
-        val uid = intent.getStringExtra("uid") ?: ""
         val intent = Intent(this, PersonalProfileSpecialist::class.java)
-        intent.putExtra("uid", uid) // Pasa el uid del especialista
+        intent.putExtra("uid", especialistaId) // Pasa el uid del especialista
         startActivity(intent)
     }
 
     fun goToComments(view: View) {
         val intent = Intent(this, ClientsComments::class.java)
+        intent.putExtra("especialistaId", especialistaId)
+        intent.putExtra("servicioId", servicioId)
         startActivity(intent)
     }
 }
