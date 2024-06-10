@@ -8,10 +8,10 @@ import com.example.proyecto_fixit_final.R
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import android.widget.TextView
+import com.example.proyecto_fixit_final.Client.ClientsComments
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DetailServiceClient : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detalle_servicio_cliente)
@@ -58,6 +58,11 @@ class DetailServiceClient : AppCompatActivity() {
         val uid = intent.getStringExtra("uid") ?: ""
         val intent = Intent(this, PersonalProfileSpecialist::class.java)
         intent.putExtra("uid", uid) // Pasa el uid del especialista
+        startActivity(intent)
+    }
+
+    fun goToComments(view: View) {
+        val intent = Intent(this, ClientsComments::class.java)
         startActivity(intent)
     }
 }
