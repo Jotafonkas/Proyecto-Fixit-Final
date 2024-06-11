@@ -7,54 +7,76 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.firestore.FirebaseFirestore
 import android.content.Intent
+import android.util.Log
+import android.view.LayoutInflater
 import android.widget.ImageView
+import android.widget.LinearLayout
+import com.google.firebase.firestore.QuerySnapshot
 
 class ViewSpecialistComments : AppCompatActivity() {
-    private val db = FirebaseFirestore.getInstance()
+    private lateinit var comentariosContainer: LinearLayout
+    private val TAG = "ViewSpecialistComments"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ver_comentarios_especialista)
 
-        // Configura el listener para la flecha de volver atrás
-        findViewById<ImageView>(R.id.flechavolver_comments).setOnClickListener {
-            val intent = Intent(this, ViewSpecialistDetailService::class.java)
-            startActivity(intent)
-            finish()
-        }
+        // Obtención de datos pasados por el intent
+        val uid = intent.getStringExtra("uid") ?: ""
+        val nombreServicio = intent.getStringExtra("nombreServicio") ?: ""
 
-        loadComentarios()
+        // Referencias a las vistas
+        comentariosContainer = findViewById(R.id.comentarios_container)
+
+        // Obtener comentarios desde Firebase
+        val db = FirebaseFirestore.getInstance()
+        db.collection("especialistas")
+            .document(uid)
+            .collection("servicios")
+            .whereEqualTo("nombreServicio", nombreServicio)
+            .get()
+            .addOnSuccessListener { serviceDocuments ->
+                if (!serviceDocuments.isEmpty) {
+                    for (serviceDocument in serviceDocuments) {
+                        serviceDocument.reference.collection("comentarios")
+                            .get()
+                            .addOnSuccessListener { comments ->
+                                if (!comments.isEmpty) {
+                                    displayComments(comments)
+                                } else {
+                                    Log.d(TAG, "No comments found")
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e(TAG, "Error al obtener comentarios: ", e)
+                            }
+                    }
+                } else {
+                    Log.d(TAG, "No service found")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error al obtener servicios: ", e)
+            }
     }
 
-    private fun loadComentarios() {
-        db.collection("comentarios")
-            .get()
-            .addOnSuccessListener { result ->
-                val comentarios = result.map { it.toObject(Comentario::class.java) }
+    private fun displayComments(comments: QuerySnapshot) {
+        for (comment in comments) {
+            val comentarioText = comment.getString("comentario") ?: "Sin comentario"
+            val rating = comment.getDouble("rating")?.toFloat() ?: 0f
+            val nombreUsuario = comment.getString("nombreUsuario") ?: "Anónimo"
 
-                // Asigna los datos a las vistas
-                if (comentarios.size > 0) {
-                    findViewById<TextView>(R.id.txt_nombrecliente1).text = comentarios[0].nombre
-                    findViewById<TextView>(R.id.comentarios1).text = comentarios[0].comentario
-                    findViewById<RatingBar>(R.id.estrellas1).rating = comentarios[0].estrellas.toFloat()
-                }
+            val commentView = LayoutInflater.from(this).inflate(R.layout.card_comentario_cliente, null)
 
-                if (comentarios.size > 1) {
-                    findViewById<TextView>(R.id.txt_nombrecliente2).text = comentarios[1].nombre
-                    findViewById<TextView>(R.id.comentarios2).text = comentarios[1].comentario
-                    findViewById<RatingBar>(R.id.estrellas2).rating = comentarios[1].estrellas.toFloat()
-                }
+            val comentarioTextView = commentView.findViewById<TextView>(R.id.comentarios)
+            val ratingBar = commentView.findViewById<RatingBar>(R.id.estrellas)
+            val nombreUsuarioTextView = commentView.findViewById<TextView>(R.id.txt_nombrecliente)
 
-                if (comentarios.size > 2) {
-                    findViewById<TextView>(R.id.txt_nombrecliente3).text = comentarios[2].nombre
-                    findViewById<TextView>(R.id.comentarios3).text = comentarios[2].comentario
-                    findViewById<RatingBar>(R.id.estrellas3).rating = comentarios[2].estrellas.toFloat()
-                }
-            }
-            .addOnFailureListener { exception ->
-                // Manejo de errores
-                exception.printStackTrace()
-            }
+            comentarioTextView.text = comentarioText
+            ratingBar.rating = rating
+            nombreUsuarioTextView.text = nombreUsuario
+
+            comentariosContainer.addView(commentView)
+        }
     }
 }
-

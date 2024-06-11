@@ -15,12 +15,15 @@ import com.squareup.picasso.Picasso
 
 class ViewSpecialistDetailService : AppCompatActivity() {
 
+    private var uid: String? = null
+    private var nombreServicio: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ver_detalle_servicios_especialista)
 
         // Recuperar el UID del usuario del Intent
-        val uid = intent.getStringExtra("uid")
+        uid = intent.getStringExtra("uid")
         if (uid.isNullOrEmpty()) {
             // Manejar el caso en el que el UID esté vacío o nulo
             Log.e("ViewSpecialistDetail", "UID del usuario no encontrado en el Intent")
@@ -29,7 +32,7 @@ class ViewSpecialistDetailService : AppCompatActivity() {
         }
 
         // Recuperar los detalles del servicio del Intent
-        val nombreServicio = intent.getStringExtra("nombreServicio")
+        nombreServicio = intent.getStringExtra("nombreServicio")
         val descripcionServicio = intent.getStringExtra("descripcionServicio")
         val precio = intent.getStringExtra("precio")
 
@@ -46,7 +49,7 @@ class ViewSpecialistDetailService : AppCompatActivity() {
 
         // Recuperar la imagenUrl y la categoría del servicio desde Firestore
         val db = FirebaseFirestore.getInstance()
-        db.collection("especialistas").document(uid)
+        db.collection("especialistas").document(uid!!)
             .collection("servicios")
             .whereEqualTo("nombreServicio", nombreServicio)
             .get()
@@ -86,6 +89,8 @@ class ViewSpecialistDetailService : AppCompatActivity() {
     // Función para ir a la sección de comentarios
     fun goToComments(view: View) {
         val intent = Intent(this, ViewSpecialistComments::class.java)
+        intent.putExtra("uid", uid)
+        intent.putExtra("nombreServicio", nombreServicio)
         startActivity(intent)
     }
 

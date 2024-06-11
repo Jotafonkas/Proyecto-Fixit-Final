@@ -161,5 +161,7 @@
     <string name="nuevocomentario"><u>Nuevo comentario: </u></string>
     <string name="publicarcomentario">Publicar comentario</string>
     <string name="calificar"><u>Calificar: </u></string>
+    <string name="anadir_new_comment">Nuevo comentario: </string>
+
 
 </resources>

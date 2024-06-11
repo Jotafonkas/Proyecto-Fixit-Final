@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.auth.FirebaseAuth
@@ -32,9 +33,20 @@ class AddComments : AppCompatActivity() {
     }
 
     fun addComment(view: View) {
-        val comentario = comentarioEditText.text.toString()
+        val comentario = comentarioEditText.text.toString().trim()
         val rating = ratingBar.rating
         val currentUser = auth.currentUser
+
+        // Validar que se haya ingresado un comentario y una calificación
+        if (comentario.isEmpty()) {
+            Toast.makeText(this, "Por favor, ingrese un comentario.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (rating == 0.0f) {
+            Toast.makeText(this, "Por favor, califique el servicio.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         if (currentUser != null) {
             val userId = currentUser.uid

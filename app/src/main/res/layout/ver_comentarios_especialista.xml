@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Specialist.ViewSpecialistComments"
-    >
+    tools:context=".MainActivity">
 
     <!-- Header -->
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titulo_comentarios_especialista"
+        android:layout_height="100dp"
+        android:text="@string/titulo_comentarios_clientes"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -31,177 +30,19 @@
         android:src="@drawable/ic_flechavolver"
         />
 
+    <!-- Contenido de las cards comentarios  -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header"
-        >
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
         <LinearLayout
+            android:id="@+id/comentarios_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            >
-
-            <!-- Cliente 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp"
-                >
-
-                <ImageView
-                    android:id="@+id/ic_usuario"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/iv_user"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_nombrecliente1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="@string/esp_nombrecliente"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:paddingStart="8dp"
-                    />
-
-                <RatingBar
-                    android:id="@+id/estrellas1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="1.0"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/comentarios1"
-                android:layout_width="350dp"
-                android:layout_height="145dp"
-                android:background="@color/white"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:padding="10dp"
-                android:layout_marginBottom="20dp"
-                />
-
-            <!-- Cliente 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp"
-                >
-
-                <ImageView
-                    android:id="@+id/ic_usuario2"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/iv_user"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_nombrecliente2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="@string/esp_nombrecliente"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:paddingStart="8dp"
-                    />
-
-                <RatingBar
-                    android:id="@+id/estrellas2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="1.0"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/comentarios2"
-                android:layout_width="350dp"
-                android:layout_height="145dp"
-                android:background="@color/white"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:padding="10dp"
-                android:layout_marginBottom="20dp"
-                />
-
-            <!-- Cliente 3 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp"
-                >
-
-                <ImageView
-                    android:id="@+id/ic_usuario3"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/iv_user"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_nombrecliente3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="@string/esp_nombrecliente"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:paddingStart="8dp"
-                    />
-
-                <RatingBar
-                    android:id="@+id/estrellas3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="1.0"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/comentarios3"
-                android:layout_width="350dp"
-                android:layout_height="145dp"
-                android:background="@color/white"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:padding="10dp"
-                android:layout_marginBottom="20dp"
-                />
-
-        </LinearLayout>
+            android:gravity="center"
+            />
     </ScrollView>
 </RelativeLayout>

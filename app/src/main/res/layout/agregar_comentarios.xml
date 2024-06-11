@@ -73,6 +73,7 @@
             android:textSize="15sp"
             android:padding="10dp"
             android:layout_marginBottom="20dp"
+            android:gravity="top"
             />
 
         <TextView
