@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_shape"
+    >
+
+    <TextView
+        android:id="@+id/menu_especialista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/header_admin"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:padding="25dp"
+        />
+
+
+    <View
+        android:id="@+id/rectangle1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:onClick="goClients" />
+
+    <TextView
+        android:id="@+id/Perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="130dp"
+        android:text="@string/ver_clientes"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ico_user1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/logo_persona"
+        android:contentDescription="@string/titulo_perfil" />
+
+    <ImageView
+        android:id="@+id/despliege1"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="135dp"
+        android:src="@drawable/flecha_desplegable"
+        android:contentDescription="@string/despliege" />
+
+    <View
+        android:id="@+id/rectangle2"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/rectangle1"
+        android:onClick="goSpecialists"/>
+
+    <TextView
+        android:id="@+id/myservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/ver_especialistas"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Perfil"/>
+
+    <ImageView
+        android:id="@+id/ico_user2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="47dp"
+        android:src="@drawable/logo_inge"
+        android:layout_below="@+id/ico_user1"
+        android:contentDescription="@string/despliege" />
+
+    <ImageView
+        android:id="@+id/despliege2"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege1"
+        android:contentDescription="@string/despliege" />
+
+    <View
+        android:id="@+id/rectangle3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/rectangle2"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:onClick="goRequests" />
+
+    <TextView
+        android:id="@+id/Nombre3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/solicitudes"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/myservice"/>
+
+    <ImageView
+        android:id="@+id/ico_user3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_rut"
+        android:layout_below="@+id/ico_user2"
+        android:contentDescription="@string/cerrar_sesion" />
+
+    <ImageView
+        android:id="@+id/despliege3"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege2"
+        android:contentDescription="@string/despliege" />
+
+    <View
+        android:id="@+id/rectangle4"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/rectangle3"
+        android:onClick="outSession"/>
+
+    <TextView
+        android:id="@+id/Nombre4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/cerrar_sesion"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Nombre3"/>
+
+    <ImageView
+        android:id="@+id/ico_user4"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logout"
+        android:layout_below="@+id/ico_user3" />
+
+    <ImageView
+        android:id="@+id/despliege4"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege3" />
+
+</RelativeLayout>

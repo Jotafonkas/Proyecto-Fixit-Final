@@ -90,8 +90,10 @@
     <!-- Strings Ayuda -->
     <string name="txt_contactanos">Contáctanos</string>
     <string name="numero_de_contacto">+56 9 347 096 35</string>
-    <string name="txt_correo">fixit@gmail.com</string>
+    <string name="txt_correo">fixitoficial2024@gmail.com</string>
     <string name="servicios_a_domicilio">Servicios a Domicilio</string>
+    <string name="btn_llamar">Llamar</string>
+    <string name="btn_contactar_correo">Contactar por correo</string>
     <string name="fixit_tittle">Fixit</string>
     <string name="txt_slogan_help">Te conectamos con los especialistas que necesitas.</string>
 
@@ -162,6 +164,23 @@
     <string name="publicarcomentario">Publicar comentario</string>
     <string name="calificar"><u>Calificar: </u></string>
     <string name="anadir_new_comment">Nuevo comentario: </string>
+
+    <!-- Strings Menu Admin -->
+    <string name="header_admin">Menú Admin</string>
+    <string name="ver_clientes">Lista de clientes</string>
+    <string name="ver_especialistas">Lista de especialistas</string>
+    <string name="solicitudes">Solicitudes</string>
+
+    <!-- Strings Lista de Clientes Admin -->
+    <string name="titulo_lista_clientes">Lista de clientes</string>
+    <string name="titulo_menu">Menú</string>
+    <string name="nombredelcliente"><u>Nombre y Apellido: </u></string>
+
+    <!-- Strings Perfil de Clientes Admin -->
+    <string name="titulo_perfil_clientes">Perfil Cliente</string>
+    <string name="btn_eliminar_foto_cliente">Eliminar Foto</string>
+    <string name="btn_eliminar_cliente">Eliminar Cliente</string>
+    <string name="btn_bloquear_cliente">Bloquear Cliente</string>
 
 
 </resources>

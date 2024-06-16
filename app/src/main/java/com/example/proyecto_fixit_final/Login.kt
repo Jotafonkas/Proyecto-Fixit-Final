@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto_fixit_final.Admin.MenuAdmin
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,7 +58,7 @@ class Login : AppCompatActivity() {
                     if (user?.isEmailVerified == true) {
                         user?.let {
                             val uid = it.uid
-                            verificarRolUsuario(uid)
+                            verificarRolUsuario(uid, correo, pass)
                         }
                     } else {
                         // El correo no está verificado, mostrar mensaje de error en ventana emergente
@@ -82,7 +83,30 @@ class Login : AppCompatActivity() {
     }
 
     // Verificar rol de usuario en Firestore
-    private fun verificarRolUsuario(uid: String) {
+    private fun verificarRolUsuario(uid: String, correo: String, pass: String) {
+        // Verificar si el usuario es un admin
+        val adminRef = firestore.collection("admin").document("admin_credentials")
+        adminRef.get().addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                val adminEmail = document.getString("email")
+                val adminPassword = document.getString("password")
+                if (correo == adminEmail && pass == adminPassword) {
+                    // Usuario es un admin
+                    val intent = Intent(this, MenuAdmin::class.java)
+                    intent.putExtra("uid", uid)
+                    startActivity(intent)
+                    finish()
+                    return@addOnSuccessListener
+                }
+            }
+            // Si no es admin, verificar si es especialista o cliente
+            verificarEspecialistaOCliente(uid)
+        }.addOnFailureListener { e ->
+            Toast.makeText(this, "Error al obtener los datos del usuario: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+    // Verificar si el usuario es un especialista o un cliente
+    private fun verificarEspecialistaOCliente(uid: String) {
         val especialistasRef = firestore.collection("especialistas").document(uid)
         especialistasRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
@@ -117,3 +141,4 @@ class Login : AppCompatActivity() {
         super.onBackPressed()
     }
 }
+

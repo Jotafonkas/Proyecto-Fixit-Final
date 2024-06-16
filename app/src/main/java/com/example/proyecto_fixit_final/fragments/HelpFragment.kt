@@ -40,7 +40,7 @@ class HelpFragment : Fragment() {
     fun correoEnviar(view: View) {
         // Crear un intent para iniciar la aplicación de correo electrónico con la dirección deseada
         val intent = Intent(Intent.ACTION_SENDTO)
-        intent.data = Uri.parse("mailto:fixit@gmail.com")
+        intent.data = Uri.parse("mailto:fixitoficial2024@gmail.com")
         startActivity(intent)
     }
 }
