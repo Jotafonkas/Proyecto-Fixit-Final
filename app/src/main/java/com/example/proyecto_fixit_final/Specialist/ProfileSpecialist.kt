@@ -1,6 +1,7 @@
 package com.example.proyecto_fixit_final.Specialist
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -30,6 +31,7 @@ class ProfileSpecialist : AppCompatActivity() {
     private lateinit var edNombre: EditText
     private lateinit var edProfesion: EditText
     private lateinit var edTelefono: EditText
+    private lateinit var edCiudad: EditText // Nueva variable para la ciudad
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var imgperfil: ImageView
@@ -42,34 +44,40 @@ class ProfileSpecialist : AppCompatActivity() {
     private lateinit var btnEditRut: ImageButton
     private lateinit var btnEditTelefono: ImageButton
     private lateinit var btnEditEspecialidad: ImageButton
+    private lateinit var btnEditCiudad: ImageButton // Nuevo botón para editar ciudad
 
-    // Función para cargar la vista de perfil del especialista
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.perfil_especialista)
-        auth = FirebaseAuth.getInstance() // Inicializar Firebase
+        auth = FirebaseAuth.getInstance() // Inicializar Firebase Auth
         firestore = Firebase.firestore  // Inicializar Firestore
-        edCorreo = findViewById(R.id.edCorreo) // Obtener el campo de correo
-        edRut = findViewById(R.id.edRut) // Obtener el campo de RUT
-        edNombre = findViewById(R.id.edNombre) // Obtener el campo de nombre
-        edProfesion = findViewById(R.id.edEspecialidad) // Obtener el campo de especialidad
-        edTelefono = findViewById(R.id.edTelefono) // Obtener el campo de teléfono
-        imgperfil = findViewById(R.id.imgPerfilEspecialista) // Obtener la imagen de perfil
-        btnUpload = findViewById(R.id.btnFoto) // Obtener el botón de subir foto
-        btnDelete = findViewById(R.id.btnEliminar) // Obtener el botón de eliminar foto
-        btnSave = findViewById(R.id.btnGuardarPerfilEspecialista) // Obtener el botón de guardar perfil
         storage = FirebaseStorage.getInstance() // Inicializar Firebase Storage
         storageReference = storage.reference // Inicializar la referencia de Storage
-        btnEditNombre = findViewById(R.id.btnEditNombre) // Obtener el botón de editar nombre
-        btnEditRut = findViewById(R.id.btnEditRut) // Obtener el botón de editar RUT
-        btnEditTelefono = findViewById(R.id.btnEditTelefono) // Obtener el botón de editar teléfono
-        btnEditEspecialidad = findViewById(R.id.btnEditEspecialidad) // Obtener el botón de editar especialidad
+
+        edCorreo = findViewById(R.id.edCorreo)
+        edRut = findViewById(R.id.edRut)
+        edNombre = findViewById(R.id.edNombre)
+        edProfesion = findViewById(R.id.edEspecialidad)
+        edTelefono = findViewById(R.id.edTelefono)
+        edCiudad = findViewById(R.id.edCiudad) // Inicializar el campo de ciudad
+        imgperfil = findViewById(R.id.imgPerfilEspecialista)
+        btnUpload = findViewById(R.id.btnFoto)
+        btnDelete = findViewById(R.id.btnEliminar)
+        btnSave = findViewById(R.id.btnGuardarPerfilEspecialista)
+        btnEditNombre = findViewById(R.id.btnEditNombre)
+        btnEditRut = findViewById(R.id.btnEditRut)
+        btnEditTelefono = findViewById(R.id.btnEditTelefono)
+        btnEditEspecialidad = findViewById(R.id.btnEditEspecialidad)
+        btnEditCiudad = findViewById(R.id.btnEditCiudad) // Inicializar el botón de editar ciudad
 
         loadProfileImage(auth.currentUser?.uid)
 
         btnUpload.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, 123)
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png", "image/webp"))
+            }
+            startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), REQUEST_CODE_SELECT_IMAGE)
         }
 
         btnDelete.setOnClickListener {
@@ -104,6 +112,12 @@ class ProfileSpecialist : AppCompatActivity() {
             edProfesion.requestFocus()
         }
 
+        btnEditCiudad.setOnClickListener {
+            edCiudad.isFocusableInTouchMode = true
+            edCiudad.isFocusable = true
+            edCiudad.requestFocus()
+        }
+
         // Recibir el correo pasado desde HomeActivity
         val correo = intent.getStringExtra("correo")
 
@@ -115,33 +129,38 @@ class ProfileSpecialist : AppCompatActivity() {
         }
     }
 
-    // Función para cargar la imagen de perfil
     private fun loadProfileImage(uid: String?) {
-        storageReference.child("images/$uid.jpg").downloadUrl.addOnSuccessListener {
-            Picasso.get().load(it).into(imgperfil)
-        }.addOnFailureListener {
-            Toast.makeText(this, "Error al cargar la imagen.", Toast.LENGTH_LONG).show()
+        val extensions = listOf("jpg", "jpeg", "png", "webp")
+        extensions.forEach { ext ->
+            storageReference.child("images/$uid.$ext").downloadUrl.addOnSuccessListener {
+                Picasso.get().load(it).into(imgperfil)
+                return@addOnSuccessListener
+            }.addOnFailureListener {
+                // Continue checking other extensions
+            }
         }
     }
 
-    // Función para eliminar la imagen de perfil
     private fun deleteProfileImage(uid: String?) {
-        storageReference.child("images/$uid.jpg").delete().addOnSuccessListener {
-            imgperfil.setImageDrawable(null)
-            Toast.makeText(this, "Imagen eliminada con éxito.", Toast.LENGTH_LONG).show()
-        }.addOnFailureListener {
-            Toast.makeText(this, "Error al eliminar la imagen.", Toast.LENGTH_LONG).show()
+        val extensions = listOf("jpg", "jpeg", "png", "webp")
+        extensions.forEach { ext ->
+            storageReference.child("images/$uid.$ext").delete().addOnSuccessListener {
+                imgperfil.setImageDrawable(null)
+                Toast.makeText(this, "Imagen eliminada con éxito.", Toast.LENGTH_LONG).show()
+                return@addOnSuccessListener
+            }.addOnFailureListener {
+                // Continue checking other extensions
+            }
         }
     }
 
-    // Función para cargar la imagen de perfil
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 123 && resultCode == RESULT_OK && data != null && data.data != null) {
+        if (requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK && data != null && data.data != null) {
             val filePath = data.data
-            val ref = storage.reference.child("images/${auth.currentUser?.uid}.jpg")
-            ref.putFile(filePath!!).addOnSuccessListener {
+            val ref = storage.reference.child("images/${auth.currentUser?.uid}.${getFileExtension(filePath!!)}")
+            ref.putFile(filePath).addOnSuccessListener {
                 Toast.makeText(this, "Imagen cargada con éxito.", Toast.LENGTH_LONG).show()
                 loadProfileImage(auth.currentUser?.uid)
             }.addOnFailureListener {
@@ -150,12 +169,16 @@ class ProfileSpecialist : AppCompatActivity() {
         }
     }
 
-    // Función para actualizar los datos del usuario
+    private fun getFileExtension(uri: Uri): String? {
+        return contentResolver.getType(uri)?.substringAfterLast('/')
+    }
+
     private fun updateUserData(uid: String?) {
         val nombre = edNombre.text.toString()
         val rut = edRut.text.toString()
         val profesion = edProfesion.text.toString()
         val telefono = edTelefono.text.toString()
+        val ciudad = edCiudad.text.toString() // Obtener el texto de la ciudad
 
         // Validaciones
         if (nombre.isEmpty()) {
@@ -197,12 +220,19 @@ class ProfileSpecialist : AppCompatActivity() {
             edTelefono.error = "El teléfono debe ser un número de 9 dígitos"
             return
         }
+
+        if (ciudad.isEmpty() || !ciudad.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$"))) {
+            edCiudad.error = "Ingrese su ciudad (solo letras)"
+            return
+        }
+
         // Actualizar los datos del usuario en Firestore
         val userUpdates: MutableMap<String, Any> = hashMapOf(
             "nombre" to nombre,
             "rut" to rut,
             "profesion" to profesion,
-            "telefono" to telefono
+            "telefono" to telefono,
+            "ciudad" to ciudad // Actualizar la ciudad en Firestore
         )
 
         firestore.collection("especialistas").document(uid!!)
@@ -216,12 +246,10 @@ class ProfileSpecialist : AppCompatActivity() {
     }
 
     // Función para volver al menú
-    //funcion para volver atras
     fun backMenu(view: View) {
         super.onBackPressed()
     }
 
-    // Función para obtener y mostrar los datos del usuario
     private fun fetchAndDisplayData(uid: String) {
         firestore.collection("especialistas").document(uid).get()
             .addOnSuccessListener { document ->
@@ -231,12 +259,14 @@ class ProfileSpecialist : AppCompatActivity() {
                     val rut = document.getString("rut")
                     val profesion = document.getString("profesion")
                     val telefono = document.getString("telefono")
+                    val ciudad = document.getString("ciudad") // Obtener la ciudad
                     val imageUrl = document.getString("imageUrl")
                     edNombre.setText(nombre)
                     edCorreo.setText(correo)
                     edRut.setText(rut)
                     edProfesion.setText(profesion)
                     edTelefono.setText(telefono)
+                    edCiudad.setText(ciudad) // Mostrar la ciudad
                     if (!imageUrl.isNullOrEmpty()) {
                         Picasso.get().load(imageUrl).into(imgperfil)
                     }
@@ -250,5 +280,9 @@ class ProfileSpecialist : AppCompatActivity() {
                 Toast.makeText(this, "Error al obtener el usuario: ${e.message}", Toast.LENGTH_LONG).show()
                 Log.d("ProfileSpecialist", "Error al obtener el usuario: ${e.message}")
             }
+    }
+
+    companion object {
+        private const val REQUEST_CODE_SELECT_IMAGE = 123
     }
 }

@@ -44,9 +44,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageServiceSpecialist"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:layout_gravity="top|start"
             android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/perfil_especialista"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
             android:layout_marginTop="30dp"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="45dp"
             android:layout_marginEnd="30dp"
             />
 
@@ -91,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/containerimgrating"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Nombre y Apellido"
         android:textColor="@color/black"
         android:textSize="20sp"

@@ -107,9 +107,10 @@
                         android:id="@+id/edNombre_especialista"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:paddingStart="40dp"
                         android:background="@drawable/image_rectangle1"
                         android:inputType="text"
+                        android:hint="Ej: Tomás Pérez"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,6 +179,39 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/txtCiudad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Ciudad:"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/menu"
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:startIconDrawable="@drawable/location_city_24"
+                    android:hint="Ciudad">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:background="@drawable/round_border_city_menu"
+                        android:id="@+id/autoCompleteTextView"
+                        android:paddingStart="40dp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
                     android:id="@+id/txtTelefono"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -235,9 +269,10 @@
                         android:id="@+id/edEspecialidad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:paddingStart="40dp"
                         android:background="@drawable/image_rectangle1"
                         android:inputType="text"
+                        android:hint="Carpintero"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 

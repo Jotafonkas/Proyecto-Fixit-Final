@@ -221,6 +221,55 @@
                     />
 
                 <TextView
+                    android:id="@+id/txtCiudad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Ciudad:"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"/>
+
+                <LinearLayout
+                    android:layout_width="347dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ciudad_especialista_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:startIconDrawable="@drawable/location_city_24">
+
+                        <EditText
+                            android:id="@+id/edCiudad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:paddingTop="15dp"
+                            android:background="@drawable/image_rectangle1"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/btnEditCiudad"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/image_pencil"
+                        android:background="?attr/selectableItemBackgroundBorderless"/>
+                </LinearLayout>
+
+                <TextView
                     android:id="@+id/txtTelefono"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

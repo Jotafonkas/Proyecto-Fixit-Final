@@ -12,8 +12,9 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Especialistas"
+        android:text="Servicios"
         android:textSize="30sp"
+        android:layout_marginBottom="-15dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:background="@color/header"
@@ -31,12 +32,62 @@
         android:onClick="backMenu"
         />
 
+    <!-- ChipGroup -->
+    <LinearLayout
+        android:id="@+id/filters_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/header"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filtros"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_ciudad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:text="Ciudad"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:text="Nombre"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_precio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:text="Precio"/>
+
+        </com.google.android.material.chip.ChipGroup>
+    </LinearLayout>
+
     <!-- RecyclerView para las cards de especialistas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_specialists"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header"
+        android:layout_below="@id/filters_container"
         android:background="@color/white"
         android:padding="10dp"/>
 </RelativeLayout>

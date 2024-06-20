@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFEFECEC"/> <!-- Color de fondo transparente -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFEFECEC"/>
+    <corners android:radius="50dp"/>
+</shape>

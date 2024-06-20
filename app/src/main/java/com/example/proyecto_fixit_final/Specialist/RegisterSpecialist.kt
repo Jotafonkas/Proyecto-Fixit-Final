@@ -9,16 +9,11 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.Login
 import com.example.proyecto_fixit_final.R
-import com.example.proyecto_fixit_final.SelectUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,10 +21,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
-@Suppress("DEPRECATION")
 class RegisterSpecialist : AppCompatActivity() {
 
-    // Declarar las variables del layout
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
@@ -43,6 +36,7 @@ class RegisterSpecialist : AppCompatActivity() {
     private lateinit var correoEsp: EditText
     private lateinit var telefonoEsp: EditText
     private lateinit var profesionEsp: EditText
+    private lateinit var ciudadEsp: AutoCompleteTextView
     private lateinit var passEsp: EditText
     private lateinit var pass2Esp: EditText
     private lateinit var loaderDialog: Dialog
@@ -56,7 +50,6 @@ class RegisterSpecialist : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         storage = Firebase.storage
 
-        // Declarar las variables del layout
         btnRegistro = findViewById(R.id.btnRegistrarse_especialista)
         btnFoto = findViewById(R.id.btnFoto)
         btnEliminar = findViewById(R.id.btnEliminar)
@@ -67,10 +60,20 @@ class RegisterSpecialist : AppCompatActivity() {
         correoEsp = findViewById(R.id.edCorreo_especialista)
         telefonoEsp = findViewById(R.id.edTelefono_especialista)
         profesionEsp = findViewById(R.id.edEspecialidad)
+        ciudadEsp = findViewById(R.id.autoCompleteTextView)
         passEsp = findViewById(R.id.edContraseña_especialista)
         pass2Esp = findViewById(R.id.edConfirmaContraseña_especialista)
 
         setupLoader()
+
+        // Configurar el menú desplegable para la ciudad
+        val cities = resources.getStringArray(R.array.simple_items)
+        val adapter = ArrayAdapter(this, R.layout.list_item, cities)
+        ciudadEsp.setAdapter(adapter)
+
+        ciudadEsp.setOnClickListener {
+            ciudadEsp.showDropDown()
+        }
 
         btnRegistro.setOnClickListener {
             // Obtener datos del registro
@@ -79,6 +82,7 @@ class RegisterSpecialist : AppCompatActivity() {
             val correo: String = correoEsp.text.toString()
             val telefono: String = telefonoEsp.text.toString()
             val profesion: String = profesionEsp.text.toString()
+            val ciudad: String = ciudadEsp.text.toString()
             val pass: String = passEsp.text.toString()
             val pass2: String = pass2Esp.text.toString()
 
@@ -108,14 +112,19 @@ class RegisterSpecialist : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (ciudad.isEmpty()) {
+                ciudadEsp.error = "Seleccione su ciudad"
+                return@setOnClickListener
+            }
+
             var isPasswordValid = true
 
-            if (pass.isEmpty() || !pass.matches(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,])(?=\\S+$).{6,}$"))) {
+            if (pass.isEmpty() || !pass.matches(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,_*])(?=\\S+$).{6,}$"))) {
                 passEsp.error = "Ingrese su contraseña (al menos 6 caracteres, 1 número, 1 letra minúscula, 1 letra mayúscula y 1 carácter especial)"
                 isPasswordValid = false
             }
 
-            if (pass2.isEmpty() || !pass2.matches(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,])(?=\\S+$).{6,}$"))) {
+            if (pass2.isEmpty() || !pass2.matches(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,_*])(?=\\S+$).{6,}$"))) {
                 pass2Esp.error = "Repita su contraseña (al menos 6 caracteres, 1 número, 1 letra minúscula, 1 letra mayúscula y 1 carácter especial)"
                 isPasswordValid = false
             }
@@ -140,7 +149,7 @@ class RegisterSpecialist : AppCompatActivity() {
 
                     if (pass == pass2) {
                         showLoader()
-                        registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, pass)
+                        registrarNuevoUsuario(nombre, rut, correo, telefono, profesion, ciudad, pass)
                     } else {
                         pass2Esp.error = "Las contraseñas no coinciden"
                         Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
@@ -153,8 +162,11 @@ class RegisterSpecialist : AppCompatActivity() {
         }
 
         btnFoto.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE)
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png", "image/webp"))
+            }
+            startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), REQUEST_CODE_SELECT_IMAGE)
         }
 
         btnEliminar.setOnClickListener {
@@ -170,7 +182,7 @@ class RegisterSpecialist : AppCompatActivity() {
             startActivityForResult(Intent.createChooser(intent, "Seleccionar PDF"), REQUEST_CODE_SELECT_PDF)
         }
     }
-    //setear loader
+
     private fun setupLoader() {
         loaderDialog = Dialog(this)
         loaderDialog.setContentView(R.layout.loader_registro)
@@ -181,13 +193,13 @@ class RegisterSpecialist : AppCompatActivity() {
         )
         loaderDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
-    //mostrar loader
+
     private fun showLoader() {
         if (!loaderDialog.isShowing) {
             loaderDialog.show()
         }
     }
-    //esconder loader
+
     private fun hideLoader() {
         if (loaderDialog.isShowing) {
             loaderDialog.dismiss()
@@ -220,7 +232,6 @@ class RegisterSpecialist : AppCompatActivity() {
         private const val REQUEST_CODE_SELECT_PDF = 1001
     }
 
-    // Método para validar si el RUT está repetido
     private fun validarRut(rut: String, callback: (Boolean) -> Unit) {
         firestore.collection("especialistas")
             .whereEqualTo("rut", rut)
@@ -231,13 +242,11 @@ class RegisterSpecialist : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 hideLoader()
                 Log.e("RegisterSpecialist", "Error al validar el RUT: ${exception.message}", exception)
-                // Manejar el error apropiadamente
                 callback(false)
             }
     }
 
-    // Método para registrar un nuevo usuario en Firebase Auth
-    private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, profesion: String, pass: String) {
+    private fun registrarNuevoUsuario(nombre: String, rut: String, correo: String, telefono: String, profesion: String, ciudad: String, pass: String) {
         auth.createUserWithEmailAndPassword(correo, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -246,7 +255,7 @@ class RegisterSpecialist : AppCompatActivity() {
                         if (verificationTask.isSuccessful) {
                             user.let {
                                 if (selectedImageUri != null) {
-                                    uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion)
+                                    uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion, ciudad)
                                 }
                             }
                         } else {
@@ -261,6 +270,63 @@ class RegisterSpecialist : AppCompatActivity() {
             }
     }
 
+    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, ciudad: String) {
+        val ref = storage.reference.child("images/$uid.jpg")
+        val uploadTask = ref.putFile(selectedImageUri!!)
+
+        uploadTask.addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener { uri ->
+                if (selectedPdfUri != null) {
+                    uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, ciudad, uri.toString())
+                } else {
+                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, ciudad, uri.toString(), null)
+                }
+            }
+        }.addOnFailureListener { e ->
+            Log.e("RegisterSpecialist", "Error al subir imagen", e)
+            Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun uploadPdfToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, ciudad: String, imageUrl: String) {
+        val ref = storage.reference.child("pdfs/$uid.pdf")
+        val uploadTask = ref.putFile(selectedPdfUri!!)
+
+        uploadTask.addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener { uri ->
+                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, ciudad, imageUrl, uri.toString())
+            }
+        }.addOnFailureListener { e ->
+            Log.e("RegisterSpecialist", "Error al subir PDF", e)
+            Toast.makeText(this, "Error al subir PDF: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, ciudad: String, imageUrl: String?, pdfUrl: String?) {
+        val user = hashMapOf(
+            "nombre" to nombre,
+            "rut" to rut,
+            "correo" to correo,
+            "telefono" to telefono,
+            "profesion" to profesion,
+            "ciudad" to ciudad,
+            "imageUrl" to imageUrl,
+            "pdfUrl" to pdfUrl
+        )
+
+        firestore.collection("especialistas").document(uid)
+            .set(user)
+            .addOnSuccessListener {
+                hideLoader()
+                showVerificationDialog(correo)
+            }
+            .addOnFailureListener { e ->
+                hideLoader()
+                Log.e("RegisterSpecialist", "Error al guardar datos adicionales del usuario", e)
+                Toast.makeText(this, "Error al guardar datos adicionales del usuario: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
     private fun showVerificationDialog(email: String?) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Correo de verificación enviado")
@@ -272,74 +338,12 @@ class RegisterSpecialist : AppCompatActivity() {
         dialog.show()
     }
 
-    // Método para subir la imagen al almacenamiento de Firebase
-    private fun uploadImageToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String) {
-        val ref = storage.reference.child("images/$uid.jpg")
-        val uploadTask = ref.putFile(selectedImageUri!!)
-
-        uploadTask.addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener { uri ->
-                if (selectedPdfUri != null) {
-                    uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, uri.toString())
-                } else {
-                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, uri.toString(), null)
-                }
-            }
-        }.addOnFailureListener { e ->
-            Log.e("RegisterSpecialist", "Error al subir imagen", e)
-            Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    // Método para subir el PDF al almacenamiento de Firebase
-    private fun uploadPdfToStorage(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?) {
-        val ref = storage.reference.child("pdfs/$uid.pdf")
-        val uploadTask = ref.putFile(selectedPdfUri!!)
-
-        uploadTask.addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener { uri ->
-                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, imageUrl, uri.toString())
-            }
-        }.addOnFailureListener { e ->
-            Log.e("RegisterSpecialist", "Error al subir PDF", e)
-            Toast.makeText(this, "Error al subir PDF: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    // Método para guardar datos adicionales del usuario
-    private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, profesion: String, imageUrl: String?, pdfUrl: String?) {
-        val user = hashMapOf(
-            "nombre" to nombre,
-            "rut" to rut,
-            "correo" to correo,
-            "telefono" to telefono,
-            "profesion" to profesion,
-            "imageUrl" to imageUrl,
-            "pdfUrl" to pdfUrl
-        )
-        // Referencia a la subcolección "especialistas" directamente dentro de la colección "especialistas"
-        val specialistRef = firestore.collection("especialistas").document(uid)
-
-        specialistRef.set(user)
-            .addOnSuccessListener {
-                Log.d("RegisterSpecialist", "DocumentSnapshot successfully written!")
-                showVerificationDialog(user["correo"] as String)
-                hideLoader()
-
-            }
-            .addOnFailureListener { e ->
-                Log.w("RegisterSpecialist", "Error writing document", e)
-            }
-    }
-
-    // Método para navegar a la pantalla de inicio de sesión
     private fun navigateToLogin() {
-        val intent = Intent(this, Login::class.java) // Asegúrate de que esta es la clase correcta para la pantalla de inicio de sesión
+        val intent = Intent(this, Login::class.java)
         startActivity(intent)
         finish()
     }
 
-    // Función para volver atrás
     fun backMenu(view: View) {
         super.onBackPressed()
     }

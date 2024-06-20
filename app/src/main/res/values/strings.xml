@@ -182,5 +182,41 @@
     <string name="btn_eliminar_cliente">Eliminar Cliente</string>
     <string name="btn_bloquear_cliente">Bloquear Cliente</string>
 
+    <!-- Strings Lista de Ciudades -->
+    <string-array name="simple_items">
+        <item>Cauquenes</item>
+        <item>Chanco</item>
+        <item>Colbun</item>
+        <item>Constitución</item>
+        <item>Curanipe</item>
+        <item>Curicó</item>
+        <item>Curepto</item>
+        <item>Empedrado</item>
+        <item>Hualañé</item>
+        <item>Licanten</item>
+        <item>Linares</item>
+        <item>Longaví</item>
+        <item>Maule</item>
+        <item>Molina</item>
+        <item>Nirivilo</item>
+        <item>Paninavida</item>
+        <item>Parral</item>
+        <item>Pelarco</item>
+        <item>Pelluhue</item>
+        <item>Pencahue</item>
+        <item>Rauco</item>
+        <item>Retiro</item>
+        <item>Río Claro</item>
+        <item>Romeral</item>
+        <item>Sagrada Familia</item>
+        <item>San Clemente</item>
+        <item>San Javier de Loncomilla</item>
+        <item>San Rafael</item>
+        <item>Talca</item>
+        <item>Teno</item>
+        <item>Vichuquén</item>
+        <item>Villa Alegre</item>
+        <item>Yerbas Buenas</item>
+    </string-array>
 
 </resources>

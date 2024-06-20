@@ -33,14 +33,16 @@ class SpecialistAdapter(private val specialists: List<Specialist>) : RecyclerVie
         private val imageView: ShapeableImageView = itemView.findViewById(R.id.imagen_especialista)
         private val nameView: TextView = itemView.findViewById(R.id.ednombreEspecialista)
         private val serviceNameView: TextView = itemView.findViewById(R.id.edNombreServicio)
-        private val categoryView: TextView = itemView.findViewById(R.id.edcategoria_especialista)
+        private val cityView: TextView = itemView.findViewById(R.id.edCiudadServicio)
+        private val priceView: TextView = itemView.findViewById(R.id.edprecio_servicio)
         private val cardView: MaterialCardView = itemView.findViewById(R.id.card_specialist)
 
         // Vincula los datos de un especialista con la vista
         fun bind(specialist: Specialist) {
             nameView.text = specialist.nombre
             serviceNameView.text = specialist.nombreServicio
-            categoryView.text = specialist.categoria
+            cityView.text = specialist.ciudad
+            priceView.text = specialist.precio
             if (specialist.imageUrl.isNotEmpty()) {
                 Picasso.get().load(specialist.imageUrl).into(imageView)
             }
@@ -52,6 +54,8 @@ class SpecialistAdapter(private val specialists: List<Specialist>) : RecyclerVie
                     putExtra("nombre", specialist.nombre)
                     putExtra("nombreServicio", specialist.nombreServicio)
                     putExtra("categoria", specialist.categoria)
+                    putExtra("ciudad", specialist.ciudad)
+                    putExtra("precio", specialist.precio)
                     putExtra("imageUrl", specialist.imageUrl)
                 }
                 context.startActivity(intent)

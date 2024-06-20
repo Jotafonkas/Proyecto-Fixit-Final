@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
     android:gravity="center">
 
     <!-- Card del servicio -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_specialist"
-        android:layout_width="350dp"
-        android:layout_height="210dp"
+        android:layout_width="420dp"
+        android:layout_height="270dp"
         android:layout_gravity="center"
+        android:layout_margin="5dp"
         app:cardBackgroundColor="@color/color_servicio"
         app:shapeAppearanceOverlay="@style/radius5"
         android:onClick="goDetail">
@@ -24,9 +24,9 @@
             <!-- Imagen del servicio -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imagen_especialista"
-                android:layout_width="120dp"
-                android:layout_height="170dp"
-                android:layout_margin="15dp"
+                android:layout_width="145dp"
+                android:layout_height="240dp"
+                android:layout_margin="10dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/radius5"
                 android:layout_alignParentStart="true"
@@ -37,11 +37,11 @@
                 android:id="@+id/txt_nombreEspecialista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre y Apellido"
+                android:text="Nombre Especialista"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="5dp"
                 android:layout_toEndOf="@id/imagen_especialista"
                 android:layout_marginTop="10dp"
                 />
@@ -54,9 +54,11 @@
                 android:layout_toEndOf="@id/imagen_especialista"
                 android:layout_below="@id/txt_nombreEspecialista"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="8dp"
                 android:textColor="@color/white"
-                android:background="@color/color_servicio2"
+                android:layout_marginStart="5dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/rounded_border"
                 />
 
             <!-- Nombre del servicio -->
@@ -68,7 +70,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="5dp"
                 android:layout_below="@id/ednombreEspecialista"
                 android:layout_toEndOf="@id/imagen_especialista"
                 android:layout_marginTop="3dp"
@@ -82,37 +84,71 @@
                 android:layout_toEndOf="@id/imagen_especialista"
                 android:layout_below="@id/txt_nombreServicio"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="8dp"
+                android:paddingStart="10dp"
+                android:layout_marginStart="5dp"
+                android:paddingTop="5dp"
                 android:textColor="@color/white"
-                android:background="@color/color_servicio2"
+                android:background="@drawable/rounded_border"
                 />
 
-            <!-- Descripción del servicio -->
+            <!-- Nombre del servicio -->
             <TextView
-                android:id="@+id/txt_categoria_especialista"
+                android:id="@+id/txt_CiudadServicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Categoría"
+                android:text="Ciudad"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="5dp"
                 android:layout_below="@id/edNombreServicio"
+                android:layout_toEndOf="@id/imagen_especialista"
+                android:layout_marginTop="3dp"
+                />
+
+            <!-- Campo de texto para el nombre del servicio -->
+            <TextView
+                android:id="@+id/edCiudadServicio"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@id/imagen_especialista"
+                android:layout_below="@id/txt_CiudadServicio"
+                android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_border"
+                />
+
+            <!-- Categoría del servicio -->
+            <TextView
+                android:id="@+id/txt_precio_servicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_below="@id/edCiudadServicio"
                 android:layout_toEndOf="@id/imagen_especialista"
                 android:layout_marginTop="3dp"
                 />
 
             <!-- Campo de texto para la descripción del servicio -->
             <TextView
-                android:id="@+id/edcategoria_especialista"
+                android:id="@+id/edprecio_servicio"
                 android:layout_width="180dp"
                 android:layout_height="30dp"
                 android:layout_toEndOf="@id/imagen_especialista"
-                android:layout_below="@id/edNombreServicio"
+                android:layout_below="@id/edCiudadServicio"
                 android:layout_marginTop="30dp"
-                android:layout_marginStart="8dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/white"
-                android:background="@color/color_servicio2"
+                android:background="@drawable/rounded_border"
                 />
 
         </RelativeLayout>
