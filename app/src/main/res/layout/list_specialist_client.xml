@@ -1,6 +1,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:background="@color/color_navbar_home"
     android:layout_width="match_parent"
@@ -32,62 +33,57 @@
         android:onClick="backMenu"
         />
 
-    <!-- ChipGroup -->
-    <LinearLayout
-        android:id="@+id/filters_container"
+    <!-- Campo de búsqueda -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_filter_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@id/header"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        app:startIconDrawable="@drawable/ic_editar">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Buscar..."
+            android:padding="10dp"
+            android:paddingStart="42dp"
+            android:inputType="text"
+            android:background="@drawable/image_rectangle1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Spinner para seleccionar la ciudad -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/city_spinner_layout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_filter_layout"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
+        app:boxBackgroundMode="filled"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusBottomEnd="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/city_spinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Filtros"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_marginBottom="5dp"/>
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_ciudad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:text="Ciudad"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:text="Nombre"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_precio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:text="Precio"/>
-
-        </com.google.android.material.chip.ChipGroup>
-    </LinearLayout>
+            android:padding="10dp"
+            android:background="@drawable/image_rectangle1"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- RecyclerView para las cards de especialistas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_specialists"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/filters_container"
+        android:layout_below="@id/city_spinner_layout"
         android:background="@color/white"
         android:padding="10dp"/>
 </RelativeLayout>

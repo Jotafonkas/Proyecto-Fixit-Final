@@ -1,7 +1,13 @@
 package com.example.proyecto_fixit_final.Specialist
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,102 +15,78 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.modelos.Specialist
 import com.example.proyecto_fixit_final.adapters.SpecialistAdapter
-import com.google.android.material.chip.ChipGroup
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ViewSpecialistsByCategory : AppCompatActivity() {
 
     private lateinit var categoryName: String
     private lateinit var recyclerView: RecyclerView
-    private val specialistsList = mutableListOf<Specialist>() // Lista de especialistas que se mostrarán en el RecyclerView
+    private lateinit var searchFilter: EditText
+    private lateinit var citySpinner: Spinner
+    private val specialistsList = mutableListOf<Specialist>()
     private lateinit var adapter: SpecialistAdapter
-    private lateinit var chipGroup: ChipGroup
-    private var isPriceAscending = true
-    private var isCityAscending = true
-    private var isNameAscending = true
-    private var lastCheckedChipId: Int? = null
+    private val displayedList = mutableListOf<Specialist>()
+    private var selectedCity: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_specialist_client)
 
-        categoryName = intent.getStringExtra("categoryName") ?: "" // Obtenemos el nombre de la categoría seleccionada
-        recyclerView = findViewById(R.id.recycler_view_specialists) // Referenciamos el RecyclerView en el layout
-        chipGroup = findViewById(R.id.chip_group) // Referenciamos el ChipGroup
+        categoryName = intent.getStringExtra("categoryName") ?: ""
+        recyclerView = findViewById(R.id.recycler_view_specialists)
+        searchFilter = findViewById(R.id.search_filter)
+        citySpinner = findViewById(R.id.city_spinner)
 
-        recyclerView.layoutManager = LinearLayoutManager(this) // Configuramos el RecyclerView con un LinearLayoutManager
-        adapter = SpecialistAdapter(specialistsList) // Creamos un adaptador para el RecyclerView
-        recyclerView.adapter = adapter // Asignamos el adaptador al RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = SpecialistAdapter(displayedList)
+        recyclerView.adapter = adapter
 
+        setupCitySpinner()
         loadSpecialistsByCategory()
-        setupChipGroupListener()
-    }
 
-    private fun setupChipGroupListener() {
-        chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            if (checkedIds.isEmpty()) return@setOnCheckedStateChangeListener
+        searchFilter.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            val checkedId = checkedIds.firstOrNull()
-            if (checkedId == lastCheckedChipId) {
-                // Si se presiona el mismo chip dos veces, alternar el orden
-                when (checkedId) {
-                    R.id.chip_precio -> isPriceAscending = !isPriceAscending
-                    R.id.chip_ciudad -> isCityAscending = !isCityAscending
-                    R.id.chip_nombre -> isNameAscending = !isNameAscending
-                }
-            } else {
-                // Si se presiona un chip diferente, restablecer las banderas
-                isPriceAscending = true
-                isCityAscending = true
-                isNameAscending = true
-                lastCheckedChipId = checkedId
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filter()
             }
 
-            when (checkedId) {
-                R.id.chip_ciudad -> sortSpecialistsByCity()
-                R.id.chip_nombre -> sortSpecialistsByName()
-                R.id.chip_precio -> sortSpecialistsByPrice()
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                selectedCity = if (position == 0) null else parent.getItemAtPosition(position) as String
+                filter()
             }
 
-            adapter.notifyDataSetChanged() // Notificamos al adaptador que los datos han cambiado
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                selectedCity = null
+                filter()
+            }
         }
     }
 
-    private fun sortSpecialistsByCity() {
-        if (isCityAscending) {
-            specialistsList.sortBy { it.ciudad.lowercase() }
-        } else {
-            specialistsList.sortByDescending { it.ciudad.lowercase() }
-        }
+    private fun setupCitySpinner() {
+        val cities = resources.getStringArray(R.array.simple_items)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cities)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        citySpinner.adapter = adapter
     }
 
-    private fun sortSpecialistsByName() {
-        if (isNameAscending) {
-            specialistsList.sortBy { it.nombre.lowercase() }
-        } else {
-            specialistsList.sortByDescending { it.nombre.lowercase() }
-        }
-    }
-
-    private fun sortSpecialistsByPrice() {
-        if (isPriceAscending) {
-            specialistsList.sortBy { it.precio.toDoubleOrNull() ?: 0.0 }
-        } else {
-            specialistsList.sortByDescending { it.precio.toDoubleOrNull() ?: 0.0 }
-        }
-    }
-
-    // Cargamos los especialistas de la categoría seleccionada
     private fun loadSpecialistsByCategory() {
         val db = FirebaseFirestore.getInstance()
 
         db.collection("especialistas")
             .get()
             .addOnSuccessListener { specialistDocuments ->
+                specialistsList.clear()
+                displayedList.clear()
+
                 for (specialistDocument in specialistDocuments) {
                     val nombre = specialistDocument.getString("nombre") ?: ""
                     val imageUrl = specialistDocument.getString("imageUrl") ?: ""
-                    val ciudad = specialistDocument.getString("ciudad") ?: "" // Obtener la ciudad del especialista
+                    val ciudad = specialistDocument.getString("ciudad") ?: ""
                     val specialistUid = specialistDocument.id
 
                     db.collection("especialistas")
@@ -116,7 +98,7 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
                             for (serviceDocument in serviceDocuments) {
                                 val nombreServicio = serviceDocument.getString("nombreServicio") ?: ""
                                 val categoria = serviceDocument.getString("categoria") ?: ""
-                                val precio = serviceDocument.getString("precio") ?: "" // Obtener el precio del servicio
+                                val precio = serviceDocument.getString("precio") ?: ""
 
                                 val specialist = Specialist(
                                     uid = specialistUid,
@@ -124,12 +106,18 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
                                     imageUrl = imageUrl,
                                     nombreServicio = nombreServicio,
                                     categoria = categoria,
-                                    ciudad = ciudad, // Añadir la ciudad al objeto Specialist
-                                    precio = precio // Añadir el precio al objeto Specialist
+                                    ciudad = ciudad,
+                                    precio = precio
                                 )
-                                specialistsList.add(specialist)
+
+                                if (!specialistsList.contains(specialist)) {
+                                    specialistsList.add(specialist)
+                                }
                             }
-                            adapter.notifyDataSetChanged() // Notificamos al adaptador después de añadir todos los especialistas
+
+                            displayedList.clear()
+                            displayedList.addAll(specialistsList)
+                            adapter.notifyDataSetChanged()
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(this, "Error al cargar los servicios: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -141,7 +129,25 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
             }
     }
 
-    // Función para volver al menú
+    private fun filter() {
+        val searchText = searchFilter.text.toString().toLowerCase()
+        displayedList.clear()
+
+        for (specialist in specialistsList) {
+            val matchesSearchText = specialist.nombre.contains(searchText, true) ||
+                    specialist.nombreServicio.contains(searchText, true) ||
+                    specialist.categoria.contains(searchText, true) ||
+                    specialist.precio.contains(searchText, true)
+
+            val matchesCity = selectedCity == null || specialist.ciudad.equals(selectedCity, true)
+
+            if (matchesSearchText && matchesCity) {
+                displayedList.add(specialist)
+            }
+        }
+        adapter.notifyDataSetChanged()
+    }
+
     fun backMenu(view: View) {
         super.onBackPressed()
     }

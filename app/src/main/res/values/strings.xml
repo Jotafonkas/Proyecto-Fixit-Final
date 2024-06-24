@@ -184,6 +184,7 @@
 
     <!-- Strings Lista de Ciudades -->
     <string-array name="simple_items">
+        <item>Seleccionar ciudad</item> <!-- Opción de deselección -->
         <item>Cauquenes</item>
         <item>Chanco</item>
         <item>Colbun</item>
