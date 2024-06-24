@@ -73,4 +73,7 @@ class ClientsComments : AppCompatActivity() {
         intent.putExtra("servicioId", servicioId)
         startActivity(intent)
     }
+    fun backDetailService(view: View) {
+        onBackPressed()
+    }
 }

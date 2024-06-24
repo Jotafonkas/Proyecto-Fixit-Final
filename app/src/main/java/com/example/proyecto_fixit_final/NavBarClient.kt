@@ -73,4 +73,9 @@ class NavBarClient : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        moveTaskToBack(true) // Mover la aplicación al segundo plano en lugar de cerrarla
+    }
 }

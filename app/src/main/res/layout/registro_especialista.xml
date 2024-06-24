@@ -142,7 +142,7 @@
                         android:paddingStart="40dp"
                         android:background="@drawable/image_rectangle1"
                         android:hint="@string/ej_123456789"
-                        android:inputType="number"/>
+                        android:inputType="text"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 

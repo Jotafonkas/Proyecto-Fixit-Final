@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +20,12 @@ class Login : AppCompatActivity() {
     private lateinit var btn_login_specialist: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var forgot_password: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
+
         // Inicializar Firebase Auth y Firestore
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -30,6 +33,7 @@ class Login : AppCompatActivity() {
         Email_Login_Specialist = findViewById(R.id.Email_Login_Specialist) // Obtener el correo
         password_login_specialist = findViewById(R.id.password_login_specialist) // Obtener la contraseña
         btn_login_specialist = findViewById(R.id.btn_login_specialist) // Obtener el botón
+        forgot_password = findViewById(R.id.forgot_password) // Obtener el TextView
 
         // login en click al botón
         btn_login_specialist.setOnClickListener {
@@ -46,6 +50,16 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
             iniciarSesion(correo, pass)
+        }
+
+        // Recuperar contraseña en click al TextView
+        forgot_password.setOnClickListener {
+            val correo = Email_Login_Specialist.text.toString()
+            if (correo.isEmpty()) {
+                Email_Login_Specialist.error = "Ingrese un correo"
+                return@setOnClickListener
+            }
+            recuperarContrasena(correo)
         }
     }
 
@@ -105,6 +119,7 @@ class Login : AppCompatActivity() {
             Toast.makeText(this, "Error al obtener los datos del usuario: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
+
     // Verificar si el usuario es un especialista o un cliente
     private fun verificarEspecialistaOCliente(uid: String) {
         val especialistasRef = firestore.collection("especialistas").document(uid)
@@ -137,8 +152,19 @@ class Login : AppCompatActivity() {
         }
     }
 
+    // Recuperar contraseña
+    private fun recuperarContrasena(correo: String) {
+        auth.sendPasswordResetEmail(correo)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Correo para restablecer contraseña enviado a $correo", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Error al enviar correo: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
     fun backMenu(view: View) {
         super.onBackPressed()
     }
 }
-

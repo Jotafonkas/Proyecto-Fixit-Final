@@ -65,6 +65,16 @@ class RegisterSpecialist : AppCompatActivity() {
         pass2Esp = findViewById(R.id.edConfirmaContraseña_especialista)
 
         setupLoader()
+        // Formatear el RUT al perder el foco
+        rutEsp.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val rut = rutEsp.text.toString()
+                if (rut.isNotEmpty()) {
+                    val rutFormateado = formatRut(rut)
+                    rutEsp.setText(rutFormateado)
+                }
+            }
+        }
 
         // Configurar el menú desplegable para la ciudad
         val cities = resources.getStringArray(R.array.simple_items)
@@ -92,8 +102,8 @@ class RegisterSpecialist : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (rut.isEmpty() || rut.length > 9 || rut.toDoubleOrNull() == null) {
-                rutEsp.error = "Ingrese su rut (solo números)"
+            if (validarRutKE(rut)) {
+                rutEsp.error = "Ingrese un RUT válido"
                 return@setOnClickListener
             }
 
@@ -336,6 +346,59 @@ class RegisterSpecialist : AppCompatActivity() {
         }
         val dialog = builder.create()
         dialog.show()
+    }
+    private fun validarRutKE(rut: String): Boolean {
+        val rutLimpio = rut.replace(".", "").replace("-", "")
+        if (rutLimpio.length < 8 || rutLimpio.length > 9) {
+            return false
+        }
+
+        val cuerpo = rutLimpio.dropLast(1)
+        val dv = rutLimpio.last()
+
+        return calcularDV(cuerpo) == dv
+    }
+
+    // Método para calcular el dígito verificador (DV) de un RUT
+    private fun calcularDV(rut: String): Char {
+        var suma = 0
+        var multiplo = 2
+
+        rut.reversed().forEach { c ->
+            suma += c.toString().toInt() * multiplo
+            if (multiplo == 7) {
+                multiplo = 2
+            } else {
+                multiplo++
+            }
+        }
+
+        val dvEsperado = 11 - (suma % 11)
+        return when (dvEsperado) {
+            11 -> '0'
+            10 -> 'K'
+            else -> dvEsperado.toString().first()
+        }
+    }
+
+    private fun formatRut(rut: String): String {
+        val cleanedRut = rut.replace(Regex("[^0-9kK]"), "")
+        val rutPart = cleanedRut.substring(0, cleanedRut.length - 1)
+        val dvPart = cleanedRut.last().toUpperCase()
+
+        val formattedRutPart = StringBuilder()
+        var count = 0
+
+        for (i in rutPart.length - 1 downTo 0) {
+            formattedRutPart.append(rutPart[i])
+            count++
+            if (count == 3 && i != 0) {
+                formattedRutPart.append(".")
+                count = 0
+            }
+        }
+
+        return formattedRutPart.reverse().toString() + "-" + dvPart
     }
 
     private fun navigateToLogin() {

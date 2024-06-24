@@ -181,6 +181,7 @@
     <string name="btn_eliminar_foto_cliente">Eliminar Foto</string>
     <string name="btn_eliminar_cliente">Eliminar Cliente</string>
     <string name="btn_bloquear_cliente">Bloquear Cliente</string>
+    <string name="olvido_su_contrase_a">¿Olvido su contraseña?</string>
 
     <!-- Strings Lista de Ciudades -->
     <string-array name="simple_items">

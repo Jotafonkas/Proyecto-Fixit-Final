@@ -68,6 +68,16 @@ class RegisterClient: AppCompatActivity() {
         passCliente = findViewById(R.id.edContraseña_cliente)
         pass2Cliente = findViewById(R.id.edConfirmaContraseña_cliente)
 
+        // Formatear el RUT al perder el foco
+        rutCliente.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val rut = rutCliente.text.toString()
+                if (rut.isNotEmpty()) {
+                    val rutFormateado = formatRut(rut)
+                    rutCliente.setText(rutFormateado)
+                }
+            }
+        }
         setupLoader()
 
         btnRegistro.setOnClickListener {
@@ -85,8 +95,8 @@ class RegisterClient: AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (rut.isEmpty() || rut.length > 9 || rut.toDoubleOrNull() == null) {
-                rutCliente.error = "Ingrese su rut ( maximo 9 digitos y solo números)"
+            if(validarRutKC(rut)){
+                rutCliente.error = "Ingrese un rut valido"
                 return@setOnClickListener
             }
 
@@ -252,6 +262,7 @@ class RegisterClient: AppCompatActivity() {
         }
     }
 
+
     // Método para guardar datos adicionales del usuario
     private fun saveAdditionalUserData(uid: String, nombre: String, rut: String, correo: String, telefono: String, imageUrl: String?) {
         val user = hashMapOf(
@@ -273,6 +284,46 @@ class RegisterClient: AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w("RegisterClient", "Error writing document", e)
             }
+    }
+    // Método para validar el formato del RUT
+    private fun validarRutKC(rut: String): Boolean {
+        val rutLimpio = rut.replace(".", "").replace("-", "")
+        if (rutLimpio.length < 8 || rutLimpio.length > 9) {
+            return false
+        }
+
+        val cuerpo = rutLimpio.dropLast(1)
+        val dv = rutLimpio.last()
+
+        return calcularDV(cuerpo) == dv
+    }
+
+    // Método para calcular el dígito verificador (DV) de un RUT
+    private fun calcularDV(rut: String): Char {
+        var suma = 0
+        var multiplo = 2
+
+        rut.reversed().forEach { c ->
+            suma += c.toString().toInt() * multiplo
+            if (multiplo == 7) {
+                multiplo = 2
+            } else {
+                multiplo++
+            }
+        }
+
+        val dvEsperado = 11 - (suma % 11)
+        return when (dvEsperado) {
+            11 -> '0'
+            10 -> 'K'
+            else -> dvEsperado.toString().first()
+        }
+    }
+    // Método para formatear el RUT (con puntos y guión)
+    private fun formatRut(rut: String): String {
+        val cuerpo = rut.dropLast(1)
+        val dv = rut.last()
+        return cuerpo.reversed().chunked(3).joinToString(".").reversed() + "-$dv"
     }
 
     // Método para navegar a la pantalla principal

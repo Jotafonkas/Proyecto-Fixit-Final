@@ -67,4 +67,7 @@ class DetailServiceClient : AppCompatActivity() {
         intent.putExtra("servicioId", servicioId)
         startActivity(intent)
     }
+    fun backServices(view: View) {
+        onBackPressed()
+    }
 }
