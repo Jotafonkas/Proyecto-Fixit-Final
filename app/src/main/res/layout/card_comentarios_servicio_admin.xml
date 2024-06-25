@@ -1,0 +1,86 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_comment"
+        android:layout_width="350dp"
+        android:layout_height="190dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            >
+
+            <!-- Botón de eliminar comentario -->
+            <ImageButton
+                android:id="@+id/btnEliminarComentario"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/eliminar"
+                android:contentDescription="@string/eliminar_servicio"
+                android:layout_toEndOf="@id/estrellas"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
+                app:tint="@color/red2" />
+
+            <ImageView
+                android:id="@+id/ic_usuario"
+                android:layout_width="24dp"
+                android:layout_height="21dp"
+                android:src="@drawable/iv_user"
+                />
+
+            <TextView
+                android:id="@+id/txt_nombrecliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/nombrecliente"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_toEndOf="@id/ic_usuario"
+                android:padding="2dp"
+                />
+
+            <RatingBar
+                android:id="@+id/estrellas"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_toEndOf="@+id/ic_usuario"
+                android:numStars="5"
+                android:stepSize="1.0" />
+
+            <TextView
+                android:id="@+id/comentarios"
+                android:layout_width="350dp"
+                android:layout_height="145dp"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/ic_usuario"
+                />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

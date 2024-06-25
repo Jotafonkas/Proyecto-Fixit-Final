@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/olvido_su_contrase_a"
+        android:text="@string/olvido_su_contrasena"
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"

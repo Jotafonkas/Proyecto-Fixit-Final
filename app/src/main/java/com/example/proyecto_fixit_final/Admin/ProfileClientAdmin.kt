@@ -54,10 +54,10 @@ class ProfileClientAdmin : AppCompatActivity() {
         }
 
         // Configurar botones para volver al sitio indicado
-        val flechaVolverMenu: ImageView = findViewById(R.id.flechavolver_listaclientes)
+        val flechaVolver: ImageView = findViewById(R.id.flechavolver_listaclientes)
         val menu: TextView = findViewById(R.id.menu)
 
-        flechaVolverMenu.setOnClickListener { irAListaClientes() }
+        flechaVolver.setOnClickListener { irAListaClientes() }
         menu.setOnClickListener { irAlMenu() }
 
         // Configurar acción de eliminar foto con confirmación

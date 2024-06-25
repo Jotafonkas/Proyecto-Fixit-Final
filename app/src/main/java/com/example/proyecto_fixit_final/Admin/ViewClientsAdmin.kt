@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -59,10 +58,10 @@ class ViewClientsAdmin : AppCompatActivity() {
 
     private fun addClientCard(nombre: String?, imageUrl: String?, clientId: String, rut: String?, correo: String?, telefono: String?) {
         val inflater = LayoutInflater.from(this)
-        val card = inflater.inflate(R.layout.card_lista_clientes, clientesContainer, false)
+        val card = inflater.inflate(R.layout.card_lista_usuarios_admin, clientesContainer, false)
 
-        val nombreCliente: TextView = card.findViewById(R.id.nombreCliente)
-        val imagenCliente: ImageView = card.findViewById(R.id.imagen_cliente)
+        val nombreCliente: TextView = card.findViewById(R.id.nombreUsuario)
+        val imagenCliente: ImageView = card.findViewById(R.id.imagen_usuario)
 
         nombreCliente.text = nombre
 

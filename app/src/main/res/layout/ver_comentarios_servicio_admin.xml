@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,24 +13,20 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
+        android:text="@string/titulo_comentarios_clientes"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:background="@color/header"
         android:gravity="center"
         android:padding="25dp"
-        android:text="@string/titulo_lista_clientes"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
+        />
     <ImageView
-        android:id="@+id/flechavolver_menu"
+        android:id="@+id/flechavolver_detalleservicioadmin"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="38dp"
         android:src="@drawable/ic_flechavolver"
         />
 
@@ -39,10 +36,9 @@
         android:layout_height="match_parent"
         android:layout_below="@id/header"
         android:layout_above="@+id/menu"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
         <LinearLayout
-            android:id="@+id/clientes_container"
+            android:id="@+id/comentarios_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -63,5 +59,4 @@
         android:padding="25dp"
         android:layout_alignParentBottom="true"
         />
-
 </RelativeLayout>

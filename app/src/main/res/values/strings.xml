@@ -31,11 +31,12 @@
     <string name="button1_selection_user">ESPECIALISTA</string>
     <string name="button2_selection_user">CLIENTE</string>
 
-    <!-- Strings Login Especialista -->
+    <!-- Strings Login -->
     <string name="login_specialist_title">Iniciar Sesión</string>
     <string name="email_login_specialist"><u>Correo Electrónico: </u></string>
     <string name="password_login_specialist"><u>Contraseña: </u></string>
     <string name="btnLogin">Ingresar</string>
+    <string name="olvido_su_contrasena">¿Olvidó su contraseña?</string>
 
     <!-- Strings Home -->
     <string name="titulo_home">Bienvenid@ a Fixit</string>
@@ -59,6 +60,7 @@
     <string name="nombre_y_apellido"><u>Nombre y Apellido: </u></string>
     <string name="rut"><u>Rut: </u></string>
     <string name="correo_electr_nico"><u>Correo Electrónico: </u></string>
+    <string name="ciudad_especialista"><u>Ciudad: </u></string>
     <string name="tel_fono"><u>Teléfono: </u></string>
     <string name="profesi_n_especialidad"><u>Profesión/Especialidad: </u></string>
     <string name="guardar_cambios">Guardar Cambios</string>
@@ -72,11 +74,11 @@
     <string name="precio_del_servicio"><u>Precio del Servicio: </u></string>
     <string name="btn_cargar_imgservicio_especialista">Cargar</string>
     <string name="btn_publicar_servicio">Publicar Servicio</string>
-    <string name="imagenes_de_tus_trabajos"><u>Imagen de tu trabajo: </u></string>
+    <string name="imagenes_de_tus_trabajos"><u>Imágen de tu trabajo: </u></string>
 
     <!-- Strings Categorias Especialista -->
     <string name="titulo_categorias">Categorías de servicios</string>
-    <string name="texto_categorias">Ofrece entre una de las categorias disponibles:</string>
+    <string name="texto_categorias">Ofrece entre una de las categorías disponibles:</string>
     <string name="txt_limpieza">Limpieza</string>
     <string name="txt_transporte">Transporte</string>
     <string name="txt_electricidad">Electricidad</string>
@@ -110,6 +112,7 @@
     <string name="btncontactar">Contactar</string>
     <string name="btncomentarios">Comentarios</string>
     <string name="eliminar_servicio">X</string>
+    <string name="btn_eliminar_servicio_admin">Eliminar Servicio</string>
 
     <!-- Strings Comentarios Especialista -->
     <string name="titulo_comentarios_especialista">Comentarios</string>
@@ -124,10 +127,10 @@
     <string name="txt_ayuda_especialista"><u>¿Necesitas Ayuda?</u></string>
 
     <!-- Strings Menu Especialista -->
-    <string name="volver_atras">volver atras</string>
+    <string name="volver_atras">volver atrás</string>
     <string name="ofrecer_nuevo_servicio">Ofrecer nuevo servicio</string>
     <string name="mis_servicios">Mis servicios</string>
-    <string name="cerrar_sesion">Cerrar sesion</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
     <string name="despliege">despliege</string>
     <string name="menu_cambiar_contrase_a">Cambiar Contraseña</string>
 
@@ -171,17 +174,22 @@
     <string name="ver_especialistas">Lista de especialistas</string>
     <string name="solicitudes">Solicitudes</string>
 
-    <!-- Strings Lista de Clientes Admin -->
-    <string name="titulo_lista_clientes">Lista de clientes</string>
+    <!-- Strings Lista de Clientes y Especialistas Admin -->
+    <string name="titulo_lista_clientes">Lista de Clientes</string>
+    <string name="titulo_lista_especialistas">Lista de Especialistas</string>
     <string name="titulo_menu">Menú</string>
-    <string name="nombredelcliente"><u>Nombre y Apellido: </u></string>
+    <string name="nombredelUsuario"><u>Nombre y Apellido: </u></string>
 
-    <!-- Strings Perfil de Clientes Admin -->
+    <!-- Strings Perfil de Clientes y Especialistas Admin -->
+    <string name="btn_eliminar_foto">Eliminar Foto</string>
     <string name="titulo_perfil_clientes">Perfil Cliente</string>
-    <string name="btn_eliminar_foto_cliente">Eliminar Foto</string>
     <string name="btn_eliminar_cliente">Eliminar Cliente</string>
-    <string name="btn_bloquear_cliente">Bloquear Cliente</string>
-    <string name="olvido_su_contrase_a">¿Olvido su contraseña?</string>
+    <string name="titulo_perfil_especialistas">Perfil Especialista</string>
+    <string name="txt_servicios_especialista"><u>Servicios del especialista: </u></string>
+    <string name="btn_servicios_especialista">Ver Servicios</string>
+    <string name="txt_antecedentes_especialista"><u>Certificado de Antecedentes: </u></string>
+    <string name="btn_antecedentes_especialista">Descargar Certificado</string>
+    <string name="btn_eliminar_especialista">Eliminar Especialista</string>
 
     <!-- Strings Lista de Ciudades -->
     <string-array name="simple_items">

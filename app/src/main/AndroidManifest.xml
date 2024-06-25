@@ -23,7 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
-
         <!-- Specialist Activities -->
         <activity
             android:name=".Specialist.ChangePasswordSpecialist"
@@ -71,20 +70,32 @@
             android:name=".Client.ClientsComments"
             android:exported="false" /> <!-- Admin Activities -->
         <activity
-            android:name=".Admin.ViewSpecialistsAdmin"
+            android:name=".Admin.MenuAdmin"
             android:exported="false" />
         <activity
             android:name=".Admin.ViewClientsAdmin"
             android:exported="false" />
         <activity
-            android:name=".Admin.RequestsAdmin"
-            android:exported="false" />
-        <activity
             android:name=".Admin.ProfileClientAdmin"
             android:exported="false" />
         <activity
-            android:name=".Admin.MenuAdmin"
-            android:exported="false" /><!-- Common Activities -->
+            android:name=".Admin.ViewSpecialistsAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.ProfileSpecialistAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.ViewSpecialistServicesAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.ViewSpecialistDetailServiceAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.ViewCommentsServiceAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.RequestsAdmin"
+            android:exported="false" /> <!-- Common Activities -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
