@@ -52,7 +52,7 @@
             android:name=".Specialist.DetailServiceClient"
             android:exported="true" />
         <activity
-            android:name=".Specialist.PersonalProfileSpecialist"
+            android:name=".Client.PersonalProfileSpecialist"
             android:exported="true" /> <!-- Client Activities -->
         <activity
             android:name=".Client.ChangePasswordClient"

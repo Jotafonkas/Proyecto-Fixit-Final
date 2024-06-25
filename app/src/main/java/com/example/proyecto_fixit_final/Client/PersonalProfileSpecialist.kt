@@ -1,4 +1,4 @@
-package com.example.proyecto_fixit_final.Specialist
+package com.example.proyecto_fixit_final.Client
 
 import android.content.Intent
 import android.net.Uri
@@ -58,6 +58,8 @@ class PersonalProfileSpecialist : AppCompatActivity() {
                     ciudadTextView.text = ciudad
                     if (imageUrl.isNotEmpty()) {
                         Picasso.get().load(imageUrl).into(imageView)
+                    }else{
+                        imageView.setImageResource(R.drawable.imagen_login) // Imagen predeterminada
                     }
                 } else {
                     // Manejar el caso en que el documento no existe
@@ -80,5 +82,9 @@ class PersonalProfileSpecialist : AppCompatActivity() {
         } ?: run {
             // Manejar el caso en que el teléfono sea nulo
         }
+    }
+
+    fun backMenu(view: View) {
+        onBackPressed()
     }
 }

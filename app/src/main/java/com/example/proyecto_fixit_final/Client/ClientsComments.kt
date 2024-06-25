@@ -72,8 +72,9 @@ class ClientsComments : AppCompatActivity() {
         intent.putExtra("especialistaId", especialistaId)
         intent.putExtra("servicioId", servicioId)
         startActivity(intent)
+        finish()
     }
     fun backDetailService(view: View) {
-        onBackPressed()
+        finish()
     }
 }

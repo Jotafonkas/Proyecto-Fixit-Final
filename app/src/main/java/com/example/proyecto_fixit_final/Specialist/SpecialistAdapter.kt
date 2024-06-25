@@ -45,6 +45,8 @@ class SpecialistAdapter(private val specialists: List<Specialist>) : RecyclerVie
             priceView.text = specialist.precio
             if (specialist.imageUrl.isNotEmpty()) {
                 Picasso.get().load(specialist.imageUrl).into(imageView)
+            }else{
+                imageView.setImageResource(R.drawable.imagen_login) // Imagen predeterminada
             }
 
             cardView.setOnClickListener {

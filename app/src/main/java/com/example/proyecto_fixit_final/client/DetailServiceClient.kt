@@ -9,6 +9,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import android.widget.TextView
 import com.example.proyecto_fixit_final.Client.ClientsComments
+import com.example.proyecto_fixit_final.Client.PersonalProfileSpecialist
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DetailServiceClient : AppCompatActivity() {
@@ -23,7 +24,7 @@ class DetailServiceClient : AppCompatActivity() {
         especialistaId = intent.getStringExtra("uid") ?: ""
         val nombre = intent.getStringExtra("nombre") ?: ""
         val nombreServicio = intent.getStringExtra("nombreServicio") ?: ""
-        val imageUrl = intent.getStringExtra("imageUrl") ?: ""
+
 
         // Referencias a las vistas
         val imageView: ShapeableImageView = findViewById(R.id.imageServiceSpecialist)
@@ -34,9 +35,8 @@ class DetailServiceClient : AppCompatActivity() {
         // Asignación de datos a las vistas
         nombreTextView.text = nombre
         nombreServicioTextView.text = nombreServicio
-        Picasso.get().load(imageUrl).into(imageView)
 
-        // Obtener la descripción del servicio desde Firebase
+        // Obtener la descripción y la imagen del servicio desde Firebase
         val db = FirebaseFirestore.getInstance()
         db.collection("especialistas")
             .document(especialistaId)
@@ -47,6 +47,8 @@ class DetailServiceClient : AppCompatActivity() {
                 for (serviceDocument in serviceDocuments) {
                     val descripcionServicio = serviceDocument.getString("descripcionServicio") ?: ""
                     descripcionTextView.text = descripcionServicio
+                    val imagenUrl = serviceDocument.getString("imagenUrl") ?: ""
+                    Picasso.get().load(imagenUrl).into(imageView)
                     servicioId = serviceDocument.id // Guardar el ID del servicio
                 }
             }
