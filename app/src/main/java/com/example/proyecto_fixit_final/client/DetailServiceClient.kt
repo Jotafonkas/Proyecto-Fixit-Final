@@ -3,18 +3,26 @@ package com.example.proyecto_fixit_final.Specialist
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import android.widget.TextView
+import android.widget.Toast
 import com.example.proyecto_fixit_final.Client.ClientsComments
 import com.example.proyecto_fixit_final.Client.PersonalProfileSpecialist
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.UUID
 
 class DetailServiceClient : AppCompatActivity() {
     private lateinit var especialistaId: String
     private lateinit var servicioId: String
+    private lateinit var nombreEspecialista: String
+    private lateinit var nombreServicio: String
+    private lateinit var clienteId: String
+    private lateinit var nombreCliente: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,18 +30,27 @@ class DetailServiceClient : AppCompatActivity() {
 
         // Obtención de datos pasados por el intent
         especialistaId = intent.getStringExtra("uid") ?: ""
-        val nombre = intent.getStringExtra("nombre") ?: ""
-        val nombreServicio = intent.getStringExtra("nombreServicio") ?: ""
+        nombreEspecialista = intent.getStringExtra("nombre") ?: ""
+        nombreServicio = intent.getStringExtra("nombreServicio") ?: ""
 
+        //se obtiene el id del usuario navegando
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+        clienteId = currentUser.uid
 
         // Referencias a las vistas
         val imageView: ShapeableImageView = findViewById(R.id.imageServiceSpecialist)
         val nombreTextView: TextView = findViewById(R.id.input_nombre_especialista)
         val nombreServicioTextView: TextView = findViewById(R.id.input_nombre_servicio)
         val descripcionTextView: TextView = findViewById(R.id.input_descripcion_servicio)
+        val btnSolicitud: Button = findViewById(R.id.botonsolicitar)
 
         // Asignación de datos a las vistas
-        nombreTextView.text = nombre
+        nombreTextView.text = nombreEspecialista
         nombreServicioTextView.text = nombreServicio
 
         // Obtener la descripción y la imagen del servicio desde Firebase
@@ -55,6 +72,11 @@ class DetailServiceClient : AppCompatActivity() {
             .addOnFailureListener { e ->
                 descripcionTextView.text = "Error al cargar la descripción: ${e.message}"
             }
+
+        // Configurar el click listener para el botón de solicitud
+        btnSolicitud.setOnClickListener {
+            checkAndSendServiceRequest()
+        }
     }
 
     fun goToProfileSpecialist(view: View) {
@@ -69,7 +91,104 @@ class DetailServiceClient : AppCompatActivity() {
         intent.putExtra("servicioId", servicioId)
         startActivity(intent)
     }
+
     fun backServices(view: View) {
         onBackPressed()
+    }
+
+    private fun checkAndSendServiceRequest() {
+        val db = FirebaseFirestore.getInstance()
+
+        if (servicioId.isBlank() || nombreEspecialista.isBlank() || nombreServicio.isBlank()) {
+            Toast.makeText(this, "Datos incompletos del servicio", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Verificar si ya existe una solicitud para el mismo servicio y cliente
+        db.collection("clientes")
+            .document(clienteId)
+            .collection("SolicitudesPendientes")
+            .whereEqualTo("servicioId", servicioId)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    Toast.makeText(this, "Ya has solicitado este servicio anteriormente", Toast.LENGTH_SHORT).show()
+                } else {
+                    sendServiceRequest()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al verificar solicitudes existentes: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun sendServiceRequest() {
+        val db = FirebaseFirestore.getInstance()
+
+        // Obtener el nombre del cliente desde Firestore
+        db.collection("clientes")
+            .document(clienteId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    nombreCliente = document.getString("nombre") ?: "Cliente Anónimo"
+
+                    // Obtener el nombre del especialista desde Firestore
+                    db.collection("especialistas")
+                        .document(especialistaId)
+                        .get()
+                        .addOnSuccessListener { specialistDocument ->
+                            if (specialistDocument != null && specialistDocument.exists()) {
+                                nombreEspecialista = specialistDocument.getString("nombre") ?: "Especialista Anónimo"
+
+                                val solicitudId = UUID.randomUUID().toString()
+
+                                val solicitud = hashMapOf(
+                                    "id" to solicitudId,
+                                    "clienteId" to clienteId,
+                                    "nombreCliente" to nombreCliente,
+                                    "servicioId" to servicioId,
+                                    "nombreServicio" to nombreServicio,
+                                    "nombreEspecialista" to nombreEspecialista,
+                                    "estado" to "pendiente"
+                                )
+
+                                // Guardar solicitud en la subcolección del cliente
+                                db.collection("clientes")
+                                    .document(clienteId)
+                                    .collection("SolicitudesPendientes")
+                                    .document(solicitudId)  // Usar el ID aleatorio
+                                    .set(solicitud)
+                                    .addOnSuccessListener {
+                                        // Guardar solicitud en la subcolección del especialista
+                                        db.collection("especialistas")
+                                            .document(especialistaId)
+                                            .collection("SolicitudesPendientes")
+                                            .document(solicitudId)  // Usar el ID aleatorio
+                                            .set(solicitud)
+                                            .addOnSuccessListener {
+                                                Toast.makeText(this, "Solicitud enviada con éxito", Toast.LENGTH_SHORT).show()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Toast.makeText(this, "Error al guardar la solicitud en el especialista: ${e.message}", Toast.LENGTH_SHORT).show()
+                                            }
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Error al guardar la solicitud en el cliente: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            } else {
+                                Toast.makeText(this, "Especialista no encontrado", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Error al obtener el especialista: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(this, "Cliente no encontrado", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al obtener el cliente: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
