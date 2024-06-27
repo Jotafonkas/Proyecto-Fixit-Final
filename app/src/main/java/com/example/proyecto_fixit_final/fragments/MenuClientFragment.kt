@@ -12,6 +12,7 @@ import com.example.proyecto_fixit_final.MainActivity
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Client.ProfileClient
 import com.example.proyecto_fixit_final.Client.ChangePasswordClient
+import com.example.proyecto_fixit_final.Client.ServicesHistory
 import com.google.firebase.auth.FirebaseAuth
 
 class MenuClientFragment : Fragment() {
@@ -30,7 +31,8 @@ class MenuClientFragment : Fragment() {
         // Botones en el layout con los ids 'rectangle1', 'rectangle2' y 'rectangle3'
         view.findViewById<View>(R.id.rectangle1).setOnClickListener { openProfileClient() }
         view.findViewById<View>(R.id.rectangle2).setOnClickListener { openCredentialsClient() }
-        view.findViewById<View>(R.id.rectangle3).setOnClickListener { mostrarDialogoConfirmacion() }
+        view.findViewById<View>(R.id.rectangle4).setOnClickListener { mostrarDialogoConfirmacion() }
+        view.findViewById<View>(R.id.rectangle3).setOnClickListener { ServiceHistory() }
     }
 
     // Función para abrir el perfil
@@ -42,6 +44,11 @@ class MenuClientFragment : Fragment() {
     // Función para abrir las credenciales
     fun openCredentialsClient() {
         val intent = Intent(requireActivity(), ChangePasswordClient::class.java)
+        startActivity(intent)
+    }
+    // Función para abrir el Historial de servicios
+    fun ServiceHistory() {
+        val intent = Intent(requireActivity(), ServicesHistory::class.java)
         startActivity(intent)
     }
 

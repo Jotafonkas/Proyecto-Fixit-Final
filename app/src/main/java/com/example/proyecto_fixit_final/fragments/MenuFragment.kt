@@ -13,6 +13,7 @@ import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.ProfileSpecialist
 import com.example.proyecto_fixit_final.Specialist.ChangePasswordSpecialist
 import com.example.proyecto_fixit_final.Specialist.CreateServicesSpecialist
+import com.example.proyecto_fixit_final.Specialist.ServicesRequest
 import com.example.proyecto_fixit_final.Specialist.ViewSpecialistServices
 import com.google.firebase.auth.FirebaseAuth
 
@@ -33,7 +34,8 @@ class MenuFragment : Fragment() {
         view.findViewById<View>(R.id.rectangle1).setOnClickListener { openProfile() }
         view.findViewById<View>(R.id.rectangle4).setOnClickListener { openCredentialsSpecialist() }
         view.findViewById<View>(R.id.rectangle3).setOnClickListener { goServices() }
-        view.findViewById<View>(R.id.rectangle5).setOnClickListener { mostrarDialogoConfirmacion() }
+        view.findViewById<View>(R.id.rectangle5).setOnClickListener { goServicesRequests() }
+        view.findViewById<View>(R.id.rectangle6).setOnClickListener { mostrarDialogoConfirmacion() }
     }
 
     // Función para abrir el perfil
@@ -65,6 +67,17 @@ class MenuFragment : Fragment() {
             startActivity(intent)
         } else {
             Toast.makeText(requireContext(), "Error: Usuario no autenticado.", Toast.LENGTH_SHORT).show()
+        }
+    }
+    //funcion que redigie a las solicitudes de servicio
+    private fun goServicesRequests() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            val intent = Intent(requireActivity(), ServicesRequest::class.java)
+            intent.putExtra("uid", uid)
+            startActivity(intent)
+        } else {
+            Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -109,7 +109,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:layout_below="@+id/rectangle2"
-        android:onClick="outSession"/>
+        android:onClick="ServiceHistory"/>
 
     <TextView
         android:id="@+id/Nombre3"
@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginTop="50dp"
-        android:text="@string/cerrar_sesion"
+        android:text="Historial servicios"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -129,7 +129,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="23dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/logout"
+        android:src="@drawable/ic_category"
         android:layout_below="@+id/ico_user2" />
 
     <ImageView
@@ -140,5 +140,45 @@
         android:layout_marginTop="50dp"
         android:src="@drawable/flecha_desplegable"
         android:layout_below="@+id/despliege2" />
+
+    <View
+        android:id="@+id/rectangle4"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/rectangle3"
+        android:onClick="outSession"/>
+
+    <TextView
+        android:id="@+id/Nombre4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/cerrar_sesion"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Nombre3"/>
+
+    <ImageView
+        android:id="@+id/ico_user4"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logout"
+        android:layout_below="@+id/ico_user3" />
+
+    <ImageView
+        android:id="@+id/despliege4"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/flecha_desplegable"
+        android:layout_below="@+id/despliege3" />
 
 </RelativeLayout>

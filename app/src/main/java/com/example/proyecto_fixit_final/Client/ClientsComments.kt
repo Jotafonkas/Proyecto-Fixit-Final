@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RatingBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
@@ -16,6 +17,7 @@ class ClientsComments : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var especialistaId: String
     private lateinit var servicioId: String
+    private lateinit var loaderLayout: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,10 @@ class ClientsComments : AppCompatActivity() {
         // Obtener especialistaId y servicioId del Intent
         especialistaId = intent.getStringExtra("especialistaId") ?: ""
         servicioId = intent.getStringExtra("servicioId") ?: ""
+
+        // Inicializar loader
+        loaderLayout = findViewById(R.id.loader_layout)
+        showLoader()
 
         loadComments()
     }
@@ -39,6 +45,7 @@ class ClientsComments : AppCompatActivity() {
             }
             .addOnFailureListener {
                 // Manejar errores
+                hideLoader()
             }
     }
 
@@ -65,16 +72,15 @@ class ClientsComments : AppCompatActivity() {
 
             comentariosContainer.addView(view)
         }
+
+        hideLoader()
     }
 
-    fun goNewComment(view: View) {
-        val intent = Intent(this, AddComments::class.java)
-        intent.putExtra("especialistaId", especialistaId)
-        intent.putExtra("servicioId", servicioId)
-        startActivity(intent)
-        finish()
+    private fun showLoader() {
+        loaderLayout.visibility = View.VISIBLE
     }
-    fun backDetailService(view: View) {
-        finish()
+
+    private fun hideLoader() {
+        loaderLayout.visibility = View.GONE
     }
 }

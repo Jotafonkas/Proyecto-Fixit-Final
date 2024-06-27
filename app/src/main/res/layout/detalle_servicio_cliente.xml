@@ -183,7 +183,7 @@
         android:layout_width="196dp"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:layout_below="@+id/descripcion_servicio_layout"
         android:text="@string/btncomentarios"
         android:textSize="18sp"
@@ -203,5 +203,18 @@
         android:textSize="18sp"
         android:includeFontPadding="false"
         android:onClick="goToProfileSpecialist" />
+
+    <Button
+        android:id="@+id/botonsolicitar"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/botonperfilespecialista"
+        android:text="Solicitar"
+        android:textSize="18sp"
+        android:includeFontPadding="false"
+        android:onClick="requestService"
+        />
 
 </RelativeLayout>

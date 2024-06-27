@@ -1,0 +1,119 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center">
+
+    <!-- Card del servicio -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_serviciosH"
+        android:layout_width="350dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/color_servicio"
+        app:shapeAppearanceOverlay="@style/radius5">
+
+        <!-- Contenido del card -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Imagen del servicio -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen_especialistaH"
+                android:layout_width="120dp"
+                android:layout_height="170dp"
+                android:layout_margin="15dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/radius5"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <!-- Nombre del servicio -->
+            <TextView
+                android:id="@+id/txt_nombreEspecialistaH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre Especialista"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/imagen_especialistaH"
+                android:layout_marginTop="10dp"
+                />
+
+            <!-- Campo de texto para el nombre del servicio -->
+            <TextView
+                android:id="@+id/ednombreEspecialistaH"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@id/imagen_especialistaH"
+                android:layout_below="@id/txt_nombreEspecialistaH"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:background="@color/color_servicio2"
+                />
+
+            <!-- Nombre del servicio -->
+            <TextView
+                android:id="@+id/txt_nombreServicioH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del Servicio"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/ednombreEspecialistaH"
+                android:layout_toEndOf="@id/imagen_especialistaH"
+                android:layout_marginTop="3dp"
+                />
+
+            <!-- Campo de texto para el nombre del servicio -->
+            <TextView
+                android:id="@+id/edNombreServicioH"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@id/imagen_especialistaH"
+                android:layout_below="@id/txt_nombreServicioH"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:background="@color/color_servicio2"
+                />
+
+            <!-- Descripción del servicio -->
+            <TextView
+                android:id="@+id/txt_categoria_especialistaH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valor"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/edNombreServicioH"
+                android:layout_toEndOf="@id/imagen_especialistaH"
+                android:layout_marginTop="3dp"
+                />
+
+            <!-- Campo de texto para la descripción del servicio -->
+            <TextView
+                android:id="@+id/edvalor_especialistaH"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@id/imagen_especialistaH"
+                android:layout_below="@id/edNombreServicioH"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:background="@color/color_servicio2"
+                />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

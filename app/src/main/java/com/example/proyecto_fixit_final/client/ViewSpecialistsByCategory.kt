@@ -4,11 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,10 +23,14 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
     private lateinit var adapter: SpecialistAdapter
     private val displayedList = mutableListOf<Specialist>()
     private var selectedCity: String? = null
+    private lateinit var loaderLayout: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_specialist_client)
+
+        loaderLayout = findViewById(R.id.loader_layout)
+        showLoader()
 
         categoryName = intent.getStringExtra("categoryName") ?: ""
         recyclerView = findViewById(R.id.recycler_view_specialists)
@@ -83,6 +83,9 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
                 specialistsList.clear()
                 displayedList.clear()
 
+                val totalSpecialists = specialistDocuments.size()
+                var processedSpecialists = 0
+
                 for (specialistDocument in specialistDocuments) {
                     val nombre = specialistDocument.getString("nombre") ?: ""
                     val imageUrl = specialistDocument.getString("imageUrl") ?: ""
@@ -115,19 +118,33 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
                                 }
                             }
 
-                            displayedList.clear()
-                            displayedList.addAll(specialistsList)
-                            adapter.notifyDataSetChanged()
+                            processedSpecialists++
+                            if (processedSpecialists == totalSpecialists) {
+                                displayedList.clear()
+                                displayedList.addAll(specialistsList)
+                                adapter.notifyDataSetChanged()
+                                hideLoader()
+                            }
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(this, "Error al cargar los servicios: ${e.message}", Toast.LENGTH_SHORT).show()
+                            processedSpecialists++
+                            if (processedSpecialists == totalSpecialists) {
+                                hideLoader()
+                            }
                         }
+                }
+
+                if (totalSpecialists == 0) {
+                    hideLoader()
                 }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al cargar los especialistas: ${e.message}", Toast.LENGTH_SHORT).show()
+                hideLoader()
             }
     }
+
 
     private fun filter() {
         val searchText = searchFilter.text.toString().toLowerCase()
@@ -146,6 +163,14 @@ class ViewSpecialistsByCategory : AppCompatActivity() {
             }
         }
         adapter.notifyDataSetChanged()
+    }
+
+    private fun showLoader() {
+        loaderLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideLoader() {
+        loaderLayout.visibility = View.GONE
     }
 
     fun backMenu(view: View) {
