@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Nombre de la aplicación -->
-    <string name="nombre_app" />
+    <string name="nombre_app">Fixit</string>
 
     <!-- Strings Portada -->
     <string name="titulo_portada">Fixit</string>

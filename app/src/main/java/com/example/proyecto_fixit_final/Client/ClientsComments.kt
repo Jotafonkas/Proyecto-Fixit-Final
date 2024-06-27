@@ -75,6 +75,13 @@ class ClientsComments : AppCompatActivity() {
 
         hideLoader()
     }
+    fun goNewComment(view: View) {
+        val intent = Intent(this, AddComments::class.java)
+        intent.putExtra("especialistaId", especialistaId)
+        intent.putExtra("servicioId", servicioId)
+        startActivity(intent)
+        finish()
+    }
 
     private fun showLoader() {
         loaderLayout.visibility = View.VISIBLE
@@ -83,4 +90,10 @@ class ClientsComments : AppCompatActivity() {
     private fun hideLoader() {
         loaderLayout.visibility = View.GONE
     }
+
+    fun backMenu(view: View) {
+        super.onBackPressed()
+        finish()
+    }
+
 }

@@ -13,6 +13,7 @@ import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Client.ProfileClient
 import com.example.proyecto_fixit_final.Client.ChangePasswordClient
 import com.example.proyecto_fixit_final.Client.ServicesHistory
+import com.example.proyecto_fixit_final.Login
 import com.google.firebase.auth.FirebaseAuth
 
 class MenuClientFragment : Fragment() {
@@ -76,8 +77,9 @@ class MenuClientFragment : Fragment() {
     // Función para cerrar sesión
     private fun cerrarSesion() {
         FirebaseAuth.getInstance().signOut()
-        val intent = Intent(requireActivity(), MainActivity::class.java)
+        val intent = Intent(requireActivity(), Login::class.java)
         startActivity(intent)
+        requireActivity().finish()
         Toast.makeText(requireContext(), "Sesión cerrada exitosamente", Toast.LENGTH_SHORT).show()
     }
 }

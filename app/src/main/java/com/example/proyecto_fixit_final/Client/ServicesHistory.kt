@@ -2,6 +2,7 @@ package com.example.proyecto_fixit_final.Client
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,5 +74,8 @@ class ServicesHistory : AppCompatActivity() {
                 Toast.makeText(this, "Error al cargar los servicios: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Error al cargar los servicios", e)
             }
+    }
+    fun backMenu(view: View) {
+        super.onBackPressed()
     }
 }

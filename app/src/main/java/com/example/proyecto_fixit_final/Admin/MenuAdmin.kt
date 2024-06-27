@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto_fixit_final.Login
 import com.example.proyecto_fixit_final.MainActivity
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.auth.FirebaseAuth
@@ -65,8 +66,9 @@ class MenuAdmin : AppCompatActivity() {
     // Función para cerrar sesión
     private fun cerrarSesion() {
         FirebaseAuth.getInstance().signOut()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, Login::class.java)
         startActivity(intent)
+        finish()
         Toast.makeText(this, "Sesión cerrada exitosamente", Toast.LENGTH_SHORT).show()
     }
 }

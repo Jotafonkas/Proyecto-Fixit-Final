@@ -106,6 +106,7 @@ class Login : AppCompatActivity() {
                 val adminPassword = document.getString("password")
                 if (correo == adminEmail && pass == adminPassword) {
                     // Usuario es un admin
+                    guardarTipoUsuario("admin")
                     val intent = Intent(this, MenuAdmin::class.java)
                     intent.putExtra("uid", uid)
                     startActivity(intent)
@@ -126,6 +127,7 @@ class Login : AppCompatActivity() {
         especialistasRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
                 // Usuario es un especialista
+                guardarTipoUsuario("specialist")
                 val intent = Intent(this, NavBar::class.java)
                 intent.putExtra("uid", uid)
                 startActivity(intent)
@@ -136,6 +138,7 @@ class Login : AppCompatActivity() {
                 clientesRef.get().addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
                         // Usuario es un cliente
+                        guardarTipoUsuario("client")
                         val intent = Intent(this, NavBarClient::class.java)
                         intent.putExtra("uid", uid)
                         startActivity(intent)
@@ -152,14 +155,39 @@ class Login : AppCompatActivity() {
         }
     }
 
+    // Guardar tipo de usuario en SharedPreferences
+    private fun guardarTipoUsuario(tipo: String) {
+        val sharedPref = getSharedPreferences("userPrefs", MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString("userType", tipo)
+            apply()
+        }
+    }
+
     // Recuperar contraseña
     private fun recuperarContrasena(correo: String) {
         auth.sendPasswordResetEmail(correo)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Correo para restablecer contraseña enviado a $correo", Toast.LENGTH_LONG).show()
+                    // Mostrar alerta de éxito
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Correo enviado")
+                    builder.setMessage("Correo para restablecer contraseña enviado a $correo")
+                    builder.setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    val dialog = builder.create()
+                    dialog.show()
                 } else {
-                    Toast.makeText(this, "Error al enviar correo: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                    // Mostrar alerta de error
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Error")
+                    builder.setMessage("Error al enviar correo: ${task.exception?.message}")
+                    builder.setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    val dialog = builder.create()
+                    dialog.show()
                 }
             }
     }
