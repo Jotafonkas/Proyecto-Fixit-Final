@@ -2,8 +2,12 @@ package com.example.proyecto_fixit_final.Admin
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,12 +22,15 @@ class ViewClientsAdmin : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private lateinit var clientesContainer: LinearLayout
+    private lateinit var searchFilter: EditText
+    private val clientesList = mutableListOf<Client>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ver_clientes_admin)
 
         clientesContainer = findViewById(R.id.clientes_container)
+        searchFilter = findViewById(R.id.search_filter)
 
         // Buscar clientes desde Firestore
         buscarClientes()
@@ -34,6 +41,17 @@ class ViewClientsAdmin : AppCompatActivity() {
 
         flechaVolverMenu.setOnClickListener { irAlMenu() }
         menu.setOnClickListener { irAlMenu() }
+
+        // Configurar filtro de búsqueda
+        searchFilter.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filtrarClientes(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun buscarClientes() {
@@ -41,6 +59,7 @@ class ViewClientsAdmin : AppCompatActivity() {
             .get()
             .addOnCompleteListener(OnCompleteListener<QuerySnapshot> { task ->
                 if (task.isSuccessful) {
+                    clientesList.clear()
                     for (document in task.result) {
                         val nombre = document.getString("nombre")
                         val imageUrl = document.getString("imageUrl")
@@ -48,7 +67,11 @@ class ViewClientsAdmin : AppCompatActivity() {
                         val rut = document.getString("rut")
                         val correo = document.getString("correo")
                         val telefono = document.getString("telefono")
-                        addClientCard(nombre, imageUrl, clientId, rut, correo, telefono)
+                        val cliente = Client(nombre, imageUrl, clientId, rut, correo, telefono)
+                        if (!clientesList.contains(cliente)) {
+                            clientesList.add(cliente)
+                            addClientCard(cliente)
+                        }
                     }
                 } else {
                     Log.w("ViewClientsAdmin", "Error al obtener datos del cliente.", task.exception)
@@ -56,42 +79,57 @@ class ViewClientsAdmin : AppCompatActivity() {
             })
     }
 
-    private fun addClientCard(nombre: String?, imageUrl: String?, clientId: String, rut: String?, correo: String?, telefono: String?) {
+    private fun addClientCard(cliente: Client) {
         val inflater = LayoutInflater.from(this)
         val card = inflater.inflate(R.layout.card_lista_usuarios_admin, clientesContainer, false)
 
         val nombreCliente: TextView = card.findViewById(R.id.nombreUsuario)
         val imagenCliente: ImageView = card.findViewById(R.id.imagen_usuario)
 
-        nombreCliente.text = nombre
+        nombreCliente.text = cliente.nombre
 
-        // Verificar si la URL de la imagen ha cambiado
-        if (imageUrl != null && imageUrl.isNotEmpty()) {
-            Picasso.get().load(imageUrl).into(imagenCliente)
+        if (cliente.imageUrl != null && cliente.imageUrl.isNotEmpty()) {
+            Picasso.get().load(cliente.imageUrl).into(imagenCliente)
         } else {
-            // Si no hay imagen, cargar la imagen predeterminada
             imagenCliente.setImageResource(R.drawable.imagen_login)
         }
 
-        // Establecer el listener del card para iniciar ProfileClientAdmin con los datos del cliente
         card.setOnClickListener {
             val intent = Intent(this, ProfileClientAdmin::class.java)
-            intent.putExtra("nombre", nombre)
-            intent.putExtra("imageUrl", imageUrl)
-            intent.putExtra("rut", rut)
-            intent.putExtra("correo", correo)
-            intent.putExtra("telefono", telefono)
-            intent.putExtra("clientId", clientId)
+            intent.putExtra("nombre", cliente.nombre)
+            intent.putExtra("imageUrl", cliente.imageUrl)
+            intent.putExtra("rut", cliente.rut)
+            intent.putExtra("correo", cliente.correo)
+            intent.putExtra("telefono", cliente.telefono)
+            intent.putExtra("clientId", cliente.clientId)
             startActivity(intent)
         }
 
         clientesContainer.addView(card)
     }
 
-    // Función para volver al menú
+    private fun filtrarClientes(query: String) {
+        clientesContainer.removeAllViews()
+        val filteredList = clientesList.filter {
+            it.nombre?.contains(query, true) == true
+        }
+        for (cliente in filteredList) {
+            addClientCard(cliente)
+        }
+    }
+
     private fun irAlMenu() {
         val intent = Intent(this, MenuAdmin::class.java)
         startActivity(intent)
         finish()
     }
+
+    data class Client(
+        val nombre: String?,
+        val imageUrl: String?,
+        val clientId: String,
+        val rut: String?,
+        val correo: String?,
+        val telefono: String?
+    )
 }
