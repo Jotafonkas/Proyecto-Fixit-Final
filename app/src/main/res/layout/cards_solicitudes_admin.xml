@@ -1,0 +1,106 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shapeAppearanceOverlay="@style/radius3"
+    android:layout_margin="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/color_servicio">
+
+        <!-- Imagen solicitud de servicio -->
+        <ImageView
+            android:id="@+id/imageSpecialistSolicitude"
+            android:layout_width="match_parent"
+            android:layout_height="194dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/backgroundapp"
+            android:contentDescription="" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Nombre Solicitud de Servicio -->
+            <TextView
+                android:id="@+id/nameServiceSolicitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/solicitud_de_servicio"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+            <!-- Categoría Solicitud de Servicio -->
+            <TextView
+                android:id="@+id/categorieServiceSolicitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16dp"
+                android:text="@string/categor_a_de_servicio"
+                android:textColor="@color/white"
+                android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+            <!-- Nombre del Especialista -->
+            <TextView
+                android:id="@+id/nameSpecialistSolicitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@string/nombre_del_especialista"
+                android:textColor="@color/white" />
+
+            <!-- Precio -->
+            <TextView
+                android:id="@+id/priceSpecialistSolicitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:text="@string/precio"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:layout_gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/reviewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:text="@string/aceptar"
+                style="?attr/borderlessButtonStyle"
+                android:backgroundTint="#1B9873"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rejectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rechazar"
+                android:textSize="16sp"
+                style="?attr/borderlessButtonStyle"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

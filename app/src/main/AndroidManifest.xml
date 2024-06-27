@@ -101,7 +101,9 @@
             android:exported="false" />
         <activity
             android:name=".Admin.RequestsAdmin"
-            android:exported="false" /> <!-- Common Activities -->
+            android:exported="false" />
+        <activity android:name=".Admin.SolicitudeServices"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

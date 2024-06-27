@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.Login
-import com.example.proyecto_fixit_final.MainActivity
 import com.example.proyecto_fixit_final.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -39,6 +38,12 @@ class MenuAdmin : AppCompatActivity() {
     // Función para ir a las solicitudes
     private fun goRequests() {
         val intent = Intent(this, RequestsAdmin::class.java)
+        startActivity(intent)
+    }
+
+    // Función para ir a las solicitudes de servicios
+    fun goSolicitudes(view: View) {
+        val intent = Intent(this, SolicitudeServices::class.java)
         startActivity(intent)
     }
 

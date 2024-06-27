@@ -86,7 +86,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="48dp"
         android:src="@drawable/logo_inge"
         android:layout_below="@+id/ico_user1"
         android:contentDescription="@string/despliege" />
@@ -116,12 +116,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="52dp"
         android:text="@string/solicitudes"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_below="@+id/myservice"/>
+        android:layout_below="@+id/myservice"
+        android:onClick="goSolicitudes"/>
 
     <ImageView
         android:id="@+id/ico_user3"

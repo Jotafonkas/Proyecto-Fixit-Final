@@ -191,6 +191,14 @@
     <string name="btn_antecedentes_especialista">Descargar Certificado</string>
     <string name="btn_eliminar_especialista">Eliminar Especialista</string>
 
+    <!-- Strings Cards Solicitudes Admin -->
+    <string name="solicitud_de_servicio">Solicitud de Servicio</string>
+    <string name="categor_a_de_servicio">Categoría de servicio</string>
+    <string name="nombre_del_especialista">Nombre del Especialista</string>
+    <string name="precio">Precio</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="rechazar">Rechazar</string>
+
     <!-- Strings Lista de Ciudades -->
     <string-array name="simple_items">
         <item>Seleccionar ciudad</item> <!-- Opción de deselección -->

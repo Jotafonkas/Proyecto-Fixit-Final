@@ -163,9 +163,17 @@ class ViewSpecialistServices : AppCompatActivity() {
         db.collection("especialistas").document(uid).collection("servicios").document(documentId)
             .delete()
             .addOnSuccessListener {
-                // Eliminamos la vista del servicio del contenedor
-                serviciosContainer.removeView(view)
-                Toast.makeText(this, "Servicio eliminado exitosamente.", Toast.LENGTH_SHORT).show()
+                // Eliminamos la solicitud correspondiente de Firestore
+                db.collection("admin").document("solicitudes").collection("solicitud").document(documentId)
+                    .delete()
+                    .addOnSuccessListener {
+                        // Eliminamos la vista del servicio del contenedor
+                        serviciosContainer.removeView(view)
+                        Toast.makeText(this, "Servicio eliminado exitosamente.", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error al eliminar la solicitud: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al eliminar el servicio: ${e.message}", Toast.LENGTH_SHORT).show()
