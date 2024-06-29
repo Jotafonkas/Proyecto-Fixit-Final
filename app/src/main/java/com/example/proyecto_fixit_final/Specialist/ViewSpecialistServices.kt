@@ -11,15 +11,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
-import com.example.proyecto_fixit_final.fragments.HelpFragment
-import com.example.proyecto_fixit_final.fragments.MenuFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import android.app.AlertDialog
-import android.content.DialogInterface
 import com.example.proyecto_fixit_final.NavBar
+import java.text.NumberFormat
+import java.util.Locale
 
-// Clase que muestra los servicios del especialista
 class ViewSpecialistServices : AppCompatActivity() {
     private lateinit var serviciosContainer: LinearLayout
     private lateinit var uid: String
@@ -28,7 +26,6 @@ class ViewSpecialistServices : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ver_servicios_especialista)
 
-        // Obtener el UID del usuario
         uid = intent.getStringExtra("uid").toString()
         if (uid.isEmpty()) {
             Toast.makeText(this, "Error: no se proporcionó un UID de usuario.", Toast.LENGTH_SHORT).show()
@@ -36,26 +33,20 @@ class ViewSpecialistServices : AppCompatActivity() {
             return
         }
 
-        // Obtener el contenedor de servicios
         serviciosContainer = findViewById(R.id.servicios_container)
         cargarServicios()
     }
 
-    // Función para regresar al menú principal
     fun backMenu(view: View) {
         val intent = Intent(this, NavBar::class.java)
         startActivity(intent)
         finish()
     }
 
-    // Función para cargar los servicios del especialista
     private fun cargarServicios() {
-        // Obtenemos la colección de servicios del especialista
         val db = FirebaseFirestore.getInstance()
-        // Obtenemos los servicios del especialista
         db.collection("especialistas").document(uid).collection("servicios")
             .get()
-            // Si se obtienen los servicios exitosamente se agregan al contenedor
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val nombreServicio = document.getString("nombreServicio") ?: ""
@@ -63,9 +54,10 @@ class ViewSpecialistServices : AppCompatActivity() {
                     val precio = document.getString("precio") ?: ""
                     val imagenUrl = document.getString("imagenUrl") ?: ""
                     val categoriaServicio = document.getString("categoriaServicio") ?: ""
+                    val estado = document.getString("estado") ?: "Pendiente"
                     val documentId = document.id
 
-                    agregarServicio(nombreServicio, descripcionServicio, precio, imagenUrl, categoriaServicio, documentId)
+                    agregarServicio(nombreServicio, descripcionServicio, precio, imagenUrl, categoriaServicio, estado, documentId)
                 }
             }
             .addOnFailureListener { exception ->
@@ -73,101 +65,104 @@ class ViewSpecialistServices : AppCompatActivity() {
             }
     }
 
-    // Función que agrega un servicio al contenedor
-    private fun agregarServicio(nombre: String, descripcion: String, precio: String, imagenUrl: String, categoria: String, documentId: String) {
+    private fun agregarServicio(nombre: String, descripcion: String, precio: String, imagenUrl: String, categoria: String, estado: String, documentId: String) {
         val servicioView = LayoutInflater.from(this).inflate(R.layout.item_servicio, serviciosContainer, false)
         val imagenServicio = servicioView.findViewById<ImageView>(R.id.imagen_servicio)
         val txtNombreServicio = servicioView.findViewById<TextView>(R.id.edNombreServicio)
         val txtDescripcionServicio = servicioView.findViewById<TextView>(R.id.edDescripcionServicio)
         val txtPrecioServicio = servicioView.findViewById<TextView>(R.id.edPrecio)
+        val txtEstadoServicio = servicioView.findViewById<TextView>(R.id.estadoservicio)
         val btnEliminarServicio = servicioView.findViewById<ImageButton>(R.id.btnEliminarServicio)
 
-        // Establecemos valores del servicio en la vista
+        // Formatear el precio
+        val formattedPrice = formatPrice(precio)
+
         txtNombreServicio.text = nombre
         txtDescripcionServicio.text = descripcion
-        txtPrecioServicio.text = precio
+        txtPrecioServicio.text = formattedPrice
+        txtEstadoServicio.text = estado
 
-        // Agregar clic listener para abrir la actividad de detalle con los datos del servicio
+        txtEstadoServicio.setTextColor(
+            if (estado == "Verificado") resources.getColor(R.color.green)
+            else resources.getColor(R.color.yellow)
+        )
+
         servicioView.setOnClickListener {
             val intent = Intent(this@ViewSpecialistServices, ViewSpecialistDetailService::class.java)
             intent.putExtra("nombreServicio", nombre)
             intent.putExtra("descripcionServicio", descripcion)
-            intent.putExtra("precio", precio)
+            intent.putExtra("precio", formattedPrice)
             intent.putExtra("imagenUrl", imagenUrl)
             intent.putExtra("categoria", categoria)
+            intent.putExtra("estado", estado)
+            intent.putExtra("uid", uid)
             startActivity(intent)
         }
 
-        // Cargamos la imagen del servicio
         if (imagenUrl.isNotEmpty()) {
             Picasso.get().load(imagenUrl).into(imagenServicio)
         }
 
-        // Establecer el tag del servicioView con el documentId
         servicioView.tag = documentId
         btnEliminarServicio.setOnClickListener {
             mostrarDialogoConfirmacion(servicioView, documentId)
         }
 
-        // Agregamos la vista al contenedor
         serviciosContainer.addView(servicioView)
     }
 
-    // Función que se ejecuta al presionar una card
+    private fun formatPrice(price: String): String {
+        return try {
+            val parsedPrice = price.toDouble()
+            val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CL"))
+            formatter.format(parsedPrice)
+        } catch (e: NumberFormatException) {
+            price
+        }
+    }
+
+
     fun goDetail(view: View) {
-        // Obtener el servicio seleccionado
         val cardView = view.parent as View
         val nombreServicio = cardView.findViewById<TextView>(R.id.edNombreServicio).text.toString()
         val descripcionServicio = cardView.findViewById<TextView>(R.id.edDescripcionServicio).text.toString()
         val precio = cardView.findViewById<TextView>(R.id.edPrecio).text.toString()
 
-        // Crear un Intent para la siguiente actividad
         val intent = Intent(this, ViewSpecialistDetailService::class.java)
-
-        // Pasar los detalles del servicio como extras en el Intent
         intent.putExtra("nombreServicio", nombreServicio)
         intent.putExtra("descripcionServicio", descripcionServicio)
         intent.putExtra("precio", precio)
         intent.putExtra("uid", uid)
 
-        // Iniciar la siguiente actividad
         startActivity(intent)
     }
 
-    // Función para mostrar un diálogo de confirmación antes de eliminar el servicio
     private fun mostrarDialogoConfirmacion(view: View, documentId: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Eliminar Servicio")
         builder.setMessage("¿Está seguro que desea eliminar este servicio?")
 
-        // Si el usuario confirma la eliminación, se elimina el servicio
         builder.setPositiveButton("Sí") { dialog, _ ->
             eliminarServicio(view, documentId)
             dialog.dismiss()
         }
 
-        // Si el usuario cancela la eliminación, se cierra el diálogo
         builder.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.dismiss()
         }
 
-        // Mostramos el diálogo
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
 
-    // Función para eliminar el servicio de Firestore y de la vista
     private fun eliminarServicio(view: View, documentId: String) {
         val db = FirebaseFirestore.getInstance()
-        // Eliminamos el servicio de Firestore
         db.collection("especialistas").document(uid).collection("servicios").document(documentId)
             .delete()
             .addOnSuccessListener {
-                // Eliminamos la solicitud correspondiente de Firestore
                 db.collection("admin").document("solicitudes").collection("solicitud").document(documentId)
                     .delete()
                     .addOnSuccessListener {
-                        // Eliminamos la vista del servicio del contenedor
                         serviciosContainer.removeView(view)
                         Toast.makeText(this, "Servicio eliminado exitosamente.", Toast.LENGTH_SHORT).show()
                     }

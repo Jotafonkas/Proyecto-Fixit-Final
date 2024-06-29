@@ -146,10 +146,6 @@ class CreateServicesSpecialist : AppCompatActivity() {
             return
         }
 
-        if (imageUri == null) {
-            Toast.makeText(this, "Por favor, seleccione al menos una imagen.", Toast.LENGTH_SHORT).show()
-            return
-        }
         showLoader()
 
         val storageReference = FirebaseStorage.getInstance().reference
@@ -167,7 +163,8 @@ class CreateServicesSpecialist : AppCompatActivity() {
                         "categoria" to categoria,
                         "imagenUrl" to downloadUrl,
                         "uid" to uid,
-                        "nombreEspecialista" to nombreEspecialista
+                        "nombreEspecialista" to nombreEspecialista,
+                        "estado" to "Pendiente"
                     )
 
                     db.collection("especialistas").document(uid).collection("servicios")

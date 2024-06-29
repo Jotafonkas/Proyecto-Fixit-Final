@@ -46,7 +46,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="127dp"
         android:src="@drawable/logo_persona"
         android:contentDescription="@string/titulo_perfil" />
 
@@ -209,7 +209,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:src="@drawable/logout"
         android:layout_below="@+id/ico_user6" />
 

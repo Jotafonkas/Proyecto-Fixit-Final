@@ -168,7 +168,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="43dp"
         android:src="@drawable/logout"
         android:layout_below="@+id/ico_user3" />
 

@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_fixit_final.R
+import com.example.proyecto_fixit_final.adapters.ServiceAdapter
+import com.example.proyecto_fixit_final.modelos.Services
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -62,7 +64,7 @@ class ServicesHistory : AppCompatActivity() {
                         imageUrl = imageUrl,
                         nombreServicio = nombreServicio,
                         categoria = categoria,
-                        valor = valor
+                        precio = valor
                     )
                     servicesList.add(servicio)
                     Log.d(TAG, "Servicio añadido: $nombre, $nombreServicio")

@@ -12,6 +12,8 @@ import com.example.proyecto_fixit_final.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import java.text.NumberFormat
+import java.util.Locale
 
 class ViewSpecialistDetailService : AppCompatActivity() {
 
@@ -22,32 +24,37 @@ class ViewSpecialistDetailService : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ver_detalle_servicios_especialista)
 
-        // Recuperar el UID del usuario del Intent
         uid = intent.getStringExtra("uid")
-        if (uid.isNullOrEmpty()) {
-            // Manejar el caso en el que el UID esté vacío o nulo
-            Log.e("ViewSpecialistDetail", "UID del usuario no encontrado en el Intent")
-            finish() // Finalizar la actividad actual si no se encuentra el UID
+        nombreServicio = intent.getStringExtra("nombreServicio")
+
+        if (uid.isNullOrEmpty() || nombreServicio.isNullOrEmpty()) {
+            Log.e("ViewSpecialistDetail", "Detalles del servicio no encontrados en el Intent")
+            finish()
             return
         }
 
-        // Recuperar los detalles del servicio del Intent
-        nombreServicio = intent.getStringExtra("nombreServicio")
         val descripcionServicio = intent.getStringExtra("descripcionServicio")
         val precio = intent.getStringExtra("precio")
+        val imagenUrl = intent.getStringExtra("imagenUrl")
+        val categoriaServicio = intent.getStringExtra("categoria")
 
-        // Encontrar las vistas en tu diseño XML
         val txtNombreServicio = findViewById<TextView>(R.id.nombre_servicio)
         val txtDescripcion = findViewById<TextView>(R.id.descripcion_servicio)
         val txtPrecio = findViewById<TextView>(R.id.precio_servicio)
+        val txtCategoria = findViewById<TextView>(R.id.categoria_servicio)
         val imageServiceSpecialist = findViewById<ImageView>(R.id.imageServiceSpecialist)
 
-        // Establecer los datos en las vistas
         txtNombreServicio.text = nombreServicio
         txtDescripcion.text = descripcionServicio
-        txtPrecio.text = precio
+        txtPrecio.text = formatPrice(precio)
+        txtCategoria.text = categoriaServicio
 
-        // Recuperar la imagenUrl y la categoría del servicio desde Firestore
+        if (!imagenUrl.isNullOrEmpty()) {
+            Picasso.get().load(imagenUrl).into(imageServiceSpecialist)
+        } else {
+            Log.e("ViewSpecialistDetail", "URL de imagen no disponible")
+        }
+
         val db = FirebaseFirestore.getInstance()
         db.collection("especialistas").document(uid!!)
             .collection("servicios")
@@ -55,26 +62,46 @@ class ViewSpecialistDetailService : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
+                    val estado = document.getString("estado") ?: "Pendiente"
+                    val txtEstadoServicio = findViewById<TextView>(R.id.estadoservicio)
+                    txtEstadoServicio.text = estado
+                    txtEstadoServicio.setTextColor(
+                        if (estado == "Verificado") resources.getColor(R.color.green)
+                        else resources.getColor(R.color.yellow)
+                    )
+
+                    // Actualizar la imagen y la categoría del servicio en caso de que no estén disponibles en el Intent
                     val imagenUrl = document.getString("imagenUrl")
                     val categoriaServicio = document.getString("categoria")
 
-                    // Cargar la imagen en el ImageView usando Picasso
                     if (!imagenUrl.isNullOrEmpty()) {
                         Picasso.get().load(imagenUrl).into(imageServiceSpecialist)
                     }
 
-                    // Mostrar la categoría en un TextView
-                    val txtCategoria = findViewById<TextView>(R.id.categoria_servicio)
-                    txtCategoria.text = categoriaServicio
+                    if (!categoriaServicio.isNullOrEmpty()) {
+                        txtCategoria.text = categoriaServicio
+                    }
                 }
             }
             .addOnFailureListener { exception ->
-                // Manejar el error
                 Log.e("ViewSpecialistDetail", "Error al obtener detalles del servicio", exception)
             }
     }
 
-    // Función para volver a los servicios
+    private fun formatPrice(price: String?): String {
+        return if (!price.isNullOrEmpty()) {
+            try {
+                val parsedPrice = price.toDouble()
+                val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CL"))
+                formatter.format(parsedPrice)
+            } catch (e: NumberFormatException) {
+                price
+            }
+        } else {
+            "Precio no disponible"
+        }
+    }
+
     fun backServices(view: View) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {
@@ -86,7 +113,6 @@ class ViewSpecialistDetailService : AppCompatActivity() {
         }
     }
 
-    // Función para ir a la sección de comentarios
     fun goToComments(view: View) {
         val intent = Intent(this, ViewSpecialistComments::class.java)
         intent.putExtra("uid", uid)
@@ -94,7 +120,6 @@ class ViewSpecialistDetailService : AppCompatActivity() {
         startActivity(intent)
     }
 
-    // Función para ir a la sección de servicios
     fun goToServices(view: View) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {

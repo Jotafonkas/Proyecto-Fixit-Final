@@ -7,8 +7,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_fixit_final.Client.Request
-import com.example.proyecto_fixit_final.Client.Services
-import com.example.proyecto_fixit_final.R
 
 class RequestAdapter(
     private val solicitudes: List<Request>,

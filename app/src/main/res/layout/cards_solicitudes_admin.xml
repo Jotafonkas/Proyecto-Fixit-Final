@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
@@ -13,12 +14,13 @@
         android:background="@color/color_servicio">
 
         <!-- Imagen solicitud de servicio -->
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageSpecialistSolicitude"
             android:layout_width="match_parent"
             android:layout_height="194dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/backgroundapp"
+            android:layout_margin="10dp"
+            app:shapeAppearanceOverlay="@style/radius6"
             android:contentDescription="" />
 
         <LinearLayout
@@ -32,7 +34,7 @@
                 android:id="@+id/nameServiceSolicitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/solicitud_de_servicio"
+                android:text="Nombre del servicio"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -45,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16dp"
-                android:text="@string/categor_a_de_servicio"
+                android:text="Categoría del servicio"
                 android:textColor="@color/white"
                 android:textAppearance="?attr/textAppearanceBodyMedium" />
 
@@ -57,7 +59,7 @@
                 android:layout_marginTop="16dp"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:text="@string/nombre_del_especialista"
+                android:text="Nombre del especialista"
                 android:textColor="@color/white" />
 
             <!-- Precio -->
@@ -67,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textSize="16sp"
-                android:text="@string/precio"
+                android:text="Precio"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -85,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:textSize="16sp"
-                android:text="@string/aceptar"
+                android:text="Aceptar"
                 style="?attr/borderlessButtonStyle"
                 android:backgroundTint="#1B9873"
                 android:textColor="@color/white" />
@@ -94,7 +96,7 @@
                 android:id="@+id/rejectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rechazar"
+                android:text="Rechazar"
                 android:textSize="16sp"
                 style="?attr/borderlessButtonStyle"
                 android:backgroundTint="@color/red"

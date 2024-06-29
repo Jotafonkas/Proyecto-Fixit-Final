@@ -1,13 +1,14 @@
-package com.example.proyecto_fixit_final.Client
+package com.example.proyecto_fixit_final.modelos
 
-// Clase que representa un servicio
 data class Services(
-    val uid: String = "", // Añadido el campo para el UID del especialista
+    val uid: String = "",
     val nombre: String = "",
     val imageUrl: String = "",
     val nombreServicio: String = "",
     val categoria: String = "",
-    val descripcionServicio: String = "", // Añadido el campo para la descripción del servicio
-    val valor: String = ""
-) {
-}
+    val descripcionServicio: String = "",
+    val precio: String = "",
+    val nombreEspecialista: String = "",
+    val imagenUrl: String = "",
+    val estado: String = "Pendiente"
+)

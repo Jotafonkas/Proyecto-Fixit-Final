@@ -48,7 +48,11 @@
         <item name="cornerSizeBottomLeft">80dp</item>
         <item name="cornerSizeBottomRight">80dp</item>
     </style>
-
-
+    <style name="radius9">
+        <item name="cornerSizeTopRight">100dp</item>
+        <item name="cornerSizeTopLeft">100dp</item>
+        <item name="cornerSizeBottomLeft">100dp</item>
+        <item name="cornerSizeBottomRight">100dp</item>
+    </style>
 
 </resources>

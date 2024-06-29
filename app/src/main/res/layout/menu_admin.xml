@@ -126,11 +126,11 @@
 
     <ImageView
         android:id="@+id/ico_user3"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_marginStart="23dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/ic_rut"
+        android:src="@drawable/checklist_24"
         android:layout_below="@+id/ico_user2"
         android:contentDescription="@string/cerrar_sesion" />
 
@@ -171,7 +171,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="44dp"
         android:src="@drawable/logout"
         android:layout_below="@+id/ico_user3" />
 

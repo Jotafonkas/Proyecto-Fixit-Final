@@ -10,7 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_service"
         android:layout_width="350dp"
-        android:layout_height="230dp"
+        android:layout_height="260dp"
         android:layout_gravity="center"
         app:cardBackgroundColor="@color/color_servicio"
         app:shapeAppearanceOverlay="@style/radius5"
@@ -43,7 +43,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imagen_servicio"
                 android:layout_width="140dp"
-                android:layout_height="210dp"
+                android:layout_height="240dp"
                 android:layout_margin="10dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/radius5"
@@ -72,7 +72,8 @@
                 android:layout_below="@id/txt_nombreservicio"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/white"
-                android:background="@color/color_servicio2"
+                android:paddingStart="10dp"
+                android:background="@drawable/rounded_border"
                 android:padding="1dp"/>
 
             <!-- Descripción del servicio -->
@@ -98,7 +99,8 @@
                 android:layout_below="@id/txt_descripcion"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/white"
-                android:background="@color/color_servicio2"
+                android:paddingStart="10dp"
+                android:background="@drawable/rounded_border2"
                 android:padding="1dp"/>
 
             <!-- Precio del servicio -->
@@ -125,8 +127,24 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/white"
-                android:background="@color/color_servicio2"
+                android:background="@drawable/rounded_border"
                 android:padding="5dp"
+                android:paddingStart="10dp"
+                />
+
+            <!-- Estado del servicio -->
+            <TextView
+                android:id="@+id/estadoservicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pendiente"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="68dp"
+                android:layout_below="@id/edPrecio"
+                android:layout_toEndOf="@id/imagen_servicio"
+                android:layout_marginTop="8dp"
                 />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

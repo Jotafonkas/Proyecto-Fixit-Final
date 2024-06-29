@@ -23,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
+
         <!-- Specialist Activities -->
         <activity
             android:name=".Specialist.ServicesRequest"
@@ -54,9 +55,11 @@
         <activity
             android:name=".Specialist.DetailServiceClient"
             android:exported="true" />
+
+        <!-- Client Activities -->
         <activity
             android:name=".Client.PersonalProfileSpecialist"
-            android:exported="true" /> <!-- Client Activities -->
+            android:exported="true" />
         <activity
             android:name=".Client.ServicesHistory"
             android:exported="true" />
@@ -74,7 +77,9 @@
             android:exported="false" />
         <activity
             android:name=".Client.ClientsComments"
-            android:exported="false" /> <!-- Admin Activities -->
+            android:exported="false" />
+
+        <!-- Admin Activities -->
         <activity
             android:name=".Admin.MenuAdmin"
             android:exported="false" />
@@ -104,6 +109,8 @@
             android:exported="false" />
         <activity android:name=".Admin.SolicitudeServices"
             android:exported="false" />
+
+        <!-- General Activities -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

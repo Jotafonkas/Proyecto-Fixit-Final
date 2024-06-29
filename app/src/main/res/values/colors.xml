@@ -24,7 +24,6 @@
 
     <!-- Colores de Visualizacion Especialista -->
     <color name="red">#AF5050</color>
-    <color name="green">#466D20</color>
     <color name="greenlight">#66AD20</color>
     <color name="color_fondo_de_datos">#EAEAEA</color>
 
@@ -34,5 +33,9 @@
 
     <!-- Colores de Visualizacion Servicio Especialista -->
     <color name="red2">#EA4545</color>
+
+    <!-- colors.xml -->
+    <color name="yellow">#FFB72A</color>
+    <color name="green">#00BAA8</color>
 
 </resources>

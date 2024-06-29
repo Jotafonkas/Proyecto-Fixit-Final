@@ -37,11 +37,11 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/imagen_login"
         app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHeight_percent="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LoginEspecialista"
-        app:shapeAppearanceOverlay="@style/radius8"/>
+        app:shapeAppearanceOverlay="@style/radius9"/>
 
     <LinearLayout
         android:id="@+id/editTextContainer"

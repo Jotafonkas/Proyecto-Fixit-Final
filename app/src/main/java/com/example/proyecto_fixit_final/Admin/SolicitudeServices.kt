@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.proyecto_fixit_final.R
-import com.example.proyecto_fixit_final.Specialist.modelos.Servicio
+import com.example.proyecto_fixit_final.Specialist.modelos.Services
 import com.example.proyecto_fixit_final.utils.EmailSender
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.material.button.MaterialButton
@@ -51,8 +51,9 @@ class SolicitudeServices : AppCompatActivity() {
         db.collection("admin").document("solicitudes").collection("solicitud")
             .get()
             .addOnSuccessListener { result ->
+                solicitudesContainer.removeAllViews() // Eliminar duplicados
                 for (document in result) {
-                    val servicio = document.toObject(Servicio::class.java)
+                    val servicio = document.toObject(Services::class.java)
                     val documentId = document.id
                     agregarSolicitud(servicio, documentId)
                 }
@@ -64,7 +65,7 @@ class SolicitudeServices : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun agregarSolicitud(servicio: Servicio, documentId: String) {
+    private fun agregarSolicitud(servicio: Services, documentId: String) {
         val solicitudView = LayoutInflater.from(this).inflate(R.layout.cards_solicitudes_admin, solicitudesContainer, false)
 
         val imageSpecialistSolicitude: ImageView = solicitudView.findViewById(R.id.imageSpecialistSolicitude)
@@ -77,12 +78,21 @@ class SolicitudeServices : AppCompatActivity() {
 
         nameServiceSolicitude.text = servicio.nombreServicio
         categorieServiceSolicitude.text = servicio.categoria
-
-        // Formatear el precio con el signo de peso y puntos de miles
-        val formattedPrice = NumberFormat.getCurrencyInstance(Locale("es", "CL")).format(servicio.precio.toDouble())
-        priceSpecialistSolicitude.text = formattedPrice
-
         nameSpecialistSolicitude.text = servicio.nombreEspecialista
+
+        // Verificar si el precio está vacío o no es válido
+        val precioString = servicio.precio
+        if (precioString.isNullOrEmpty()) {
+            priceSpecialistSolicitude.text = "Precio no disponible"
+        } else {
+            try {
+                val formattedPrice = NumberFormat.getCurrencyInstance(Locale("es", "CL")).format(precioString.toDouble())
+                priceSpecialistSolicitude.text = formattedPrice
+            } catch (e: NumberFormatException) {
+                priceSpecialistSolicitude.text = "Precio no válido"
+            }
+        }
+
         Glide.with(this).load(servicio.imagenUrl).into(imageSpecialistSolicitude)
 
         reviewButton.setOnClickListener {
@@ -96,7 +106,7 @@ class SolicitudeServices : AppCompatActivity() {
         solicitudesContainer.addView(solicitudView)
     }
 
-    private fun mostrarDialogoConfirmacionParaAceptar(servicio: Servicio, documentId: String, solicitudView: View) {
+    private fun mostrarDialogoConfirmacionParaAceptar(servicio: Services, documentId: String, solicitudView: View) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Aceptar Solicitud")
         builder.setMessage("¿Está seguro que desea aceptar esta solicitud?")
@@ -114,24 +124,19 @@ class SolicitudeServices : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun aceptarSolicitud(servicio: Servicio, documentId: String, solicitudView: View) {
-        db.collection("admin").document("solicitudes").collection("solicitud").document(documentId)
-            .update("estado", "aceptada")
-            .addOnSuccessListener {
-                enviarCorreo(servicio.uid, servicio.nombreServicio)
-                db.collection("admin").document("solicitudes").collection("solicitud").document(documentId)
-                    .delete()
-                    .addOnSuccessListener {
-                        solicitudesContainer.removeView(solicitudView)
-                        Toast.makeText(this, "Solicitud aceptada y eliminada.", Toast.LENGTH_SHORT).show()
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(this, "Error al eliminar la solicitud: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al aceptar la solicitud: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+    private fun aceptarSolicitud(servicio: Services, documentId: String, solicitudView: View) {
+        val especialistaDocRef = db.collection("especialistas").document(servicio.uid).collection("servicios").document(documentId)
+
+        db.runTransaction { transaction ->
+            transaction.update(especialistaDocRef, "estado", "Verificado")
+            transaction.delete(db.collection("admin").document("solicitudes").collection("solicitud").document(documentId))
+        }.addOnSuccessListener {
+            solicitudesContainer.removeView(solicitudView)
+            enviarCorreo(servicio.uid, servicio.nombreServicio)
+            Toast.makeText(this, "Solicitud aceptada y servicio actualizado.", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener { e ->
+            Toast.makeText(this, "Error al aceptar la solicitud: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun enviarCorreo(uid: String, nombreServicio: String) {
