@@ -1,6 +1,8 @@
 package com.example.proyecto_fixit_final.Client
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.adapters.ServiceAdapter
 import com.example.proyecto_fixit_final.modelos.Services
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -17,8 +20,10 @@ class ServicesHistory : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private val servicesList = mutableListOf<Services>()
+    private val filteredServicesList = mutableListOf<Services>()
     private lateinit var adapter: ServiceAdapter
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var searchFilter: TextInputEditText
 
     companion object {
         private const val TAG = "ServicesHistory"
@@ -31,8 +36,18 @@ class ServicesHistory : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_historial)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = ServiceAdapter(servicesList)
+        adapter = ServiceAdapter(filteredServicesList)
         recyclerView.adapter = adapter
+
+        searchFilter = findViewById(R.id.search_filter)
+        searchFilter.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                filterServices(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
 
         firestore = FirebaseFirestore.getInstance()
 
@@ -49,7 +64,7 @@ class ServicesHistory : AppCompatActivity() {
         firestore.collection("clientes").document(uid).collection("servicios_solicitados")
             .get()
             .addOnSuccessListener { documents ->
-                servicesList.clear() // Limpiamos la lista antes de agregar nuevos datos
+                servicesList.clear()
                 for (document in documents) {
                     val nombre = document.getString("nombreEspecialista") ?: ""
                     val imageUrl = document.getString("imagenUrl") ?: ""
@@ -69,7 +84,7 @@ class ServicesHistory : AppCompatActivity() {
                     servicesList.add(servicio)
                     Log.d(TAG, "Servicio añadido: $nombre, $nombreServicio")
                 }
-                adapter.notifyDataSetChanged()
+                filterServices(searchFilter.text.toString())
                 Log.d(TAG, "Total de servicios cargados: ${servicesList.size}")
             }
             .addOnFailureListener { e ->
@@ -77,6 +92,22 @@ class ServicesHistory : AppCompatActivity() {
                 Log.e(TAG, "Error al cargar los servicios", e)
             }
     }
+
+    private fun filterServices(query: String) {
+        val lowerCaseQuery = query.lowercase().trim()
+        filteredServicesList.clear()
+        for (service in servicesList) {
+            if (service.nombre.lowercase().contains(lowerCaseQuery) ||
+                service.nombreServicio.lowercase().contains(lowerCaseQuery) ||
+                service.precio.lowercase().contains(lowerCaseQuery)
+            ) {
+                filteredServicesList.add(service)
+            }
+        }
+        adapter.notifyDataSetChanged()
+        Log.d(TAG, "Servicios filtrados: ${filteredServicesList.size}")
+    }
+
     fun backMenu(view: View) {
         super.onBackPressed()
     }

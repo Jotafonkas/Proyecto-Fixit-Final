@@ -222,6 +222,9 @@ class RegisterClient: AppCompatActivity() {
                             user?.let {
                                 if (selectedImageUri != null) {
                                     uploadImageToStorage(it.uid, nombre, rut, correo, telefono)
+                                } else {
+                                    // Si no hay imagen seleccionada, guardar datos sin imagen
+                                    saveAdditionalUserData(it.uid, nombre, rut, correo, telefono, null)
                                 }
                             }
                         } else {
@@ -253,12 +256,13 @@ class RegisterClient: AppCompatActivity() {
 
         uploadTask.addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener { uri ->
-
+                // Llamar a saveAdditionalUserData() después de subir la imagen
                 saveAdditionalUserData(uid, nombre, rut, correo, telefono, uri.toString())
             }
         }.addOnFailureListener { e ->
             Log.e("RegisterClient", "Error al subir imagen", e)
             Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
+            hideLoader()
         }
     }
 
@@ -270,12 +274,14 @@ class RegisterClient: AppCompatActivity() {
             "rut" to rut,
             "correo" to correo,
             "telefono" to telefono,
-            "imageUrl" to imageUrl
+            "imageUrl" to imageUrl,
+            "rol" to "cliente"
         )
-        // Referencia a la subcolección "Cliente" directamente dentro de la colección "users"
-        val ClientRef = firestore.collection("clientes").document(uid)
 
-        ClientRef.set(user)
+        // Referencia al documento del cliente en la colección "clientes"
+        val clientRef = firestore.collection("clientes").document(uid)
+
+        clientRef.set(user)
             .addOnSuccessListener {
                 Log.d("RegisterClient", "DocumentSnapshot successfully written!")
                 showVerificationDialog(user["correo"] as String)
@@ -283,8 +289,11 @@ class RegisterClient: AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 Log.w("RegisterClient", "Error writing document", e)
+                hideLoader()
             }
     }
+
+
     // Método para validar el formato del RUT
     private fun validarRutKC(rut: String): Boolean {
         val rutLimpio = rut.replace(".", "").replace("-", "")

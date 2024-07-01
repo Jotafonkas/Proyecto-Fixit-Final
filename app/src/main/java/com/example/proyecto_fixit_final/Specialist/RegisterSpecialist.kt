@@ -263,9 +263,13 @@ class RegisterSpecialist : AppCompatActivity() {
                     val user = auth.currentUser
                     user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
                         if (verificationTask.isSuccessful) {
-                            user.let {
-                                if (selectedImageUri != null) {
+                            user?.let {
+                                if (selectedImageUri != null && selectedPdfUri != null) {
                                     uploadImageToStorage(it.uid, nombre, rut, correo, telefono, profesion, ciudad)
+                                } else {
+                                    // Si falta alguna de las subidas, muestra un mensaje de error
+                                    Toast.makeText(this, "Por favor, suba su imagen de perfil y certificado de antecedentes.", Toast.LENGTH_LONG).show()
+                                    hideLoader()
                                 }
                             }
                         } else {
@@ -286,15 +290,12 @@ class RegisterSpecialist : AppCompatActivity() {
 
         uploadTask.addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener { uri ->
-                if (selectedPdfUri != null) {
-                    uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, ciudad, uri.toString())
-                } else {
-                    saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, ciudad, uri.toString(), null)
-                }
+                uploadPdfToStorage(uid, nombre, rut, correo, telefono, profesion, ciudad, uri.toString())
             }
         }.addOnFailureListener { e ->
             Log.e("RegisterSpecialist", "Error al subir imagen", e)
             Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_LONG).show()
+            hideLoader()
         }
     }
 
@@ -303,12 +304,13 @@ class RegisterSpecialist : AppCompatActivity() {
         val uploadTask = ref.putFile(selectedPdfUri!!)
 
         uploadTask.addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener { uri ->
-                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, ciudad, imageUrl, uri.toString())
+            ref.downloadUrl.addOnSuccessListener { pdfUrl ->
+                saveAdditionalUserData(uid, nombre, rut, correo, telefono, profesion, ciudad, imageUrl, pdfUrl.toString())
             }
         }.addOnFailureListener { e ->
             Log.e("RegisterSpecialist", "Error al subir PDF", e)
             Toast.makeText(this, "Error al subir PDF: ${e.message}", Toast.LENGTH_LONG).show()
+            hideLoader()
         }
     }
 
@@ -321,21 +323,25 @@ class RegisterSpecialist : AppCompatActivity() {
             "profesion" to profesion,
             "ciudad" to ciudad,
             "imageUrl" to imageUrl,
-            "pdfUrl" to pdfUrl
+            "pdfUrl" to pdfUrl,
+            "rol" to "especialista"
         )
 
-        firestore.collection("especialistas").document(uid)
-            .set(user)
+        // Referencia al documento del especialista en la colección "especialistas"
+        val specialistRef = firestore.collection("especialistas").document(uid)
+
+        specialistRef.set(user)
             .addOnSuccessListener {
                 hideLoader()
                 showVerificationDialog(correo)
             }
             .addOnFailureListener { e ->
                 hideLoader()
-                Log.e("RegisterSpecialist", "Error al guardar datos adicionales del usuario", e)
-                Toast.makeText(this, "Error al guardar datos adicionales del usuario: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e("RegisterSpecialist", "Error al guardar datos adicionales del especialista", e)
+                Toast.makeText(this, "Error al guardar datos adicionales del especialista: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
+
 
     private fun showVerificationDialog(email: String?) {
         val builder = AlertDialog.Builder(this)
