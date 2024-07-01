@@ -72,6 +72,7 @@ class ServicesHistory : AppCompatActivity() {
                     val nombreServicio = document.getString("nombreServicio") ?: ""
                     val categoria = document.getString("categoria") ?: ""
                     val valor = document.getString("precio") ?: ""
+                    val descripcion = document.getString("descripcion") ?: "" // Obtén la descripción
 
                     val servicio = Services(
                         uid = uidServicio,
@@ -79,7 +80,9 @@ class ServicesHistory : AppCompatActivity() {
                         imageUrl = imageUrl,
                         nombreServicio = nombreServicio,
                         categoria = categoria,
-                        precio = valor
+                        precio = valor,
+                        estado = document.getString("estado") ?: "", // Agrega el estado si es necesario
+                        descripcionServicio = descripcion // Añade la descripción
                     )
                     servicesList.add(servicio)
                     Log.d(TAG, "Servicio añadido: $nombre, $nombreServicio")
@@ -92,6 +95,7 @@ class ServicesHistory : AppCompatActivity() {
                 Log.e(TAG, "Error al cargar los servicios", e)
             }
     }
+
 
     private fun filterServices(query: String) {
         val lowerCaseQuery = query.lowercase().trim()

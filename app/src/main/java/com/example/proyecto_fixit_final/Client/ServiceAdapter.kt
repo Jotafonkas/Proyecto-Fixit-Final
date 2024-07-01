@@ -42,3 +42,4 @@ class ServiceAdapter(private val services: MutableList<com.example.proyecto_fixi
         }
     }
 }
+

@@ -9,4 +9,5 @@ data class Request(
     var nombreServicio: String,
     var nombreEspecialista: String,
     val estado: String, // "pendiente", "aceptada", "rechazada"
+    val descripcionServicio: String
 )

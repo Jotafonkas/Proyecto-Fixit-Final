@@ -91,6 +91,7 @@ class ServicesRequest : AppCompatActivity() {
             }
     }
 
+
     private fun eliminarSolicitudPendiente(especialistaRef: DocumentReference, clienteRef: DocumentReference, solicitudId: String, acceptedService: Map<String, Any>) {
         especialistaRef.collection(COLLECTION_SOLICITUDES_PENDIENTES).document(solicitudId).delete()
             .addOnSuccessListener {
@@ -113,6 +114,7 @@ class ServicesRequest : AppCompatActivity() {
                 showToastAndLog("Error al eliminar la solicitud pendiente del especialista", e)
             }
     }
+
 
     private fun onRejectClick(solicitud: Request) {
         val especialistaRef = firestore.collection(COLLECTION_ESPECIALISTAS).document(uid!!)
@@ -142,14 +144,17 @@ class ServicesRequest : AppCompatActivity() {
             servicioId = getString("servicioId") ?: "",
             nombreServicio = getString("nombreServicio") ?: "",
             estado = getString("estado") ?: "",
-            nombreEspecialista = getString("nombreEspecialista") ?: ""
+            nombreEspecialista = getString("nombreEspecialista") ?: "",
+            descripcionServicio = getString("descripcion") ?: ""
         )
     }
+
 
     private fun DocumentSnapshot.toAcceptedService(solicitud: Request): Map<String, Any> {
         val nombreServicio = this.getString("nombreServicio") ?: ""
         val precio = this.getString("precio") ?: ""
         val imagenUrl = this.getString("imagenUrl") ?: ""
+        val descripcion = this.getString("descripcionServicio") ?: ""
 
         return mapOf(
             "id" to solicitud.id,
@@ -159,9 +164,11 @@ class ServicesRequest : AppCompatActivity() {
             "nombreServicio" to nombreServicio,
             "precio" to precio,
             "imagenUrl" to imagenUrl,
+            "descripcion" to descripcion,
             "estado" to "aceptada"
         )
     }
+
 
     private fun showToastAndLog(message: String, exception: Exception? = null) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

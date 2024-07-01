@@ -133,7 +133,7 @@ class DetailServiceClient : AppCompatActivity() {
                 if (document != null && document.exists()) {
                     nombreCliente = document.getString("nombre") ?: "Cliente Anónimo"
 
-                    // Obtener el nombre del especialista desde Firestore
+                    // Obtener el nombre del especialista y la descripción del servicio desde Firestore
                     db.collection("especialistas")
                         .document(especialistaId)
                         .get()
@@ -141,40 +141,54 @@ class DetailServiceClient : AppCompatActivity() {
                             if (specialistDocument != null && specialistDocument.exists()) {
                                 nombreEspecialista = specialistDocument.getString("nombre") ?: "Especialista Anónimo"
 
-                                val solicitudId = UUID.randomUUID().toString()
+                                // Obtener la descripción del servicio
+                                db.collection("especialistas")
+                                    .document(especialistaId)
+                                    .collection("servicios")
+                                    .document(servicioId)
+                                    .get()
+                                    .addOnSuccessListener { serviceDocument ->
+                                        val descripcionServicio = serviceDocument.getString("descripcionServicio") ?: "Sin descripción"
 
-                                val solicitud = hashMapOf(
-                                    "id" to solicitudId,
-                                    "clienteId" to clienteId,
-                                    "nombreCliente" to nombreCliente,
-                                    "servicioId" to servicioId,
-                                    "nombreServicio" to nombreServicio,
-                                    "nombreEspecialista" to nombreEspecialista,
-                                    "estado" to "pendiente"
-                                )
+                                        val solicitudId = UUID.randomUUID().toString()
 
-                                // Guardar solicitud en la subcolección del cliente
-                                db.collection("clientes")
-                                    .document(clienteId)
-                                    .collection("SolicitudesPendientes")
-                                    .document(solicitudId)  // Usar el ID aleatorio
-                                    .set(solicitud)
-                                    .addOnSuccessListener {
-                                        // Guardar solicitud en la subcolección del especialista
-                                        db.collection("especialistas")
-                                            .document(especialistaId)
+                                        val solicitud = hashMapOf(
+                                            "id" to solicitudId,
+                                            "clienteId" to clienteId,
+                                            "nombreCliente" to nombreCliente,
+                                            "servicioId" to servicioId,
+                                            "nombreServicio" to nombreServicio,
+                                            "nombreEspecialista" to nombreEspecialista,
+                                            "descripcionServicio" to descripcionServicio, // Guardar descripción
+                                            "estado" to "pendiente"
+                                        )
+
+                                        // Guardar solicitud en la subcolección del cliente
+                                        db.collection("clientes")
+                                            .document(clienteId)
                                             .collection("SolicitudesPendientes")
                                             .document(solicitudId)  // Usar el ID aleatorio
                                             .set(solicitud)
                                             .addOnSuccessListener {
-                                                Toast.makeText(this, "Solicitud enviada con éxito", Toast.LENGTH_SHORT).show()
+                                                // Guardar solicitud en la subcolección del especialista
+                                                db.collection("especialistas")
+                                                    .document(especialistaId)
+                                                    .collection("SolicitudesPendientes")
+                                                    .document(solicitudId)  // Usar el ID aleatorio
+                                                    .set(solicitud)
+                                                    .addOnSuccessListener {
+                                                        Toast.makeText(this, "Solicitud enviada con éxito", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Toast.makeText(this, "Error al guardar la solicitud en el especialista: ${e.message}", Toast.LENGTH_SHORT).show()
+                                                    }
                                             }
                                             .addOnFailureListener { e ->
-                                                Toast.makeText(this, "Error al guardar la solicitud en el especialista: ${e.message}", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(this, "Error al guardar la solicitud en el cliente: ${e.message}", Toast.LENGTH_SHORT).show()
                                             }
                                     }
                                     .addOnFailureListener { e ->
-                                        Toast.makeText(this, "Error al guardar la solicitud en el cliente: ${e.message}", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this, "Error al obtener la descripción del servicio: ${e.message}", Toast.LENGTH_SHORT).show()
                                     }
                             } else {
                                 Toast.makeText(this, "Especialista no encontrado", Toast.LENGTH_SHORT).show()
@@ -191,4 +205,5 @@ class DetailServiceClient : AppCompatActivity() {
                 Toast.makeText(this, "Error al obtener el cliente: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
 }
