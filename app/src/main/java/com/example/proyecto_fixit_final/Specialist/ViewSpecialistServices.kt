@@ -97,7 +97,6 @@ class ViewSpecialistServices : AppCompatActivity() {
             intent.putExtra("estado", estado)
             intent.putExtra("uid", uid)
             startActivity(intent)
-            finish()
         }
 
         if (imagenUrl.isNotEmpty()) {
@@ -137,7 +136,6 @@ class ViewSpecialistServices : AppCompatActivity() {
         intent.putExtra("uid", uid)
 
         startActivity(intent)
-        finish()
     }
 
     private fun mostrarDialogoConfirmacion(view: View, documentId: String) {

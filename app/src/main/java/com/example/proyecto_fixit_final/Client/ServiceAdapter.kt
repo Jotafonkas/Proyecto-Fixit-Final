@@ -12,7 +12,7 @@ import android.widget.TextView
 class ServiceAdapter(private val services: MutableList<com.example.proyecto_fixit_final.modelos.Services>) : RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_servicio, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_historial_servicios, parent, false)
         return ServiceViewHolder(view)
     }
 
