@@ -24,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <!-- Imagen del servicio -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imagen_servicio"
@@ -35,6 +34,22 @@
                 app:shapeAppearanceOverlay="@style/radius5"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
+
+            <!-- Botón de eliminar servicio -->
+            <ImageButton
+                android:id="@+id/btnEliminarServicio"
+                android:layout_width="50dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/eliminar"
+                android:contentDescription="@string/eliminar_servicio"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
+                app:tint="@color/red2" />
 
             <!-- Nombre del servicio -->
             <TextView
