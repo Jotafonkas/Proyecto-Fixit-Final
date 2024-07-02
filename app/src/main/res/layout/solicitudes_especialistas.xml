@@ -22,14 +22,16 @@
         />
 
     <!-- Flecha para volver al menú -->
-    <ImageView
+    <ImageButton
+        android:id="@+id/imgbtnvolver"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="35dp"
-        android:src="@drawable/ic_flechavolver"
-        android:onClick="backMenu"
-        />
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="top"
+        android:background="@drawable/ic_flechavolver"
+        android:scaleType="centerInside"
+        android:onClick="goBack"/>
 
     <!-- RecyclerView para las cards de especialistas -->
     <androidx.recyclerview.widget.RecyclerView

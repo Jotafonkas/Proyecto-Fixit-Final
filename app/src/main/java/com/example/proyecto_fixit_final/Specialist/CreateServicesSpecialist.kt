@@ -200,5 +200,6 @@ class CreateServicesSpecialist : AppCompatActivity() {
 
     fun backMenu(view: View) {
         super.onBackPressed()
+        finish()
     }
 }

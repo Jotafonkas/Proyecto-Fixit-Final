@@ -108,6 +108,7 @@ class ViewSpecialistDetailService : AppCompatActivity() {
             val intent = Intent(this, ViewSpecialistServices::class.java)
             intent.putExtra("uid", uid)
             startActivity(intent)
+            finish()
         } else {
             Toast.makeText(this, "Error: Usuario no autenticado.", Toast.LENGTH_SHORT).show()
         }
@@ -120,14 +121,4 @@ class ViewSpecialistDetailService : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToServices(view: View) {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        if (uid != null) {
-            val intent = Intent(this, ViewSpecialistServices::class.java)
-            intent.putExtra("uid", uid)
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "Error: Usuario no autenticado.", Toast.LENGTH_SHORT).show()
-        }
-    }
 }

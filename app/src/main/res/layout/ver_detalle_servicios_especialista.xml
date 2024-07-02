@@ -215,23 +215,11 @@
         android:layout_width="196dp"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/precio_servicio_layout"
         android:text="@string/btncomentarios"
         android:textSize="18sp"
         android:includeFontPadding="false"
         android:onClick="goToComments"/>
 
-    <!-- Botón que redirige a la vista de servicios -->
-    <Button
-        android:id="@+id/botonservicios"
-        android:layout_width="196dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/botoncomentarios"
-        android:text="@string/btnservicios"
-        android:textSize="18sp"
-        android:includeFontPadding="false"
-        android:onClick="goToServices"/>
 </RelativeLayout>

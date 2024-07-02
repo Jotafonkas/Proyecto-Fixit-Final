@@ -20,13 +20,13 @@
         android:gravity="center"
         android:padding="25dp"
         />
-    <ImageView
-        android:id="@+id/flechavolver_comments"
+    <ImageButton
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="35dp"
-        android:src="@drawable/ic_flechavolver"
+        android:background="@drawable/ic_flechavolver"
+        android:onClick="backComments"
         />
 
     <!-- Comentario -->

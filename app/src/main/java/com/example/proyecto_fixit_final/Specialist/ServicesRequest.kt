@@ -2,6 +2,7 @@ package com.example.proyecto_fixit_final.Specialist
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -149,7 +150,6 @@ class ServicesRequest : AppCompatActivity() {
         )
     }
 
-
     private fun DocumentSnapshot.toAcceptedService(solicitud: Request): Map<String, Any> {
         val nombreServicio = this.getString("nombreServicio") ?: ""
         val precio = this.getString("precio") ?: ""
@@ -169,7 +169,6 @@ class ServicesRequest : AppCompatActivity() {
         )
     }
 
-
     private fun showToastAndLog(message: String, exception: Exception? = null) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         Log.e(TAG, message, exception)
@@ -177,5 +176,9 @@ class ServicesRequest : AppCompatActivity() {
 
     private fun updateRequestList() {
         cargarSolicitudes(uid!!)
+    }
+
+    fun goBack(view: View) {
+        super.onBackPressed()
     }
 }

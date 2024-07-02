@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso
 class ProfileSpecialist : AppCompatActivity() {
     // Declaración de variables
     private lateinit var edCorreo: TextView
-    private lateinit var edRut: EditText
+    private lateinit var edRut: TextView
     private lateinit var edNombre: EditText
     private lateinit var edProfesion: EditText
     private lateinit var edTelefono: EditText
@@ -41,7 +41,6 @@ class ProfileSpecialist : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageReference: StorageReference
     private lateinit var btnEditNombre: ImageButton
-    private lateinit var btnEditRut: ImageButton
     private lateinit var btnEditTelefono: ImageButton
     private lateinit var btnEditEspecialidad: ImageButton
     private lateinit var btnEditCiudad: ImageButton // Nuevo botón para editar ciudad
@@ -65,7 +64,6 @@ class ProfileSpecialist : AppCompatActivity() {
         btnDelete = findViewById(R.id.btnEliminar)
         btnSave = findViewById(R.id.btnGuardarPerfilEspecialista)
         btnEditNombre = findViewById(R.id.btnEditNombre)
-        btnEditRut = findViewById(R.id.btnEditRut)
         btnEditTelefono = findViewById(R.id.btnEditTelefono)
         btnEditEspecialidad = findViewById(R.id.btnEditEspecialidad)
         btnEditCiudad = findViewById(R.id.btnEditCiudad) // Inicializar el botón de editar ciudad
@@ -92,12 +90,6 @@ class ProfileSpecialist : AppCompatActivity() {
             edNombre.isFocusableInTouchMode = true
             edNombre.isFocusable = true
             edNombre.requestFocus()
-        }
-
-        btnEditRut.setOnClickListener {
-            edRut.isFocusableInTouchMode = true
-            edRut.isFocusable = true
-            edRut.requestFocus()
         }
 
         btnEditTelefono.setOnClickListener {

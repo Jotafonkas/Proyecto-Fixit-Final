@@ -194,7 +194,7 @@ class ProfileSpecialistAdmin : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = uri
                 startActivity(intent)
-                Toast.makeText(this, "PDF descargado correctamente", Toast.LENGTH_SHORT).show() // Mostrar mensaje después de iniciar la Intent
+                Toast.makeText(this, "Iniciando descarga de PDF", Toast.LENGTH_SHORT).show() // Mostrar mensaje después de iniciar la Intent
             }.addOnFailureListener { e ->
                 Log.e("ProfileSpecialistAdmin", "Error al obtener URL del PDF: ${e.message}")
                 Toast.makeText(this, "Error al obtener PDF", Toast.LENGTH_SHORT).show()

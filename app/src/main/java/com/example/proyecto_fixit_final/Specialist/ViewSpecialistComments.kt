@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.google.firebase.firestore.QuerySnapshot
@@ -78,5 +79,9 @@ class ViewSpecialistComments : AppCompatActivity() {
 
             comentariosContainer.addView(commentView)
         }
+    }
+
+    fun goBack(view: View) {
+        super.onBackPressed()
     }
 }

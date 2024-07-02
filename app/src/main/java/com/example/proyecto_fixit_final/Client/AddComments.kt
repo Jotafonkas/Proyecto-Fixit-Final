@@ -86,4 +86,12 @@ class AddComments : AppCompatActivity() {
                 // Manejar errores
             }
     }
+
+    fun backComments(view: View) {
+        val intent = Intent(this, ClientsComments::class.java)
+        intent.putExtra("especialistaId", especialistaId)
+        intent.putExtra("servicioId", servicioId)
+        startActivity(intent)
+        finish()
+    }
 }
