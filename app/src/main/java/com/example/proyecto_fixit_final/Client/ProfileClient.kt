@@ -164,6 +164,22 @@ class ProfileClient : AppCompatActivity() {
             }
     }
 
+    fun formatRUT(rut: String): String {
+        var rutFormatted = rut
+        // Remove any non-digit characters except for 'K' or 'k'
+        rutFormatted = rutFormatted.replace(Regex("[^\\dKk]"), "")
+
+        // Split the RUT into the body and the check digit
+        val body = rutFormatted.dropLast(1)
+        val checkDigit = rutFormatted.takeLast(1)
+
+        // Format the body with dots
+        val formattedBody = body.reversed().chunked(3).joinToString(".").reversed()
+
+        // Combine the formatted body with the check digit
+        return "$formattedBody-$checkDigit"
+    }
+
     private fun updateImageUrl(uid: String?, imageUrl: String) {
         firestore.collection("clientes").document(uid!!)
             .update("imageUrl", imageUrl)
@@ -186,7 +202,7 @@ class ProfileClient : AppCompatActivity() {
                     val imageUrl = document.getString("imageUrl")
                     edNombre.setText(nombre)
                     edCorreo.text = correo
-                    edRut.text = rut
+                    edRut.setText(rut?.let { formatRUT(it) })
                     edTelefono.setText(telefono)
                     if (!imageUrl.isNullOrEmpty()) {
                         Picasso.get().load(imageUrl).into(imgperfil)

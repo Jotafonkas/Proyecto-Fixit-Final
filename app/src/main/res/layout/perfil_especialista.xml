@@ -225,24 +225,13 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ciudad_especialista_layout"
+                    <Spinner
+                        android:id="@+id/spinnerCiudad"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:layout_weight="1"
-                        app:startIconDrawable="@drawable/location_city_24">
-
-                        <EditText
-                            android:id="@+id/edCiudad"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:paddingTop="15dp"
-                            android:background="@drawable/image_rectangle1"
-                            android:inputType="text"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:background="@drawable/image_rectangle1"
+                        android:enabled="false"/>
 
                     <ImageButton
                         android:layout_marginTop="5dp"
@@ -286,11 +275,11 @@
                             android:id="@+id/edTelefono"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
                             android:background="@drawable/image_rectangle1"
-                            android:inputType="number"
                             android:focusable="false"
-                            android:focusableInTouchMode="false"/>
+                            android:focusableInTouchMode="false"
+                            android:inputType="number"
+                            android:paddingStart="10dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton

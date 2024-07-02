@@ -3,18 +3,19 @@ package com.example.proyecto_fixit_final.Specialist
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_fixit_final.R
-import com.example.proyecto_fixit_final.fragments.MenuFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -31,7 +32,7 @@ class ProfileSpecialist : AppCompatActivity() {
     private lateinit var edNombre: EditText
     private lateinit var edProfesion: EditText
     private lateinit var edTelefono: EditText
-    private lateinit var edCiudad: EditText // Nueva variable para la ciudad
+    private lateinit var spinnerCiudad: Spinner
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var imgperfil: ImageView
@@ -44,6 +45,8 @@ class ProfileSpecialist : AppCompatActivity() {
     private lateinit var btnEditTelefono: ImageButton
     private lateinit var btnEditEspecialidad: ImageButton
     private lateinit var btnEditCiudad: ImageButton // Nuevo botón para editar ciudad
+
+    private var ciudadSeleccionada: String? = null // Variable para almacenar la ciudad seleccionada
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,7 @@ class ProfileSpecialist : AppCompatActivity() {
         edNombre = findViewById(R.id.edNombre)
         edProfesion = findViewById(R.id.edEspecialidad)
         edTelefono = findViewById(R.id.edTelefono)
-        edCiudad = findViewById(R.id.edCiudad) // Inicializar el campo de ciudad
+        spinnerCiudad = findViewById(R.id.spinnerCiudad)
         imgperfil = findViewById(R.id.imgPerfilEspecialista)
         btnUpload = findViewById(R.id.btnFoto)
         btnDelete = findViewById(R.id.btnEliminar)
@@ -105,13 +108,25 @@ class ProfileSpecialist : AppCompatActivity() {
         }
 
         btnEditCiudad.setOnClickListener {
-            edCiudad.isFocusableInTouchMode = true
-            edCiudad.isFocusable = true
-            edCiudad.requestFocus()
+            spinnerCiudad.isEnabled = true
+            spinnerCiudad.performClick()
         }
 
-        // Recibir el correo pasado desde HomeActivity
-        val correo = intent.getStringExtra("correo")
+        val ciudadArray = resources.getStringArray(R.array.simple_items)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ciudadArray)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCiudad.adapter = adapter
+        spinnerCiudad.isEnabled = false  // Disable spinner initially
+
+        spinnerCiudad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                ciudadSeleccionada = parent.getItemAtPosition(position) as String
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                ciudadSeleccionada = null
+            }
+        }
 
         // Poner el correo en el campo de EditText
         val user = auth.currentUser
@@ -165,12 +180,28 @@ class ProfileSpecialist : AppCompatActivity() {
         return contentResolver.getType(uri)?.substringAfterLast('/')
     }
 
+    fun formatRUT(rut: String): String {
+        var rutFormatted = rut
+        // Remove any non-digit characters except for 'K' or 'k'
+        rutFormatted = rutFormatted.replace(Regex("[^\\dKk]"), "")
+
+        // Split the RUT into the body and the check digit
+        val body = rutFormatted.dropLast(1)
+        val checkDigit = rutFormatted.takeLast(1)
+
+        // Format the body with dots
+        val formattedBody = body.reversed().chunked(3).joinToString(".").reversed()
+
+        // Combine the formatted body with the check digit
+        return "$formattedBody-$checkDigit"
+    }
+
     private fun updateUserData(uid: String?) {
         val nombre = edNombre.text.toString()
         val rut = edRut.text.toString()
         val profesion = edProfesion.text.toString()
         val telefono = edTelefono.text.toString()
-        val ciudad = edCiudad.text.toString() // Obtener el texto de la ciudad
+        val ciudad = ciudadSeleccionada // Obtener la ciudad seleccionada
 
         // Validaciones
         if (nombre.isEmpty()) {
@@ -213,8 +244,8 @@ class ProfileSpecialist : AppCompatActivity() {
             return
         }
 
-        if (ciudad.isEmpty() || !ciudad.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$"))) {
-            edCiudad.error = "Ingrese su ciudad (solo letras)"
+        if (ciudad.isNullOrEmpty()) {
+            Toast.makeText(this, "Seleccione una ciudad", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -224,7 +255,7 @@ class ProfileSpecialist : AppCompatActivity() {
             "rut" to rut,
             "profesion" to profesion,
             "telefono" to telefono,
-            "ciudad" to ciudad // Actualizar la ciudad en Firestore
+            "ciudad" to ciudad // Actualizar la  ciudad en Firestore
         )
 
         firestore.collection("especialistas").document(uid!!)
@@ -255,10 +286,13 @@ class ProfileSpecialist : AppCompatActivity() {
                     val imageUrl = document.getString("imageUrl")
                     edNombre.setText(nombre)
                     edCorreo.setText(correo)
-                    edRut.setText(rut)
+                    edRut.setText(rut?.let { formatRUT(it) })
                     edProfesion.setText(profesion)
                     edTelefono.setText(telefono)
-                    edCiudad.setText(ciudad) // Mostrar la ciudad
+
+                    val position = (spinnerCiudad.adapter as ArrayAdapter<String>).getPosition(ciudad)
+                    spinnerCiudad.setSelection(position) // Seleccionar la ciudad en el spinner
+
                     if (!imageUrl.isNullOrEmpty()) {
                         Picasso.get().load(imageUrl).into(imgperfil)
                     }
