@@ -38,8 +38,7 @@ class ViewSpecialistServices : AppCompatActivity() {
     }
 
     fun backMenu(view: View) {
-        val intent = Intent(this, NavBar::class.java)
-        startActivity(intent)
+        super.onBackPressed()
         finish()
     }
 
@@ -72,7 +71,6 @@ class ViewSpecialistServices : AppCompatActivity() {
         val txtDescripcionServicio = servicioView.findViewById<TextView>(R.id.edDescripcionServicio)
         val txtPrecioServicio = servicioView.findViewById<TextView>(R.id.edPrecio)
         val txtEstadoServicio = servicioView.findViewById<TextView>(R.id.estadoservicio)
-        val btnEliminarServicio = servicioView.findViewById<ImageButton>(R.id.btnEliminarServicio)
 
         // Formatear el precio
         val formattedPrice = formatPrice(precio)
@@ -97,6 +95,7 @@ class ViewSpecialistServices : AppCompatActivity() {
             intent.putExtra("estado", estado)
             intent.putExtra("uid", uid)
             startActivity(intent)
+            finish()
         }
 
         if (imagenUrl.isNotEmpty()) {
@@ -104,9 +103,7 @@ class ViewSpecialistServices : AppCompatActivity() {
         }
 
         servicioView.tag = documentId
-        btnEliminarServicio.setOnClickListener {
-            mostrarDialogoConfirmacion(servicioView, documentId)
-        }
+
 
         serviciosContainer.addView(servicioView)
     }
@@ -135,6 +132,7 @@ class ViewSpecialistServices : AppCompatActivity() {
         intent.putExtra("uid", uid)
 
         startActivity(intent)
+        finish()
     }
 
     private fun mostrarDialogoConfirmacion(view: View, documentId: String) {
