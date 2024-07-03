@@ -177,6 +177,7 @@
     <!-- Strings Lista de Clientes y Especialistas Admin -->
     <string name="titulo_lista_clientes">Lista de Clientes</string>
     <string name="titulo_lista_especialistas">Lista de Especialistas</string>
+    <string name="titulo_autorizar_especialistas">Autorizar Especialistas</string>
     <string name="titulo_menu">Menú</string>
     <string name="nombredelUsuario"><u>Nombre y Apellido: </u></string>
 
@@ -190,6 +191,7 @@
     <string name="txt_antecedentes_especialista"><u>Certificado de Antecedentes: </u></string>
     <string name="btn_antecedentes_especialista">Descargar Certificado</string>
     <string name="btn_eliminar_especialista">Eliminar Especialista</string>
+    <string name="btn_autorizar_especialista">Autorizar Especialista</string>
 
     <!-- Strings Cards Solicitudes Admin -->
     <string name="solicitud_de_servicio">Solicitud de Servicio</string>

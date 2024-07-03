@@ -324,7 +324,9 @@ class RegisterSpecialist : AppCompatActivity() {
             "ciudad" to ciudad,
             "imageUrl" to imageUrl,
             "pdfUrl" to pdfUrl,
-            "rol" to "especialista"
+            "rol" to "especialista",
+            "verified" to "unverified", // Nuevo campo para estado de verificación
+            "autorizado" to false // Puedes mantener este campo o eliminarlo si ya no es necesario
         )
 
         // Referencia al documento del especialista en la colección "especialistas"

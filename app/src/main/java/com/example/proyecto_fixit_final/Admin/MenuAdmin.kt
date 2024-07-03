@@ -47,6 +47,12 @@ class MenuAdmin : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // Función para ir a la autenticación de especialistas
+    fun goAuthorizeSpecialists(view: View) {
+        val intent = Intent(this, AuthSpecialist::class.java)
+        startActivity(intent)
+    }
+
     // Función para mostrar el diálogo de confirmación antes de cerrar sesión
     private fun mostrarDialogoConfirmacion() {
         // Creamos un diálogo de alerta
