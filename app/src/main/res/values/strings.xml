@@ -200,6 +200,7 @@
     <string name="precio">Precio</string>
     <string name="aceptar">Aceptar</string>
     <string name="rechazar">Rechazar</string>
+    <string name="especialistas">Especialistas</string>
 
     <!-- Strings Lista de Ciudades -->
     <string-array name="simple_items">

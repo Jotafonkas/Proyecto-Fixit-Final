@@ -16,7 +16,7 @@
         android:background="@color/header"
         android:gravity="center"
         android:padding="25dp"
-        android:text="Servicios"
+        android:text="@string/especialistas"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold" />

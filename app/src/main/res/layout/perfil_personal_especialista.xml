@@ -47,7 +47,6 @@
             android:layout_width="150dp"
             android:layout_height="180dp"
             android:layout_gravity="top|start"
-            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             android:src="@drawable/perfil_especialista"
@@ -212,9 +211,6 @@
         android:src="@drawable/timbre_antecedentes"
         />
 
-    <!-- Botón que redirige a la vista de comentarios -->
-
-    <!-- Botón que redirige a la vista de servicios -->
 
     <!-- Botón que redirige al teléfono -->
     <Button
