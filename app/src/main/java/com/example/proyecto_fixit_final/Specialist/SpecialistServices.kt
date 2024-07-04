@@ -14,6 +14,7 @@ import com.example.proyecto_fixit_final.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import android.app.AlertDialog
+import com.example.proyecto_fixit_final.NavBarSpecialist
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -96,7 +97,6 @@ class SpecialistServices : AppCompatActivity() {
             intent.putExtra("estado", estado)
             intent.putExtra("uid", uid)
             startActivity(intent)
-            finish()
         }
 
         if (imagenUrl.isNotEmpty()) {

@@ -1,6 +1,5 @@
 package com.example.proyecto_fixit_final.Admin
 
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.modelos.Services
+import com.example.proyecto_fixit_final.utils.AdminEmailSender
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -166,6 +166,10 @@ class AdminSolicitudeServices : AppCompatActivity() {
                     .addOnSuccessListener {
                         solicitudesContainer.removeView(view)
                         enviarCorreo(uid, "", false)
+                        // Enviar un broadcast para notificar que el servicio ha sido eliminado
+                        val intent = Intent("com.example.proyecto_fixit_final.SERVICIO_ELIMINADO")
+                        intent.putExtra("documentId", documentId)
+                        sendBroadcast(intent)
                         Toast.makeText(this, "Solicitud rechazada y servicio eliminado exitosamente.", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener { e ->
@@ -220,8 +224,6 @@ class AdminSolicitudeServices : AppCompatActivity() {
             Toast.makeText(this, "No hay clientes de correo instalados.", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
     override fun onResume() {
         super.onResume()

@@ -1,6 +1,9 @@
 package com.example.proyecto_fixit_final.Admin
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,14 +43,34 @@ class AdminSpecialistServices : AppCompatActivity() {
 
         flechaVolver.setOnClickListener { irAPerfilEspecialista() }
         menu.setOnClickListener { irAlMenu() }
+
+        // Registrar BroadcastReceiver para eliminar servicios de la UI
+        val filter = IntentFilter("com.example.proyecto_fixit_final.SERVICIO_ELIMINADO")
+        registerReceiver(servicioEliminadoReceiver, filter, RECEIVER_NOT_EXPORTED)
+    }
+
+    private val servicioEliminadoReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val documentId = intent?.getStringExtra("documentId")
+            if (!documentId.isNullOrEmpty()) {
+                eliminarServicioDeUI(documentId)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Desregistrar el BroadcastReceiver
+        unregisterReceiver(servicioEliminadoReceiver)
     }
 
     // Función para cargar los servicios del especialista
     private fun cargarServicios(specialistId: String) {
         // Obtenemos la colección de servicios del especialista
         val db = FirebaseFirestore.getInstance()
-        // Obtenemos los servicios del especialista
+        // Obtenemos los servicios del especialista que están en estado "Verificado"
         db.collection("especialistas").document(specialistId).collection("servicios")
+            .whereEqualTo("estado", "Verificado")
             .get()
             // Si se obtienen los servicios exitosamente se agregan al contenedor
             .addOnSuccessListener { result ->
@@ -96,8 +119,22 @@ class AdminSpecialistServices : AppCompatActivity() {
             Picasso.get().load(imagenUrl).into(imagenServicio)
         }
 
+        // Añadir una etiqueta al servicioView para poder identificarlo fácilmente
+        servicioView.tag = documentId
+
         // Agregamos la vista al contenedor
         serviciosContainer.addView(servicioView)
+    }
+
+    // Función para eliminar un servicio del contenedor
+    fun eliminarServicioDeUI(documentId: String) {
+        for (i in 0 until serviciosContainer.childCount) {
+            val view = serviciosContainer.getChildAt(i)
+            if (view.tag == documentId) {
+                serviciosContainer.removeViewAt(i)
+                break
+            }
+        }
     }
 
     // Función que se ejecuta al presionar una card

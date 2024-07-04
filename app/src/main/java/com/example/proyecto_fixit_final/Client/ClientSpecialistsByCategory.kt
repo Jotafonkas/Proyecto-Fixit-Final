@@ -96,6 +96,7 @@ class ClientSpecialistsByCategory : AppCompatActivity() {
                         .document(specialistUid)
                         .collection("servicios")
                         .whereEqualTo("categoria", categoryName)
+                        .whereEqualTo("estado", "Verificado")
                         .get()
                         .addOnSuccessListener { serviceDocuments ->
                             for (serviceDocument in serviceDocuments) {
@@ -144,7 +145,6 @@ class ClientSpecialistsByCategory : AppCompatActivity() {
                 hideLoader()
             }
     }
-
 
     private fun filter() {
         val searchText = searchFilter.text.toString().toLowerCase()
