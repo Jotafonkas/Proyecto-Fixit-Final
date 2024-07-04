@@ -4,26 +4,26 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.proyecto_fixit_final.databinding.ClienteNavbarBinding
+import com.example.proyecto_fixit_final.databinding.EspecialistaNavbarBinding
 import com.example.proyecto_fixit_final.fragments.UsersHelpFragment
-import com.example.proyecto_fixit_final.fragments.ClientHomeFragment
-import com.example.proyecto_fixit_final.fragments.ClientMenuFragment
-import com.example.proyecto_fixit_final.fragments.ClientServicesFragment
+import com.example.proyecto_fixit_final.fragments.SpecialistHomeFragment
+import com.example.proyecto_fixit_final.fragments.SpecialistMenuFragment
+import com.example.proyecto_fixit_final.fragments.SpecialistServicesFragment
 
-class NavBarClient : AppCompatActivity() {
-    //Configurar binding
-    private lateinit var binding: ClienteNavbarBinding
+class NavBarSpecialist : AppCompatActivity() {
+    //COnfigurar binding
+    private lateinit var binding: EspecialistaNavbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ClienteNavbarBinding.inflate(layoutInflater)
+        binding=EspecialistaNavbarBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
 
         //Cargar un fragment cuando incie la app
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.framelayout, ClientHomeFragment()).commit()
+                .replace(R.id.framelayout, SpecialistHomeFragment()).commit()
         }
 
         //Configurar el bottom navigation view
@@ -33,26 +33,26 @@ class NavBarClient : AppCompatActivity() {
                 R.id.nav_home -> {
                     //Mostrar el fragment de home
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.framelayout, ClientHomeFragment()).commit()
+                        .replace(R.id.framelayout, SpecialistHomeFragment()).commit()
                     true
                 }
 
                 R.id.nav_services -> {
-                    //Mostrar el fragment de servicios
+                    //Mostrar el fragment de services
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.framelayout, ClientServicesFragment()).commit()
+                        .replace(R.id.framelayout, SpecialistServicesFragment()).commit()
                     true
                 }
 
                 R.id.nav_menu -> {
                     //Mostrar el fragment de menu
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.framelayout, ClientMenuFragment()).commit()
+                        .replace(R.id.framelayout, SpecialistMenuFragment()).commit()
                     true
                 }
 
                 R.id.nav_help -> {
-                    //Mostrar el fragment de ayuda
+                    //Mostrar el fragment de help
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.framelayout, UsersHelpFragment()).commit()
                     true
@@ -72,10 +72,5 @@ class NavBarClient : AppCompatActivity() {
                 else -> false
             }
         }
-    }
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        moveTaskToBack(true) // Mover la aplicación al segundo plano en lugar de cerrarla
     }
 }

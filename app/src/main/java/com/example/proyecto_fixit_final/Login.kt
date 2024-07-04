@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.proyecto_fixit_final.Admin.MenuAdmin
+import com.example.proyecto_fixit_final.Admin.AdminMenu
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,7 +24,7 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
+        setContentView(R.layout.app_login)
 
         // Inicializar Firebase Auth y Firestore
         auth = FirebaseAuth.getInstance()
@@ -107,7 +107,7 @@ class Login : AppCompatActivity() {
                 if (correo == adminEmail && pass == adminPassword) {
                     // Usuario es un admin
                     guardarTipoUsuario("admin")
-                    val intent = Intent(this, MenuAdmin::class.java)
+                    val intent = Intent(this, AdminMenu::class.java)
                     intent.putExtra("uid", uid)
                     startActivity(intent)
                     finish()
@@ -128,7 +128,7 @@ class Login : AppCompatActivity() {
             if (document != null && document.exists()) {
                 // Usuario es un especialista
                 guardarTipoUsuario("specialist")
-                val intent = Intent(this, NavBar::class.java)
+                val intent = Intent(this, NavBarSpecialist::class.java)
                 intent.putExtra("uid", uid)
                 startActivity(intent)
                 finish()

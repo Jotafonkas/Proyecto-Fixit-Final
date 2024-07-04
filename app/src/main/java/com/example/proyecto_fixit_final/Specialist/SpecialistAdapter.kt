@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_fixit_final.R
-import com.example.proyecto_fixit_final.Specialist.DetailServiceClient
+import com.example.proyecto_fixit_final.Specialist.ClientDetailService
 import com.example.proyecto_fixit_final.Specialist.modelos.Specialist
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.imageview.ShapeableImageView
@@ -18,7 +18,7 @@ import android.widget.TextView
 class SpecialistAdapter(private val specialists: List<Specialist>) : RecyclerView.Adapter<SpecialistAdapter.SpecialistViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialistViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_specialist_client, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.cliente_card_especialistas, parent, false)
         return SpecialistViewHolder(view)
     }
 
@@ -51,7 +51,7 @@ class SpecialistAdapter(private val specialists: List<Specialist>) : RecyclerVie
 
             cardView.setOnClickListener {
                 val context: Context = itemView.context
-                val intent = Intent(context, DetailServiceClient::class.java).apply {
+                val intent = Intent(context, ClientDetailService::class.java).apply {
                     putExtra("uid", specialist.uid)
                     putExtra("nombre", specialist.nombre)
                     putExtra("nombreServicio", specialist.nombreServicio)

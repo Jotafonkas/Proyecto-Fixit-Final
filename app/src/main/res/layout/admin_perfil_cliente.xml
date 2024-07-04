@@ -1,0 +1,245 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/drawable_shape"
+    tools:context=".Admin.AdminProfileClient">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/perfilcliente"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/titulo_perfil_clientes"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:padding="25dp"
+        />
+
+    <ImageView
+        android:id="@+id/flechavolver_listaclientes"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/ic_flechavolver"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/perfilcliente"
+        android:layout_above="@+id/menu">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgPerfilCliente"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/imagen_login"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/radius4"/>
+
+            <LinearLayout
+                android:id="@+id/LLbtnsimagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgPerfilCliente"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+
+
+                <Button
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_eliminar"
+                    android:text="@string/btn_eliminar_foto"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@id/LLbtnsimagen"
+                android:layout_marginTop="20dp"
+                android:id="@+id/editTextContainer"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/txtNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/nombre_y_apellido"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="25dp"/>
+
+                <TextView
+                    android:id="@+id/edNombre"
+                    android:layout_width="347dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="23dp"
+                    android:drawableStart="@drawable/logo_persona"
+                    android:drawableTint="@color/gris"
+                    android:drawablePadding="18dp"
+                    android:background="@drawable/image_rectangle1"
+                    android:paddingStart="10dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:inputType="text" />
+
+
+                <TextView
+                    android:id="@+id/txtRut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/rut"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <TextView
+                    android:id="@+id/edRut"
+                    android:layout_width="347dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="23dp"
+                    android:drawableStart="@drawable/ic_rut"
+                    android:drawableTint="@color/gris"
+                    android:drawablePadding="18dp"
+                    android:background="@drawable/image_rectangle1"
+                    android:paddingStart="10dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:inputType="number"/>
+
+
+                <TextView
+                    android:id="@+id/txtCorreo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/correo_electr_nico"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"/>
+
+                <TextView
+                    android:id="@+id/edCorreo"
+                    android:layout_width="347dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="23dp"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawableTint="@color/gris"
+                    android:drawablePadding="18dp"
+                    android:background="@drawable/image_rectangle1"
+                    android:paddingStart="10dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtTelefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-0.5dp"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/tel_fono"
+                    android:textStyle="bold"
+                    android:textColor="#FF000000"
+                    android:textSize="20sp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <TextView
+                    android:id="@+id/edTelefono"
+                    android:layout_width="347dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="23dp"
+                    android:drawableStart="@drawable/ic_phone2"
+                    android:drawableTint="@color/gris"
+                    android:drawablePadding="18dp"
+                    android:background="@drawable/image_rectangle1"
+                    android:paddingStart="10dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <Button
+                    android:id="@+id/btnEliminarPerfilCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/btn_eliminar_cliente"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/red"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/titulo_menu"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/header"
+        android:gravity="center"
+        android:padding="25dp"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

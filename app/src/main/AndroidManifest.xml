@@ -23,92 +23,90 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.ProyectoFixitFinal.Fixit"
         tools:targetApi="31">
+        <!-- Specialist Activities -->
         <activity
-            android:name=".Admin.AuthSpecialistProfile"
+            android:name=".Specialist.SpecialistServicesRequest"
+            android:exported="true" />
+        <activity
+            android:name=".Specialist.SpecialistChangePassword"
             android:exported="false" />
         <activity
-            android:name=".Admin.AuthSpecialist"
-            android:exported="false" /> <!-- Specialist Activities -->
-        <activity
-            android:name=".Specialist.ServicesRequest"
+            android:name=".Specialist.SpecialistRegister"
             android:exported="true" />
         <activity
-            android:name=".Specialist.ChangePasswordSpecialist"
-            android:exported="false" />
-        <activity
-            android:name=".Specialist.RegisterSpecialist"
+            android:name=".Specialist.SpecialistCreateServices"
             android:exported="true" />
         <activity
-            android:name=".Specialist.CreateServicesSpecialist"
+            android:name=".Specialist.SpecialistProfile"
             android:exported="true" />
         <activity
-            android:name=".Specialist.ProfileSpecialist"
+            android:name=".Specialist.SpecialistServices"
             android:exported="true" />
         <activity
-            android:name=".Specialist.ViewSpecialistServices"
+            android:name=".Specialist.SpecialistDetailService"
             android:exported="true" />
         <activity
-            android:name=".Specialist.ViewSpecialistDetailService"
+            android:name=".Specialist.SpecialistClientsComments"
             android:exported="true" />
         <activity
-            android:name=".Specialist.ViewSpecialistComments"
+            android:name=".Specialist.ClientSpecialistsByCategory"
             android:exported="true" />
         <activity
-            android:name=".Specialist.ViewSpecialistsByCategory"
-            android:exported="true" />
-        <activity
-            android:name=".Specialist.DetailServiceClient"
+            android:name=".Specialist.ClientDetailService"
             android:exported="true" /> <!-- Client Activities -->
         <activity
-            android:name=".Client.PersonalProfileSpecialist"
+            android:name=".Client.ClientProfileSpecialist"
             android:exported="true" />
         <activity
-            android:name=".Client.ServicesHistory"
+            android:name=".Client.ClientServicesHistory"
             android:exported="true" />
         <activity
-            android:name=".Client.ChangePasswordClient"
+            android:name=".Client.ClientChangePassword"
             android:exported="false" />
         <activity
-            android:name=".Client.RegisterClient"
+            android:name=".Client.ClientRegister"
             android:exported="true" />
         <activity
-            android:name=".Client.ProfileClient"
+            android:name=".Client.ClientProfile"
             android:exported="true" />
         <activity
-            android:name=".Client.AddComments"
+            android:name=".Client.ClientAddComments"
             android:exported="false" />
         <activity
-            android:name=".Client.ClientsComments"
+            android:name=".Client.ClientComments"
             android:exported="false" /> <!-- Admin Activities -->
         <activity
-            android:name=".Admin.MenuAdmin"
+            android:name=".Admin.AdminMenu"
             android:exported="false" />
         <activity
-            android:name=".Admin.ViewClientsAdmin"
+            android:name=".Admin.AdminListClients"
             android:exported="false" />
         <activity
-            android:name=".Admin.ProfileClientAdmin"
+            android:name=".Admin.AdminProfileClient"
             android:exported="false" />
         <activity
-            android:name=".Admin.ViewSpecialistsAdmin"
+            android:name=".Admin.AdminListSpecialists"
             android:exported="false" />
         <activity
-            android:name=".Admin.ProfileSpecialistAdmin"
+            android:name=".Admin.AdminProfileSpecialist"
             android:exported="false" />
         <activity
-            android:name=".Admin.ViewSpecialistServicesAdmin"
+            android:name=".Admin.AdminSpecialistServices"
             android:exported="false" />
         <activity
-            android:name=".Admin.ViewSpecialistDetailServiceAdmin"
+            android:name=".Admin.AdminSpecialistDetailService"
             android:exported="false" />
         <activity
-            android:name=".Admin.ViewCommentsServiceAdmin"
+            android:name=".Admin.AdminCommentsService"
             android:exported="false" />
         <activity
-            android:name=".Admin.RequestsAdmin"
+            android:name=".Admin.AdminSolicitudeServices"
             android:exported="false" />
         <activity
-            android:name=".Admin.SolicitudeServices"
+            android:name=".Admin.AdminAuthSpecialistProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.AdminAuthSpecialist"
             android:exported="false" /> <!-- General Activities -->
         <activity
             android:name=".MainActivity"
@@ -123,13 +121,13 @@
             android:name=".NavBarClient"
             android:exported="false" />
         <activity
-            android:name=".NavBar"
+            android:name=".NavBarSpecialist"
             android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="true" />
         <activity
-            android:name=".SelectUser"
+            android:name=".Register"
             android:exported="true" />
     </application>
 

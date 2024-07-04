@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
-import com.example.proyecto_fixit_final.Admin.MenuAdmin
+import com.example.proyecto_fixit_final.Admin.AdminMenu
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.portada)
+        setContentView(R.layout.app_portada)
 
         // Inicializar Firebase Auth y Firestore
         auth = FirebaseAuth.getInstance()
@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
         if (currentUser != null && currentUser.isEmailVerified && userType != null) {
             when (userType) {
                 "admin" -> {
-                    startActivity(Intent(this, MenuAdmin::class.java))
+                    startActivity(Intent(this, AdminMenu::class.java))
                 }
                 "specialist" -> {
-                    startActivity(Intent(this, NavBar::class.java))
+                    startActivity(Intent(this, NavBarSpecialist::class.java))
                 }
                 "client" -> {
                     startActivity(Intent(this, NavBarClient::class.java))
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openSelectUser(view: View) {
-        val intent = Intent(this, SelectUser::class.java)
+        val intent = Intent(this, Register::class.java)
         startActivity(intent)
     }
 
