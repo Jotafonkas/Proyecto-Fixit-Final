@@ -73,7 +73,7 @@ class AdminMenu : AppCompatActivity() {
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(this, Login::class.java)
         startActivity(intent)
-        finish()
         Toast.makeText(this, "Sesión cerrada exitosamente", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

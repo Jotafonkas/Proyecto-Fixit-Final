@@ -3,6 +3,7 @@ package com.example.proyecto_fixit_final.Admin
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -69,11 +70,11 @@ class AdminAuthSpecialistProfile : AppCompatActivity() {
         }
 
         btnAutorizarEspecialista.setOnClickListener {
-            autorizarEspecialista()
+            autorizarEspecialista(correo, nombre)
         }
 
         btnRechazarEspecialista.setOnClickListener {
-            mostrarDialogoConfirmacion()
+            mostrarDialogoConfirmacion(correo, nombre)
         }
 
         // Configurar acción para volver a la lista de especialistas
@@ -100,7 +101,7 @@ class AdminAuthSpecialistProfile : AppCompatActivity() {
         }
     }
 
-    private fun autorizarEspecialista() {
+    private fun autorizarEspecialista(correo: String?, nombre: String?) {
         db.collection("especialistas").document(specialistId)
             .update(mapOf(
                 "autorizado" to true,
@@ -109,24 +110,25 @@ class AdminAuthSpecialistProfile : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Especialista autorizado", Toast.LENGTH_SHORT).show()
                 limpiarYActualizarLista()
+                enviarCorreo(correo, nombre, true)
             }
             .addOnFailureListener { e ->
                 Log.e("AuthSpecialistProfile", "Error al autorizar especialista: ${e.message}")
             }
     }
 
-    private fun mostrarDialogoConfirmacion() {
+    private fun mostrarDialogoConfirmacion(correo: String?, nombre: String?) {
         AlertDialog.Builder(this)
             .setTitle("Confirmar Rechazo")
             .setMessage("¿Estás seguro de que deseas rechazar al especialista?")
             .setPositiveButton("Sí") { _, _ ->
-                rechazarEspecialista()
+                rechazarEspecialista(correo, nombre)
             }
             .setNegativeButton("Cancelar", null)
             .show()
     }
 
-    private fun rechazarEspecialista() {
+    private fun rechazarEspecialista(correo: String?, nombre: String?) {
         db.collection("especialistas").document(specialistId)
             .update(mapOf(
                 "verified" to "no",
@@ -135,10 +137,40 @@ class AdminAuthSpecialistProfile : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Especialista rechazado", Toast.LENGTH_SHORT).show()
                 limpiarYActualizarLista()
+                enviarCorreo(correo, nombre, false)
             }
             .addOnFailureListener { e ->
                 Log.e("AuthSpecialistProfile", "Error al rechazar especialista: ${e.message}")
             }
+    }
+
+    private fun enviarCorreo(email: String?, nombre: String?, aceptada: Boolean) {
+        if (!email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            val subject = if (aceptada) "Autorización de Especialista" else "Rechazo de Especialista"
+            val body = if (aceptada) {
+                "Estimado/a $nombre,\n\nSu solicitud para ser especialista en FixIt ha sido autorizada.\n\nAtentamente,\nAdministración FixIt."
+            } else {
+                "Estimado/a $nombre,\n\nLamentamos informarle que su solicitud para ser especialista en FixIt ha sido rechazada.\n\nAtentamente,\nAdministración FixIt."
+            }
+            sendEmail(email, subject, body)
+        } else {
+            Toast.makeText(this, "El correo electrónico no es válido.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun sendEmail(email: String, subject: String, body: String) {
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+        }
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Enviar correo utilizando..."))
+        } catch (ex: android.content.ActivityNotFoundException) {
+            Toast.makeText(this, "No hay clientes de correo instalados.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun limpiarYActualizarLista() {
