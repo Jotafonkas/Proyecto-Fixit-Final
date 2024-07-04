@@ -139,14 +139,16 @@ class SpecialistProfile : AppCompatActivity() {
     private fun loadProfileImage(uid: String?) {
         val extensions = listOf("jpg", "jpeg", "png", "webp")
         extensions.forEach { ext ->
-            storageReference.child("images/$uid.$ext").downloadUrl.addOnSuccessListener {
-                Picasso.get().load(it).into(imgperfil)
+            storageReference.child("images/$uid.$ext").downloadUrl.addOnSuccessListener { uri ->
+                Picasso.get().load(uri).into(imgperfil)
+                firestore.collection("especialistas").document(uid!!).update("imageUrl", uri.toString())
                 return@addOnSuccessListener
             }.addOnFailureListener {
                 // Continue checking other extensions
             }
         }
     }
+
 
     private fun deleteProfileImage(uid: String?) {
         val extensions = listOf("jpg", "jpeg", "png", "webp")
@@ -211,16 +213,6 @@ class SpecialistProfile : AppCompatActivity() {
 
         if (!nombre.matches(Regex("^[a-zA-Z ]+$"))) {
             edNombre.error = "El nombre solo puede contener letras"
-            return
-        }
-
-        if (rut.isEmpty()) {
-            edRut.error = "Ingrese su rut"
-            return
-        }
-
-        if (!rut.matches(Regex("^\\d+$"))) {
-            edRut.error = "El RUT solo puede contener números"
             return
         }
 

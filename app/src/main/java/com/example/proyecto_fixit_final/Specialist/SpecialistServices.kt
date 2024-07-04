@@ -97,6 +97,7 @@ class SpecialistServices : AppCompatActivity() {
             intent.putExtra("estado", estado)
             intent.putExtra("uid", uid)
             startActivity(intent)
+            finish()
         }
 
         if (imagenUrl.isNotEmpty()) {
