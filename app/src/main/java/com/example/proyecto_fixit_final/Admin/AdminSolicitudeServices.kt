@@ -1,24 +1,25 @@
 package com.example.proyecto_fixit_final.Admin
 
+
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.proyecto_fixit_final.R
 import com.example.proyecto_fixit_final.Specialist.modelos.Services
-import com.example.proyecto_fixit_final.utils.AdminEmailSender
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.material.button.MaterialButton
-import android.widget.Toast
-import android.app.AlertDialog
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -51,7 +52,7 @@ class AdminSolicitudeServices : AppCompatActivity() {
         db.collection("admin").document("solicitudes").collection("solicitud")
             .get()
             .addOnSuccessListener { result ->
-                solicitudesContainer.removeAllViews() // Eliminar duplicados
+                solicitudesContainer.removeAllViews()
                 for (document in result) {
                     val servicio = document.toObject(Services::class.java)
                     val documentId = document.id
@@ -80,7 +81,6 @@ class AdminSolicitudeServices : AppCompatActivity() {
         categorieServiceSolicitude.text = servicio.categoria
         nameSpecialistSolicitude.text = servicio.nombreEspecialista
 
-        // Verificar si el precio está vacío o no es válido
         val precioString = servicio.precio
         if (precioString.isNullOrEmpty()) {
             priceSpecialistSolicitude.text = "Precio no disponible"
@@ -132,37 +132,11 @@ class AdminSolicitudeServices : AppCompatActivity() {
             transaction.delete(db.collection("admin").document("solicitudes").collection("solicitud").document(documentId))
         }.addOnSuccessListener {
             solicitudesContainer.removeView(solicitudView)
-            enviarCorreo(servicio.uid, servicio.nombreServicio)
+            enviarCorreo(servicio.uid, servicio.nombreServicio, true)
             Toast.makeText(this, "Solicitud aceptada y servicio actualizado.", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { e ->
             Toast.makeText(this, "Error al aceptar la solicitud: ${e.message}", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun enviarCorreo(uid: String, nombreServicio: String) {
-        db.collection("especialistas").document(uid)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
-                    val email = document.getString("correo")
-                    if (!email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        val subject = "Solicitud de Servicio Aceptada"
-                        val body = "Su solicitud para el servicio $nombreServicio ha sido aceptada."
-                        val apiKey = "your_sendgrid_api_key"
-                        println("Enviando correo a $email")  // Agregar registro de depuración
-                        AdminEmailSender(apiKey, email, subject, body).execute()
-                        println("Correo enviado a $email")  // Agregar registro de depuración
-                        Toast.makeText(this, "Correo de aceptación enviado a $email.", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "El correo electrónico no es válido.", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this, "No se pudo encontrar el especialista.", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al obtener el correo del especialista: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
     }
 
     private fun mostrarDialogoConfirmacionParaRechazar(view: View, documentId: String, uid: String) {
@@ -191,6 +165,7 @@ class AdminSolicitudeServices : AppCompatActivity() {
                     .delete()
                     .addOnSuccessListener {
                         solicitudesContainer.removeView(view)
+                        enviarCorreo(uid, "", false)
                         Toast.makeText(this, "Solicitud rechazada y servicio eliminado exitosamente.", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener { e ->
@@ -201,6 +176,52 @@ class AdminSolicitudeServices : AppCompatActivity() {
                 Toast.makeText(this, "Error al eliminar la solicitud: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun enviarCorreo(uid: String, nombreServicio: String, aceptada: Boolean) {
+        db.collection("especialistas").document(uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val email = document.getString("correo")
+                    if (!email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        val subject = if (aceptada) "Solicitud de Servicio Aceptada" else "Solicitud de Servicio Rechazada"
+                        val body = if (aceptada) {
+                            "Su solicitud para el servicio $nombreServicio ha sido aceptada."
+                        } else {
+                            "Su solicitud del servicio ha sido rechazada por no cumplir con los requisitos necesarios para ser verificada." +
+                                    "\n\nPor favor, póngase en contacto con el administrador para más información." +
+                                    "\n\nAtentamente,\nAdministración FixIt."
+                        }
+                        sendEmail(email, subject, body)
+                        Toast.makeText(this, "Correo de ${if (aceptada) "aceptación" else "rechazo"} enviado a $email.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "El correo electrónico no es válido.", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "No se pudo encontrar el especialista.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al obtener el correo del especialista: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun sendEmail(email: String, subject: String, body: String) {
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+        }
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Enviar correo utilizando..."))
+        } catch (ex: android.content.ActivityNotFoundException) {
+            Toast.makeText(this, "No hay clientes de correo instalados.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
 
     override fun onResume() {
         super.onResume()
