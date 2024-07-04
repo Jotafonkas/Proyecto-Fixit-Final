@@ -27,56 +27,77 @@
 
         <ImageView
             android:id="@+id/container_image"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
+            android:layout_width="245dp"
+            android:layout_height="260dp"
             android:layout_below="@id/header"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:src="@drawable/container_image"/>
 
         <TextView
-            android:id="@+id/text_trabajo_recompensado"
-            android:layout_width="300dp"
-            android:layout_height="30dp"
-            android:layout_below="@id/container_image"
-            android:layout_marginTop="10dp"
+            android:id="@+id/text_fixit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/container_image"
+            android:layout_marginTop="80dp"
+            android:layout_below="@id/header"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
             android:includeFontPadding="false"
-            android:text="@string/text1_home"
+            android:text="Fixit"
             android:textColor="#FF33353C"
+            android:fontFamily="@font/extrabold"
+            android:textStyle="bold"
+            android:textSize="55sp"/>
+
+        <TextView
+            android:id="@+id/text_trabajo_recompensado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/container_image"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@string/text1_especialista_home"
+            android:textColor="#FF33353C"
+            android:fontFamily="@font/cairo"
+            android:textStyle="bold"
             android:textSize="22sp"/>
 
         <TextView
             android:id="@+id/text_ayuda_necesitas"
             android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="170dp"
             android:gravity="end"
             android:text="@string/text2_home"
             android:textColor="#FF33353C"
-            android:layout_below="@+id/text_servicio_calidad"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/cairo"
+            android:layout_above="@+id/footer"
+            android:layout_marginBottom="150dp"            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/text_servicio_calidad"
-            android:layout_width="210dp"
-            android:layout_height="120dp"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/text_trabajo_recompensado"
+            android:layout_above="@+id/text_ayuda_necesitas"
             android:layout_marginTop="50dp"
-            android:layout_marginStart="170dp"
-            android:text="@string/text3_home"
+            android:layout_marginStart="130dp"
+            android:text="@string/text3_especialista_home"
             android:textAlignment="textEnd"
+            android:fontFamily="@font/cairo"
             android:textColor="#FF282828"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            />
 
         <ImageView
             android:id="@+id/container_image1"
-            android:layout_width="190dp"
-            android:layout_height="300dp"
+            android:layout_width="160dp"
+            android:layout_height="280dp"
             android:layout_above="@+id/footer"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="45dp"
             android:src="@drawable/container_image1"/>
 
         <TextView

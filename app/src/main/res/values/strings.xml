@@ -41,9 +41,11 @@
     <!-- Strings Home -->
     <string name="titulo_home">Bienvenid@ a Fixit</string>
     <string name="btn_perfil_home">Perfil</string>
-    <string name="text1_home">Tu trabajo es recompensado</string>
+    <string name="text1_cliente_home">Servicios de Excelencia</string>
+    <string name="text1_especialista_home">Tu Trabajo es Recompensado</string>
     <string name="text2_home">Te ayudamos en lo que necesites 24/7</string>
-    <string name="text3_home">Te acercamos servicios de calidad, al alcance de tus manos.</string>
+    <string name="text3_cliente_home">Te acercamos servicios de calidad, a un solo click.</string>
+    <string name="text3_especialista_home">Facilitamos tus ventas, a un solo click.</string>
     <string name="text4_home">Garantizamos que tu necesidad sea cubierta con nuestros especialistas.</string>
 
     <!-- Strings Menú -->
@@ -94,8 +96,8 @@
     <string name="numero_de_contacto">+56 9 347 096 35</string>
     <string name="txt_correo">fixitoficial2024@gmail.com</string>
     <string name="servicios_a_domicilio">Servicios a Domicilio</string>
-    <string name="btn_llamar">Llamar</string>
-    <string name="btn_contactar_correo">Contactar por correo</string>
+    <string name="btn_llamar">Llama <u>Aquí</u></string>
+    <string name="btn_contactar_correo">Email <u>Aquí</u></string>
     <string name="fixit_tittle">Fixit</string>
     <string name="txt_slogan_help">Te conectamos con los especialistas que necesitas.</string>
 

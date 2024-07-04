@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    card_view:cardCornerRadius="8dp"
+    card_view:cardCornerRadius="20dp"
     card_view:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/color_servicio"
         android:padding="16dp">
 
         <!-- Nombre del servicio -->
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="Nombre del Servicio"
             android:textSize="18sp"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
         <!-- Nombre del cliente -->
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="Nombre del Cliente"
             android:textSize="14sp"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_below="@id/tvNombreServicio"
             android:layout_marginTop="4dp" />
 
@@ -39,9 +40,10 @@
             android:id="@+id/tvEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estado: Pendiente"
+            android:text="Pendiente"
             android:textSize="14sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
             android:layout_below="@id/tvNombreCliente"
             android:layout_marginTop="4dp" />
 
@@ -53,7 +55,8 @@
             android:text="Aceptar"
             android:layout_below="@id/tvEstado"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#1B9873"/>
 
         <!-- Botón Rechazar -->
         <Button
@@ -64,7 +67,8 @@
             android:layout_below="@id/tvEstado"
             android:layout_toStartOf="@id/btnAceptar"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/red"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
